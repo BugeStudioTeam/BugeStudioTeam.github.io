@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Buge App Manager - Professional Android Management Tool</title>
+    <link rel="icon" href="AppManager.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="AppManager.jpg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0b1321;
+            --bg-light: #f4f9ff;
+            --text-main: #0a1e3c;
+            --accent-blue: #1e88e5;
+            --card-bg: rgba(255,255,255,0.7);
+            --nav-bg: rgba(255,255,255,0.75);
+            --border-color: rgba(30,136,229,0.2);
+            --shadow-color: rgba(0,40,100,0.15);
+            --github-green: #2e7d32;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-dark: #030c17;
+                --bg-light: #0d1a2b;
+                --text-main: #e0edff;
+                --card-bg: rgba(15,30,45,0.8);
+                --nav-bg: rgba(8,18,33,0.9);
+                --border-color: rgba(100,181,246,0.2);
+                --shadow-color: rgba(0,0,0,0.4);
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at 30% 10%, var(--bg-light), var(--bg-dark));
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: cover;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            /* Flexbox ensures the footer stays at the bottom */
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.6s cubic-bezier(0.15, 0.45, 0.37, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        .global-nav {
+            position: fixed;
+            top: 24px;
+            left: 5%;
+            right: 5%;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 80px;
+            padding: 10px 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            z-index: 100;
+        }
+
+        .nav-logo { display: flex; align-items: center; gap: 12px; }
+        .nav-logo img { width: 36px; height: 36px; border-radius: 10px; object-fit: cover; }
+        .nav-logo span { font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); }
+
+        .lang-switch { display: flex; gap: 4px; background: rgba(0,0,0,0.05); padding: 4px; border-radius: 30px; }
+        .lang-option {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
+            color: var(--text-main);
+        }
+        .lang-option.active { background: var(--accent-blue); color: white; }
+
+        /* Main Content wrapper */
+        main { 
+            flex: 1; /* This fills the available space to push footer down */
+            padding-top: 140px; 
+            width: 90%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        .hero {
+            padding: 60px 0 80px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-icon {
+            width: 160px;
+            height: 160px;
+            border-radius: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 25px 50px -12px var(--shadow-color);
+            object-fit: cover;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), #90caf9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+        .hero-sub {
+            font-size: 1.4rem;
+            opacity: 0.85;
+            max-width: 750px;
+            margin-bottom: 45px;
+        }
+
+        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+        .btn {
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+        .btn-primary { background: var(--github-green); color: white; }
+        .btn-secondary { background: var(--accent-blue); color: white; }
+        .btn:hover { transform: translateY(-3px); }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0 100px;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            padding: 50px 40px;
+            border-radius: 40px;
+            border: 1px solid var(--border-color);
+        }
+        .feature-card h3 { font-size: 1.8rem; margin-bottom: 18px; color: var(--accent-blue); font-weight: 700; }
+        .feature-card p { font-size: 1.15rem; opacity: 0.8; }
+
+        /* Footer always at the bottom */
+        footer {
+            padding: 60px 0 40px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+        }
+        footer p {
+            color: #ffffff !important; 
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 600px) {
+            .btn { width: 100%; justify-content: center; }
+            .global-nav { flex-direction: column; gap: 12px; border-radius: 30px; padding: 15px; }
+            main { padding-top: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="global-nav">
+        <div class="nav-logo">
+            <img src="AppManager.jpg" alt="Logo">
+            <span data-i18n="brand">Buge App Manager</span>
+        </div>
+        <div class="lang-switch">
+            <span class="lang-option active" data-lang="en">EN</span>
+            <span class="lang-option" data-lang="de">DE</span>
+            <span class="lang-option" data-lang="ru">RU</span>
+            <span class="lang-option" data-lang="zh">中文</span>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <img src="AppManager.jpg" alt="App Icon" class="hero-icon reveal">
+            <h1 class="hero-title reveal" style="transition-delay: 0.1s;">Buge App Manager</h1>
+            <p class="hero-sub reveal" data-i18n="hero_sub" style="transition-delay: 0.2s;">A powerful Android tool for app and permission management, powered by Shizuku.</p>
+            
+            <div class="btn-group reveal" style="transition-delay: 0.3s;">
+                <a href="https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager2.2.0/BugeAppManager-v2.2.0-release.apk" class="btn btn-primary">
+                    <i class="fas fa-download"></i> <span data-i18n="download">Download v2.2.0</span>
+                </a>
+                <a href="https://github.com/BugeStudioTeam/Buge-App-Manager" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card reveal">
+                <h3 data-i18n="f1_title">Advanced Permissions</h3>
+                <p data-i18n="f1_desc">Take full control over Android permissions including hidden ones, ensuring your privacy stays private.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                <h3 data-i18n="f2_title">App Freezing</h3>
+                <p data-i18n="f2_desc">Easily disable or "freeze" background apps to save battery and improve system performance.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                <h3 data-i18n="f3_title">Shizuku Powered</h3>
+                <p data-i18n="f3_desc">Leverage the power of Shizuku for root-less advanced operations with high efficiency.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="reveal">
+        <p>© 2026 Buge Studio</p>
+    </footer>
+
+    <script>
+        (function() {
+            /* --- Original Scroll Reveal Logic from index.html --- */
+            const fadeElements = document.querySelectorAll('.reveal');
+            function checkFade() {
+                const windowHeight = window.innerHeight;
+                fadeElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < windowHeight - 50) {
+                        el.classList.add('visible');
+                    }
+                });
+            }
+            window.addEventListener('scroll', checkFade);
+            window.addEventListener('resize', checkFade);
+            setTimeout(checkFade, 100);
+
+            /* --- Multi-language Support including Chinese --- */
+            const translations = {
+                en: { brand: 'Buge App Manager', hero_sub: 'A powerful Android tool for app and permission management, powered by Shizuku.', download: 'Download v2.2.0', f1_title: 'Advanced Permissions', f1_desc: 'Take full control over Android permissions including hidden ones.', f2_title: 'App Freezing', f2_desc: 'Easily disable background apps to save battery.', f3_title: 'Shizuku Powered', f3_desc: 'Leverage the power of Shizuku for root-less operations.' },
+                de: { brand: 'Buge App Manager', hero_sub: 'Ein leistungsstarkes Android-Tool unterstützt von Shizuku.', download: 'Download v2.2.0', f1_title: 'Erweiterte Rechte', f1_desc: 'Behalten Sie die volle Kontrolle über Android-Berechtigungen.', f2_title: 'App-Einfrieren', f2_desc: 'Hintergrund-Apps deaktivieren, um Akku zu sparen.', f3_title: 'Shizuku-Power', f3_desc: 'Nutzen Sie Shizuku für Operationen ohne Root.' },
+                ru: { brand: 'Buge App Manager', hero_sub: 'Мощный инструмент Android на базе Shizuku.', download: 'Скачать v2.2.0', f1_title: 'Разрешения', f1_desc: 'Полный контроль над разрешениями Android.', f2_title: 'Заморозка', f2_desc: 'Отключайте приложения для экономии заряда.', f3_title: 'На Shizuku', f3_desc: 'Продвинутые операции без Root-прав.' },
+                zh: { brand: 'Buge 应用管理器', hero_sub: '基于 Shizuku 驱动，功能强大的 Android 应用与权限管理工具。', download: '下载 v2.2.0', f1_title: '高级权限管理', f1_desc: '完全掌控 Android 权限（包括隐藏权限），确保您的隐私安全。', f2_title: '应用冻结', f2_desc: '轻松禁用后台运行的应用，提升系统性能。', f3_title: 'Shizuku 驱动', f3_desc: '利用 Shizuku 的力量，无需 Root 即可实现高效操作。' }
+            };
+
+            const langOptions = document.querySelectorAll('.lang-option');
+            function updateLanguage(lang) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang][key]) el.innerText = translations[lang][key];
+                });
+                langOptions.forEach(opt => opt.classList.toggle('active', opt.getAttribute('data-lang') === lang));
+            }
+
+            langOptions.forEach(opt => opt.addEventListener('click', () => updateLanguage(opt.getAttribute('data-lang'))));
+            
+            // Auto-detect browser language
+            const userLang = navigator.language.slice(0, 2);
+            updateLanguage(translations[userLang] ? userLang : 'en');
+        })();
+    </script>
+</body>
+</html>
