@@ -34,7 +34,6 @@
             --support-orange: #ff9800;
             --support-orange-hover: #f57c00;
         }
-
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-dark: #030c17;
@@ -56,13 +55,11 @@
                 --github-green-hover: #1b5e20;
             }
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: radial-gradient(circle at 30% 10%, var(--bg-light), var(--bg-dark));
@@ -71,7 +68,6 @@
             overflow-x: hidden;
             transition: background 0.3s, color 0.2s;
         }
-
         /* ----- Floating navigation bar ----- */
         .global-nav {
             position: fixed;
@@ -94,7 +90,6 @@
             box-shadow: 0 20px 40px var(--shadow-color);
             z-index: 100;
         }
-
         .nav-logo {
             display: flex;
             align-items: center;
@@ -116,7 +111,6 @@
             background-clip: text;
             color: transparent;
         }
-
         /* Language switcher - EN/DE/RU/中文 */
         .lang-switch {
             display: flex;
@@ -137,17 +131,18 @@
             color: var(--text-dark);
             border: 1px solid transparent;
             font-size: 0.95rem;
+            text-decoration: none;
         }
         .lang-option.active {
             background: var(--accent-blue);
             color: white;
             border-color: var(--accent-blue);
+            pointer-events: none;
         }
         .lang-option:not(.active):hover {
             background: rgba(100,181,246,0.2);
             border-color: var(--accent-soft);
         }
-
         /* Main content */
         main {
             padding-top: 140px;
@@ -155,7 +150,6 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-
         /* Hero section */
         .hero {
             min-height: 70vh;
@@ -195,14 +189,12 @@
             padding: 8px 0 8px 32px;
             line-height: 1.5;
         }
-
         /* Section titles */
         .section-title {
             font-size: 3rem;
             font-weight: 700;
             margin: 80px 0 40px;
             color: var(--white-text);
-            /* Added Flex layout to accommodate the new button */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -215,7 +207,6 @@
             padding-bottom: 8px;
             margin-right: 15px;
         }
-
         /* Software grid - single card */
         .software-grid {
             display: grid;
@@ -223,7 +214,6 @@
             gap: 40px;
             margin: 40px 0 100px;
         }
-
         .software-card {
             background: var(--card-bg-light);
             backdrop-filter: blur(16px);
@@ -319,7 +309,6 @@
         .download-link:hover {
             background: var(--github-green-hover);
         }
-
         .support-link {
             background: linear-gradient(135deg, var(--support-orange), #ffb74d);
             box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
@@ -328,7 +317,6 @@
             background: var(--support-orange-hover);
             box-shadow: 0 12px 28px rgba(255, 152, 0, 0.4);
         }
-
         .philosophy-block {
             max-width: 1000px;
             margin: 40px 0 80px;
@@ -340,13 +328,11 @@
             border-left: 8px solid var(--accent-blue);
             padding: 8px 0 8px 32px;
         }
-
         .support-section {
             display: flex;
             justify-content: center;
             margin: 40px 0 120px;
         }
-
         .fade-out {
             transition: opacity 0.5s ease, transform 0.4s;
         }
@@ -359,7 +345,6 @@
             transform: translateY(50px);
             pointer-events: none;
         }
-
         footer {
             margin-top: 120px;
             padding: 50px 0;
@@ -373,7 +358,6 @@
         footer p {
             color: #ffffff !important;
         }
-
         @media (max-width: 900px) {
             .global-nav {
                 top: 16px;
@@ -394,7 +378,6 @@
                 font-size: 1.2rem;
             }
         }
-
         @media (max-width: 600px) {
             .hero { padding: 40px 0 60px; }
             .hero-desc { padding-left: 20px; }
@@ -409,7 +392,6 @@
                 justify-content: center;
             }
         }
-
         .fallback-emoji {
             font-size: 3rem;
             display: none;
@@ -421,33 +403,29 @@
         <div class="nav-logo">
             <img src="icon.png" alt="Buge Studio" id="navIcon" onerror="this.style.display='none'; document.querySelector('.fallback-emoji').style.display='block';">
             <span class="fallback-emoji"></span>
-            <span data-i18n="brand">Buge Studio</span>
+            <span>Buge Studio</span>
         </div>
-
         <div class="lang-switch">
-            <span class="lang-option active" data-lang="en">EN</span>
-            <span class="lang-option" data-lang="de">DE</span>
-            <span class="lang-option" data-lang="ru">RU</span>
-            <span class="lang-option" data-lang="zh">中文</span>
+            <span class="lang-option active">EN</span>
+            <a href="https://bugestudioteam.github.io/de-DE/" class="lang-option">DE</a>
+            <a href="https://bugestudioteam.github.io/re-RU/" class="lang-option">RU</a>
+            <a href="https://bugestudioteam.github.io/zh-CN/" class="lang-option">中文</a>
         </div>
     </nav>
-
     <main>
         <section class="hero fade-out visible" id="heroSection">
             <div class="hero-title">Buge Studio</div>
-            <div class="hero-sub" data-i18n="hero_sub">making useful software for everyone</div>
-            <div class="hero-desc" data-i18n="hero_desc">
+            <div class="hero-sub">making useful software for everyone</div>
+            <div class="hero-desc">
                 We build tools that just work. Simple, open, powerful.
             </div>
         </section>
-
         <div class="section-title">
-            <div><span data-i18n="software_title">Our softwares</span></div>
+            <div><span>Our softwares</span></div>
             <a href="https://bugestudioteam.github.io/softwares" class="card-link" style="margin: 0; font-size: 1.1rem; padding: 10px 24px;">
                 <i class="fas fa-arrow-right"></i> View All Softwares
             </a>
         </div>
-
         <div class="software-grid fade-out visible" id="softwareGrid">
             <div class="software-card" onclick="window.location.href='https://BugeStudioTeam.github.io/appmanager';">
                 <div class="card-icon">
@@ -455,7 +433,7 @@
                     <i class="fas fa-cubes"></i>
                 </div>
                 <h3>Buge App Manager</h3>
-                <p data-i18n="manager_desc">Buge App Manager is a powerful Android tool for app and permission management, requiring Shizuku.</p>
+                <p>Buge App Manager is a powerful Android tool for app and permission management, requiring Shizuku.</p>
                 
                 <div class="button-container">
                     <a href="https://github.com/BugeStudioTeam/Buge-App-Manager" target="_blank" class="card-link" onclick="event.stopPropagation();">
@@ -468,26 +446,22 @@
                 </div>
             </div>
         </div>
-
-        <div class="section-title"><span data-i18n="philosophy">Our philosophy</span></div>
+        <div class="section-title"><span>Our philosophy</span></div>
         <div class="philosophy-block fade-out visible" id="philosophyBlock">
-            <div class="philosophy-text" data-i18n="philosophy_text">
+            <div class="philosophy-text">
                 We create software that makes a difference. No bloat, no distractions. 
                 Fully open source, community-driven, supporting Android & Windows with native dark mode.
             </div>
         </div>
-
         <div class="support-section fade-out visible">
             <a href="https://bugestudioteam.github.io/support" class="card-link support-link" style="padding: 16px 48px; font-size: 1.5rem;">
-                <i class="fas fa-heart"></i> <span data-i18n="support_us">Support Us</span>
+                <i class="fas fa-heart"></i> Support Us
             </a>
         </div>
-
         <footer>
             <p>© 2026 Buge Studio</p>
         </footer>
     </main>
-
     <script>
         (function() {
             const fadeElements = document.querySelectorAll('.fade-out');
@@ -509,75 +483,6 @@
             window.addEventListener('resize', checkFade);
             checkFade();
 
-            const translations = {
-                en: {
-                    brand: 'Buge Studio',
-                    hero_sub: 'making useful software for everyone',
-                    hero_desc: 'We build tools that just work. Simple, open, powerful.',
-                    software_title: 'Our softwares',
-                    manager_desc: 'Buge App Manager is a powerful Android tool for app and permission management, requiring Shizuku.',
-                    philosophy: 'Our philosophy',
-                    philosophy_text: 'We create software that makes a difference. No bloat, no distractions. Fully open source, community-driven, supporting Android & Windows with native dark mode.',
-                    support_us: 'Support Us'
-                },
-                de: {
-                    brand: 'Buge Studio',
-                    hero_sub: 'nützliche Software für alle',
-                    hero_desc: 'Wir bauen Werkzeuge, die einfach funktionieren. Einfach, offen, leistungsstark.',
-                    software_title: 'Unsere Software',
-                    manager_desc: 'Buge App Manager ist ein leistungsstarkes Android-Tool für App- und Berechtigungsverwaltung, das Shizuku benötigt.',
-                    philosophy: 'Unsere Philosophie',
-                    philosophy_text: 'Wir entwickeln Software, die einen Unterschied macht. Keine Bloatware, keine Ablenkungen. Vollständig Open Source, community-getrieben, unterstützt Android & Windows mit systemeigenem Dunkelmodus.',
-                    support_us: 'Unterstützen Sie uns'
-                },
-                ru: {
-                    brand: 'Buge Studio',
-                    hero_sub: 'создаём полезный софт для всех',
-                    hero_desc: 'Мы создаём инструменты, которые просто работают. Просто, открыто, мощно.',
-                    software_title: 'Наше ПО',
-                    manager_desc: 'Buge App Manager — мощный инструмент для Android для управления приложениями и разрешениями, требующий Shizuku.',
-                    philosophy: 'Наша философия',
-                    philosophy_text: 'Мы создаём программы, которые имеют значение. Никакого bloatware, никаких отвлечений. Полностью открытый исходный код, управляется сообществом, поддерживает Android и Windows с нативной тёмной темой.',
-                    support_us: 'Поддержать нас'
-                },
-                zh: {
-                    brand: 'Buge Studio',
-                    hero_sub: '为每个人打造好用的软件',
-                    hero_desc: '我们只做真正好用的工具。简单、开放、强大。',
-                    software_title: '我们的软件',
-                    manager_desc: 'Buge App Manager 是一款强大的 Android 应用 and 权限管理工具，需要 Shizuku 支持。',
-                    philosophy: '我们的理念',
-                    philosophy_text: '我们创造真正有用的软件。没有臃肿，没有干扰。完全开源，社区驱动，支持 Android 和 Windows，并跟随系统深色模式。',
-                    support_us: '支持我们'
-                }
-            };
-
-            let currentLang = 'en';
-
-            function updateLanguage(lang) {
-                if (!translations[lang]) return;
-                const elements = document.querySelectorAll('[data-i18n]');
-                elements.forEach(el => {
-                    const key = el.getAttribute('data-i18n');
-                    if (translations[lang][key]) {
-                        el.innerText = translations[lang][key];
-                    }
-                });
-                currentLang = lang;
-            }
-
-            const langOptions = document.querySelectorAll('.lang-option');
-            langOptions.forEach(opt => {
-                opt.addEventListener('click', function() {
-                    langOptions.forEach(o => o.classList.remove('active'));
-                    this.classList.add('active');
-                    const lang = this.getAttribute('data-lang');
-                    updateLanguage(lang);
-                });
-            });
-
-            updateLanguage('en');
-
             const ua = navigator.userAgent;
             const isAndroid = /android/i.test(ua);
             const isWindows = /windows|win32|win64/i.test(ua) && !isAndroid;
@@ -588,7 +493,6 @@
             } else {
                 document.body.classList.add('windows-device');
             }
-
             const navIcon = document.getElementById('navIcon');
             const fallbackEmoji = document.querySelector('.fallback-emoji');
             if (navIcon) {
