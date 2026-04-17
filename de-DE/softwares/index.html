@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>All Softwares - Buge Studio</title>
+    <title>Alle Programme - Buge Studio</title>
     <link rel="icon" href="icon.png" type="image/png">
     <link rel="apple-touch-icon" href="icon.png">
     
@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ---------- Global variables with dark mode support (完全同步主页风格) ---------- */
         :root {
             --bg-dark: #0b1321;
             --bg-light: #f4f9ff;
@@ -31,8 +30,6 @@
             --white-text: #ffffff;
             --github-green: #2e7d32;
             --github-green-hover: #1b5e20;
-            --support-orange: #ff9800;
-            --support-orange-hover: #f57c00;
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -49,10 +46,6 @@
                 --border-light: rgba(100,181,246,0.25);
                 --shadow-color: rgba(0,20,60,0.6);
                 --logo-filter: brightness(0.9);
-                --footer-text: #ffffff;
-                --white-text: #ffffff;
-                --github-green: #2e7d32;
-                --github-green-hover: #1b5e20;
             }
         }
         * {
@@ -67,8 +60,10 @@
             line-height: 1.5;
             overflow-x: hidden;
             transition: background 0.3s, color 0.2s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        /* ----- Floating navigation bar (完全复刻主页) ----- */
         .global-nav {
             position: fixed;
             top: 24px;
@@ -113,7 +108,6 @@
             background-clip: text;
             color: transparent;
         }
-        /* Language switcher - 支持多语言 (与主页一致) */
         .lang-switch {
             display: flex;
             gap: 8px;
@@ -121,8 +115,6 @@
             padding: 6px;
             border-radius: 40px;
             backdrop-filter: blur(4px);
-            flex-wrap: wrap;
-            justify-content: flex-end;
         }
         .lang-option {
             padding: 8px 16px;
@@ -133,24 +125,25 @@
             color: var(--text-dark);
             border: 1px solid transparent;
             font-size: 0.95rem;
+            text-decoration: none;
         }
         .lang-option.active {
             background: var(--accent-blue);
             color: white;
             border-color: var(--accent-blue);
+            pointer-events: none;
         }
         .lang-option:not(.active):hover {
             background: rgba(100,181,246,0.2);
             border-color: var(--accent-soft);
         }
-        /* Main content */
         main {
             padding-top: 140px;
             width: 90%;
             max-width: 1400px;
             margin: 0 auto;
+            flex: 1;
         }
-        /* 页面头部区域 (与hero呼应) */
         .page-header {
             margin-bottom: 40px;
             padding: 20px 0 40px;
@@ -173,7 +166,6 @@
             border-left: 5px solid var(--accent-blue);
             padding-left: 24px;
         }
-        /* 软件网格 - 增强型卡片布局 (和主页一致但容纳更多条目) */
         .all-softwares-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -216,6 +208,7 @@
         .card-icon i {
             font-size: 3.8rem;
             color: var(--accent-blue);
+            display: none;
         }
         .software-card h3 {
             font-size: 2rem;
@@ -253,10 +246,6 @@
             box-shadow: 0 6px 12px rgba(30,136,229,0.25);
             cursor: pointer;
         }
-        /* 核心修改：GitHub按钮改为蓝色，Download按钮改为绿色 */
-        .github-link {
-            background: var(--accent-blue);
-        }
         .github-link:hover {
             background: #1565c0;
         }
@@ -266,27 +255,8 @@
         .download-link:hover {
             background: var(--github-green-hover);
         }
-        /* 空状态或额外说明 */
-        .info-note {
-            background: rgba(100,181,246,0.15);
-            border-radius: 48px;
-            padding: 28px 32px;
-            margin: 40px 0 60px;
-            text-align: center;
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-light);
-        }
-        .info-note p {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-        }
-        .info-note a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-weight: 600;
-        }
         footer {
-            margin-top: 80px;
+            margin-top: auto;
             padding: 40px 0;
             text-align: center;
             border-top: 1px solid var(--border-light);
@@ -313,20 +283,13 @@
             }
         }
         @media (max-width: 600px) {
-            main {
-                padding-top: 120px;
-            }
+            main { padding-top: 120px; }
             .button-container {
                 flex-direction: column;
                 width: 100%;
             }
-            .card-link {
-                width: 100%;
-                justify-content: center;
-            }
-            .page-header p {
-                font-size: 1.1rem;
-            }
+            .card-link { width: 100%; }
+            .page-header p { font-size: 1.1rem; }
         }
         .fade-out {
             transition: opacity 0.5s ease, transform 0.4s;
@@ -344,265 +307,111 @@
 </head>
 <body>
     <nav class="global-nav">
-        <a href="https://bugestudioteam.github.io" class="nav-logo" style="text-decoration: none;">
+        <a href="https://bugestudioteam.github.io/de-DE" class="nav-logo">
             <img src="icon.png" alt="Buge Studio" id="navIcon" onerror="this.style.display='none'; this.parentNode.querySelector('.fallback-emoji').style.display='block';">
             <span class="fallback-emoji" style="display:none;">⚡</span>
-            <span data-i18n="brand">Buge Studio</span>
+            <span>Buge Studio</span>
         </a>
         <div class="lang-switch">
-            <span class="lang-option active" data-lang="en">EN</span>
-            <span class="lang-option" data-lang="de">DE</span>
-            <span class="lang-option" data-lang="ru">RU</span>
-            <span class="lang-option" data-lang="zh">中文</span>
+            <a href="https://bugestudioteam.github.io/softwares" class="lang-option">EN</a>
+            <span class="lang-option active">DE</span>
+            <a href="https://bugestudioteam.github.io/re-RU/softwares" class="lang-option">RU</a>
+            <a href="https://bugestudioteam.github.io/zh-CN/softwares" class="lang-option">中文</a>
         </div>
     </nav>
     <main>
         <div class="page-header fade-out visible">
-            <h1 data-i18n="all_soft_title">All Softwares</h1>
-            <p data-i18n="all_soft_sub">Discover all tools built by Buge Studio. Open-source, powerful, and designed for everyone.</p>
+            <h1>Alle Programme</h1>
+            <p>Entdecken Sie alle Tools von Buge Studio. Open-Source, leistungsstark und für alle entwickelt.</p>
         </div>
-        <div class="all-softwares-grid fade-out visible" id="softwaresContainer">
-            <!-- 软件卡片将通过JS动态生成以保证多语言动态更新，结构与主页一致 -->
-        </div>
-        <div class="info-note fade-out visible" id="infoNote">
-            <p data-i18n="more_note">✨ More exciting projects are on the way. Stay tuned! <br> Visit our <a href="https://github.com/BugeStudioTeam" target="_blank">GitHub</a> for source code and contributions.</p>
-        </div>
-        <footer>
-            <p>© 2026 Buge Studio<span data-i18n="footer_tagline"></p>
-        </footer>
+        <div class="all-softwares-grid fade-out visible" id="softwareGrid"></div>
     </main>
+    <footer>
+        <p>© 2026 Buge Studio</p>
+    </footer>
+
     <script>
-        (function() {
-            // ----- 软件数据定义：新增Buge App Locker卡片，图标改为同路径applocker.jpg
-            const softwaresList = [
-                {
-                    id: "appmanager",
-                    nameKey: "app_name",
-                    descKey: "app_desc",
-                    iconImg: "AppManager.jpg",
-                    fallbackIcon: "fas fa-cubes",
-                    github: "https://github.com/BugeStudioTeam/Buge-App-Manager",
-                    downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager2.3.3/BugeAppManager-v2.3.3-release.apk",
-                    website: "https://bugestudioteam.github.io/appmanager",
-                    extraClass: ""
-                },
-                {
-                    id: "applocker",
-                    nameKey: "applocker_name",
-                    descKey: "applocker_desc",
-                    iconImg: "applocker.jpg", // 核心修改：设置为同路径applocker.jpg
-                    fallbackIcon: "fas fa-lock",
-                    github: "https://github.com/BugeStudioTeam/Buge-App-Locker",
-                    downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Locker/releases/download/AppLocker1.0.2/Buge.App.Locker_1.0.2.apk",
-                    website: "#",
-                    extraClass: ""
-                }
-            ];
-            // 多语言文本库：新增Buge App Locker的多语言描述
-            const translations = {
-                en: {
-                    brand: "Buge Studio",
-                    all_soft_title: "All Softwares",
-                    all_soft_sub: "Discover all tools built by Buge Studio. Open-source, powerful, and designed for everyone.",
-                    more_note: "✨ More exciting projects are on the way. Stay tuned! Visit our GitHub for source code and contributions.",
-                    footer_tagline: "",
-                    app_name: "Buge App Manager",
-                    app_desc: "Powerful Android app & permission manager (requires Shizuku). Manage apps like a pro.",
-                    applocker_name: "Buge App Locker",
-                    applocker_desc: "This Material Design 3 App will help you lock apps with Accessibility function."
-                },
-                de: {
-                    brand: "Buge Studio",
-                    all_soft_title: "Alle Software",
-                    all_soft_sub: "Entdecken Sie alle Tools von Buge Studio. Open-Source, leistungsstark und für alle entwickelt.",
-                    more_note: "✨ Weitere spannende Projekte sind in Arbeit. Bleiben Sie dran! Besuchen Sie unser GitHub für Quellcode und Beiträge.",
-                    footer_tagline: "Open Source. Einfach. Wirkungsvoll.",
-                    app_name: "Buge App Manager",
-                    app_desc: "Leistungsstarkes Android-Tool für App- und Berechtigungsverwaltung (erfordert Shizuku). Verwalten Sie Apps wie ein Profi.",
-                    applocker_name: "Buge App Locker",
-                    applocker_desc: "Diese Material Design 3-App hilft Ihnen, Apps mit der Barrierefreiheitsfunktion zu sperren."
-                },
-                ru: {
-                    brand: "Buge Studio",
-                    all_soft_title: "Все программы",
-                    all_soft_sub: "Откройте для себя все инструменты Buge Studio. Открытый исходный код, мощные и созданные для всех.",
-                    more_note: "✨ В ближайшее время появятся новые проекты. Следите за обновлениями! Посетите GitHub для кода и вклада.",
-                    footer_tagline: "Открытый код. Просто. Значимо.",
-                    app_name: "Buge App Manager",
-                    app_desc: "Мощный инструмент для управления приложениями и разрешениями на Android (требуется Shizuku).",
-                    applocker_name: "Buge App Locker",
-                    applocker_desc: "Эта программа с Material Design 3 поможет вам заблокировать приложения с помощью функции доступности."
-                },
-                zh: {
-                    brand: "Buge Studio",
-                    all_soft_title: "所有软件",
-                    all_soft_sub: "探索 Buge Studio 打造的所有工具。开源、强大，为每个人设计。",
-                    more_note: "✨ 更多精彩项目即将到来。敬请期待！访问我们的 GitHub 获取源代码和贡献。",
-                    footer_tagline: "开源 · 简约 · 不凡",
-                    app_name: "Buge App Manager",
-                    app_desc: "强大的安卓应用和权限管理工具 (需要 Shizuku)。专业级应用管理。",
-                    applocker_name: "Buge App Locker",
-                    applocker_desc: "这款采用Material Design 3的应用，可通过辅助功能为您锁定各类应用。"
-                }
-            };
-            let currentLang = 'en';
-            const container = document.getElementById('softwaresContainer');
-            // 生成卡片HTML，使用 data-i18n 动态绑定
-            function buildCardsHTML() {
-                let html = '';
-                for (let sw of softwaresList) {
-                    const hasImage = sw.iconImg ? true : false;
-                    html += `
-                        <div class="software-card" data-software-id="${sw.id}" data-website="${sw.website || '#'}">
-                            <div class="card-icon">
-                                ${hasImage ? `<img src="${sw.iconImg}" alt="${sw.id}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
-                                <i class="${sw.fallbackIcon} fallback-icon-inner" ${!hasImage ? 'style="display:flex;"' : 'style="display:none;"'}></i>
-                            </div>
-                            <h3 class="sw-name" data-i18n="${sw.nameKey}">${translations.en[sw.nameKey] || sw.nameKey}</h3>
-                            <div class="description" data-i18n="${sw.descKey}">${translations.en[sw.descKey] || sw.descKey}</div>
-                            <div class="button-container">
-                                <a href="${sw.github}" target="_blank" class="card-link github-link" onclick="event.stopPropagation();"><i class="fab fa-github"></i> GitHub</a>
-                                <a href="${sw.downloadUrl}" target="_blank" class="card-link download-link" onclick="event.stopPropagation();"><i class="fas fa-download"></i> Download</a>
-                            </div>
-                        </div>
-                    `;
-                }
-                return html;
+        // Use the old version data logic you provided
+        const softwaresList = [
+            {
+                id: "appmanager",
+                name: "Buge App Manager",
+                desc: "Leistungsstarker Android-App- und Berechtigungsmanager (erfordert Shizuku). Verwalten Sie Apps wie ein Profi.",
+                iconImg: "AppManager.jpg",
+                fallbackIcon: "fas fa-cubes",
+                github: "https://github.com/BugeStudioTeam/Buge-App-Manager",
+                downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager2.3.3/BugeAppManager-v2.3.3-release.apk",
+                website: "https://bugestudioteam.github.io/appmanager",
+                extraClass: ""
+            },
+            {
+                id: "applocker",
+                name: "Buge App Locker",
+                desc: "Diese Material Design 3 App hilft Ihnen, Apps mit der Barrierefreiheitsfunktion zu sperren.",
+                iconImg: "applocker.jpg",
+                fallbackIcon: "fas fa-lock",
+                github: "https://github.com/BugeStudioTeam/Buge-App-Locker",
+                downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Locker/releases/download/AppLocker1.0.2/Buge.App.Locker_1.0.2.apk",
+                website: "#",
+                extraClass: ""
+            },
+            {
+                id: "files",
+                name: "Buge Files",
+                desc: "Dies ist eine ANDROID-APP mit MATERIAL DESIGN 3, die Ihren Telefon-Speicher verwalten kann.",
+                iconImg: "files.png",
+                fallbackIcon: "fas fa-folder-open",
+                github: "https://github.com/BugeStudioTeam/Buge-Files",
+                downloadUrl: "https://github.com/BugeStudioTeam/Buge-Files/releases/download/DEMO-1.0.0/app-release.apk",
+                website: "#",
+                extraClass: ""
             }
-            function updateAllTexts(lang) {
-                if (!translations[lang]) return;
-                const elements = document.querySelectorAll('[data-i18n]');
-                elements.forEach(el => {
-                    const key = el.getAttribute('data-i18n');
-                    if (translations[lang][key] !== undefined) {
-                        el.innerText = translations[lang][key];
-                    }
-                });
-                const brandSpan = document.querySelector('.nav-logo span:not(.fallback-emoji)');
-                if (brandSpan && translations[lang].brand) brandSpan.innerText = translations[lang].brand;
-                currentLang = lang;
-            }
-            // 首次渲染卡片
-            container.innerHTML = buildCardsHTML();
-            // 处理卡片点击
-            const attachCardClick = () => {
-                const cards = document.querySelectorAll('.software-card');
-                cards.forEach(card => {
-                    const newCard = card.cloneNode(true);
-                    card.parentNode.replaceChild(newCard, card);
-                    const websiteUrl = newCard.getAttribute('data-website');
-                    if (websiteUrl && websiteUrl !== '#') {
-                        newCard.addEventListener('click', (e) => {
-                            if (e.target.closest('.card-link')) return;
-                            window.location.href = websiteUrl;
-                        });
-                    }
-                    const cardImg = newCard.querySelector('.card-icon img');
-                    if (cardImg) {
-                        cardImg.addEventListener('error', function() {
-                            this.style.display = 'none';
-                            const parentIcon = this.parentNode;
-                            const fallbackIconElem = parentIcon.querySelector('.fallback-icon-inner');
-                            if (fallbackIconElem) fallbackIconElem.style.display = 'flex';
-                        });
-                    }
-                    const btns = newCard.querySelectorAll('.card-link');
-                    btns.forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                        });
-                    });
-                });
-            };
-            attachCardClick();
-            // 语言切换器逻辑
-            const langOptions = document.querySelectorAll('.lang-option');
-            langOptions.forEach(opt => {
-                opt.addEventListener('click', function() {
-                    langOptions.forEach(o => o.classList.remove('active'));
-                    this.classList.add('active');
-                    const newLang = this.getAttribute('data-lang');
-                    updateAllTexts(newLang);
-                });
+        ];
+
+        // Render cards dynamically and fix icon offset
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('softwareGrid');
+            softwaresList.forEach(app => {
+                const card = document.createElement('div');
+                card.className = `software-card ${app.extraClass}`;
+                card.onclick = () => app.website && (window.location.href = app.website);
+                
+                card.innerHTML = `
+                    <div class="card-icon">
+                        <img src="${app.iconImg}" alt="${app.name}" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="${app.fallbackIcon}"></i>
+                    </div>
+                    <h3>${app.name}</h3>
+                    <div class="description">${app.desc}</div>
+                    <div class="button-container">
+                        <a href="${app.github}" target="_blank" class="card-link github-link" onclick="event.stopPropagation()">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="${app.downloadUrl}" target="_blank" class="card-link download-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-download"></i> Herunterladen
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
             });
-            // 强制默认英文
-            const setDefaultEnglish = () => {
-                const enOption = document.querySelector('.lang-option[data-lang="en"]');
-                if (enOption && !enOption.classList.contains('active')) {
-                    langOptions.forEach(o => o.classList.remove('active'));
-                    enOption.classList.add('active');
-                    updateAllTexts('en');
-                } else if (enOption && enOption.classList.contains('active')) {
-                    updateAllTexts('en');
-                } else {
-                    updateAllTexts('en');
-                }
-            };
-            setDefaultEnglish();
-            // 导航栏logo跳转
-            const navLogo = document.querySelector('.nav-logo');
-            if (navLogo) {
-                navLogo.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'https://bugestudioteam.github.io';
-                });
-            }
-            // 滚动渐现效果
+        });
+
+        // Scroll reveal animation
+        (function() {
             const fadeElements = document.querySelectorAll('.fade-out');
             function checkFade() {
-                const windowHeight = window.innerHeight;
+                const h = window.innerHeight;
                 fadeElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    const visiblePart = Math.min(1, (rect.top + rect.height) / windowHeight, (windowHeight - rect.top) / windowHeight);
-                    if (visiblePart > 0.2) {
-                        el.classList.add('visible');
-                        el.classList.remove('hidden');
-                    } else {
-                        el.classList.remove('visible');
-                        el.classList.add('hidden');
-                    }
+                    const r = el.getBoundingClientRect();
+                    const show = (r.top + r.height) / h > 0.2 && (h - r.top) / h > 0.2;
+                    el.classList.toggle('visible', show);
+                    el.classList.toggle('hidden', !show);
                 });
             }
             window.addEventListener('scroll', checkFade);
             window.addEventListener('resize', checkFade);
             checkFade();
-            // 导航栏图标错误处理
-            const navIcon = document.getElementById('navIcon');
-            if (navIcon) {
-                navIcon.onerror = function() {
-                    this.style.display = 'none';
-                    const fallbackSpan = document.querySelector('.nav-logo .fallback-emoji');
-                    if (fallbackSpan) {
-                        fallbackSpan.style.display = 'block';
-                        fallbackSpan.textContent = '⚡';
-                    }
-                };
-            }
-            // 最终确认卡片链接
-            const finalizeCardLinks = () => {
-                const allCards = document.querySelectorAll('.software-card');
-                allCards.forEach(card => {
-                    const existingListener = card.getAttribute('data-listener');
-                    if (!existingListener) {
-                        const url = card.getAttribute('data-website');
-                        if (url && url !== '#') {
-                            const clickHandler = (e) => {
-                                if (e.target.closest('.card-link')) return;
-                                window.location.href = url;
-                            };
-                            card.addEventListener('click', clickHandler);
-                            card.setAttribute('data-listener', 'true');
-                        }
-                    }
-                });
-            };
-            finalizeCardLinks();
-            // 按钮冒泡处理
-            document.querySelectorAll('.card-link').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-            });
         })();
     </script>
 </body>
