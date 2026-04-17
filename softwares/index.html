@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ---------- Global variables with dark mode support ---------- */
         :root {
             --bg-dark: #0b1321;
             --bg-light: #f4f9ff;
@@ -31,8 +30,6 @@
             --white-text: #ffffff;
             --github-green: #2e7d32;
             --github-green-hover: #1b5e20;
-            --support-orange: #ff9800;
-            --support-orange-hover: #f57c00;
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -49,10 +46,6 @@
                 --border-light: rgba(100,181,246,0.25);
                 --shadow-color: rgba(0,20,60,0.6);
                 --logo-filter: brightness(0.9);
-                --footer-text: #ffffff;
-                --white-text: #ffffff;
-                --github-green: #2e7d32;
-                --github-green-hover: #1b5e20;
             }
         }
         * {
@@ -71,7 +64,6 @@
             display: flex;
             flex-direction: column;
         }
-        /* ----- Floating navigation bar ----- */
         .global-nav {
             position: fixed;
             top: 24px;
@@ -116,7 +108,6 @@
             background-clip: text;
             color: transparent;
         }
-        /* Language switcher */
         .lang-switch {
             display: flex;
             gap: 8px;
@@ -124,8 +115,6 @@
             padding: 6px;
             border-radius: 40px;
             backdrop-filter: blur(4px);
-            flex-wrap: wrap;
-            justify-content: flex-end;
         }
         .lang-option {
             padding: 8px 16px;
@@ -148,7 +137,6 @@
             background: rgba(100,181,246,0.2);
             border-color: var(--accent-soft);
         }
-        /* Main content */
         main {
             padding-top: 140px;
             width: 90%;
@@ -156,7 +144,6 @@
             margin: 0 auto;
             flex: 1;
         }
-        /* Page header */
         .page-header {
             margin-bottom: 40px;
             padding: 20px 0 40px;
@@ -179,7 +166,6 @@
             border-left: 5px solid var(--accent-blue);
             padding-left: 24px;
         }
-        /* Software grid */
         .all-softwares-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -222,6 +208,7 @@
         .card-icon i {
             font-size: 3.8rem;
             color: var(--accent-blue);
+            display: none;
         }
         .software-card h3 {
             font-size: 2rem;
@@ -259,9 +246,6 @@
             box-shadow: 0 6px 12px rgba(30,136,229,0.25);
             cursor: pointer;
         }
-        .github-link {
-            background: var(--accent-blue);
-        }
         .github-link:hover {
             background: #1565c0;
         }
@@ -271,7 +255,6 @@
         .download-link:hover {
             background: var(--github-green-hover);
         }
-        /* Footer */
         footer {
             margin-top: auto;
             padding: 40px 0;
@@ -300,20 +283,13 @@
             }
         }
         @media (max-width: 600px) {
-            main {
-                padding-top: 120px;
-            }
+            main { padding-top: 120px; }
             .button-container {
                 flex-direction: column;
                 width: 100%;
             }
-            .card-link {
-                width: 100%;
-                justify-content: center;
-            }
-            .page-header p {
-                font-size: 1.1rem;
-            }
+            .card-link { width: 100%; }
+            .page-header p { font-size: 1.1rem; }
         }
         .fade-out {
             transition: opacity 0.5s ease, transform 0.4s;
@@ -348,89 +324,94 @@
             <h1>All Softwares</h1>
             <p>Discover all tools built by Buge Studio. Open-source, powerful, and designed for everyone.</p>
         </div>
-        <div class="all-softwares-grid fade-out visible">
-            <div class="software-card" onclick="window.location.href='https://bugestudioteam.github.io/appmanager';">
-                <div class="card-icon">
-                    <img src="AppManager.jpg" alt="Buge App Manager" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <i class="fas fa-cubes fallback-icon-inner"></i>
-                </div>
-                <h3>Buge App Manager</h3>
-                <div class="description">Powerful Android app & permission manager (requires Shizuku). Manage apps like a pro.</div>
-                <div class="button-container">
-                    <a href="https://github.com/BugeStudioTeam/Buge-App-Manager" target="_blank" class="card-link github-link" onclick="event.stopPropagation();"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager2.3.3/BugeAppManager-v2.3.3-release.apk" target="_blank" class="card-link download-link" onclick="event.stopPropagation();"><i class="fas fa-download"></i> Download</a>
-                </div>
-            </div>
-            <div class="software-card">
-                <div class="card-icon">
-                    <img src="applocker.jpg" alt="Buge App Locker" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <i class="fas fa-lock fallback-icon-inner"></i>
-                </div>
-                <h3>Buge App Locker</h3>
-                <div class="description">This Material Design 3 App will help you lock apps with Accessibility function.</div>
-                <div class="button-container">
-                    <a href="https://github.com/BugeStudioTeam/Buge-App-Locker" target="_blank" class="card-link github-link" onclick="event.stopPropagation();"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://github.com/BugeStudioTeam/Buge-App-Locker/releases/download/AppLocker1.0.2/Buge.App.Locker_1.0.2.apk" target="_blank" class="card-link download-link" onclick="event.stopPropagation();"><i class="fas fa-download"></i> Download</a>
-                </div>
-            </div>
-            <div class="software-card">
-                <div class="card-icon">
-                    <img src="files.png" alt="Buge Files" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <i class="fas fa-folder-open fallback-icon-inner"></i>
-                </div>
-                <h3>Buge Files</h3>
-                <div class="description">This is a MATERIAL DESIGN 3 ANDROID APP, it can manage your phone storage.</div>
-                <div class="button-container">
-                    <a href="https://github.com/BugeStudioTeam/Buge-Files" target="_blank" class="card-link github-link" onclick="event.stopPropagation();"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://github.com/BugeStudioTeam/Buge-Files/releases/download/DEMO-1.0.0/app-release.apk" target="_blank" class="card-link download-link" onclick="event.stopPropagation();"><i class="fas fa-download"></i> Download</a>
-                </div>
-            </div>
-        </div>
+        <div class="all-softwares-grid fade-out visible" id="softwareGrid"></div>
     </main>
     <footer>
         <p>© 2026 Buge Studio</p>
     </footer>
+
     <script>
-        // Scroll reveal animation logic
+        // 完全使用你提供的旧版本数据逻辑
+        const softwaresList = [
+            {
+                id: "appmanager",
+                name: "Buge App Manager",
+                desc: "Powerful Android app & permission manager (requires Shizuku). Manage apps like a pro.",
+                iconImg: "AppManager.jpg",
+                fallbackIcon: "fas fa-cubes",
+                github: "https://github.com/BugeStudioTeam/Buge-App-Manager",
+                downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager2.3.3/BugeAppManager-v2.3.3-release.apk",
+                website: "https://bugestudioteam.github.io/appmanager",
+                extraClass: ""
+            },
+            {
+                id: "applocker",
+                name: "Buge App Locker",
+                desc: "This Material Design 3 App will help you lock apps with Accessibility function.",
+                iconImg: "applocker.jpg",
+                fallbackIcon: "fas fa-lock",
+                github: "https://github.com/BugeStudioTeam/Buge-App-Locker",
+                downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Locker/releases/download/AppLocker1.0.2/Buge.App.Locker_1.0.2.apk",
+                website: "#",
+                extraClass: ""
+            },
+            {
+                id: "files",
+                name: "Buge Files",
+                desc: "This is a MATERIAL DESIGN 3 ANDROID APP, it can manage your phone storage.",
+                iconImg: "files.png",
+                fallbackIcon: "fas fa-folder-open",
+                github: "https://github.com/BugeStudioTeam/Buge-Files",
+                downloadUrl: "https://github.com/BugeStudioTeam/Buge-Files/releases/download/DEMO-1.0.0/app-release.apk",
+                website: "#",
+                extraClass: ""
+            }
+        ];
+
+        // 动态渲染卡片 + 修复图标偏移
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('softwareGrid');
+            softwaresList.forEach(app => {
+                const card = document.createElement('div');
+                card.className = `software-card ${app.extraClass}`;
+                card.onclick = () => app.website && (window.location.href = app.website);
+                
+                card.innerHTML = `
+                    <div class="card-icon">
+                        <img src="${app.iconImg}" alt="${app.name}" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="${app.fallbackIcon}"></i>
+                    </div>
+                    <h3>${app.name}</h3>
+                    <div class="description">${app.desc}</div>
+                    <div class="button-container">
+                        <a href="${app.github}" target="_blank" class="card-link github-link" onclick="event.stopPropagation()">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="${app.downloadUrl}" target="_blank" class="card-link download-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        });
+
+        // 滚动动画
         (function() {
             const fadeElements = document.querySelectorAll('.fade-out');
             function checkFade() {
-                const windowHeight = window.innerHeight;
+                const h = window.innerHeight;
                 fadeElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    const visiblePart = Math.min(1, (rect.top + rect.height) / windowHeight, (windowHeight - rect.top) / windowHeight);
-                    if (visiblePart > 0.2) {
-                        el.classList.add('visible');
-                        el.classList.remove('hidden');
-                    } else {
-                        el.classList.remove('visible');
-                        el.classList.add('hidden');
-                    }
+                    const r = el.getBoundingClientRect();
+                    const show = (r.top + r.height) / h > 0.2 && (h - r.top) / h > 0.2;
+                    el.classList.toggle('visible', show);
+                    el.classList.toggle('hidden', !show);
                 });
             }
             window.addEventListener('scroll', checkFade);
             window.addEventListener('resize', checkFade);
             checkFade();
-
-            // Nav icon error fallback handling
-            const navIcon = document.getElementById('navIcon');
-            if (navIcon) {
-                navIcon.onerror = function() {
-                    this.style.display = 'none';
-                    const fallbackSpan = document.querySelector('.nav-logo .fallback-emoji');
-                    if (fallbackSpan) {
-                        fallbackSpan.style.display = 'block';
-                        fallbackSpan.textContent = '⚡';
-                    }
-                };
-            }
-
-            // Prevent card click bubbling on buttons
-            document.querySelectorAll('.card-link').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-            });
         })();
     </script>
 </body>
