@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Creepy Nightmares</title>
+    <link rel="icon" type="image/jpg" href="creepynightmares.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(ellipse at 30% 40%, #1e0707 0%, #030000 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', 'SF Mono', 'Fira Code', 'Source Code Pro', monospace;
+            padding: 1.8rem;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg, rgba(100, 20, 20, 0.1) 0px, rgba(100, 20, 20, 0.1) 1px, transparent 1px, transparent 4px);
+            z-index: 0;
+        }
+
+        .nightmare-core {
+            max-width: 880px;
+            width: 100%;
+            background: linear-gradient(145deg, rgba(18, 4, 4, 0.82) 0%, rgba(8, 1, 1, 0.88) 100%);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 40px rgba(100, 20, 20, 0.4), inset 0 0 20px rgba(70, 10, 10, 0.2);
+            padding: 2.6rem 2.2rem;
+            border-radius: 0px;
+            transition: all 0.2s;
+            position: relative;
+            z-index: 2;
+            border: none;
+        }
+
+        h1, h2, h3, p, a, .game-title, .status-badge, .footer-note {
+            font-family: 'Courier New', 'Courier', 'Lucida Sans Typewriter', monospace;
+            letter-spacing: 0.02em;
+        }
+
+        .header {
+            border-bottom: 1px solid #8b2c2c;
+            margin-bottom: 2rem;
+            padding-bottom: 1.2rem;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #dc5e5e;
+            text-shadow: 0 0 6px #5a0a0a, 0 2px 0 #2b0202;
+            letter-spacing: -0.5px;
+            word-break: keep-all;
+        }
+
+        .main-title small {
+            font-size: 0.85rem;
+            display: block;
+            color: #bd7474;
+            margin-top: 0.65rem;
+            letter-spacing: 2.5px;
+            font-weight: normal;
+            border-top: 1px dotted #952f2f;
+            padding-top: 0.7rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: #b33b3b;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            height: 1.3rem;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .bio {
+            background: #13030366;
+            padding: 1.2rem 1.5rem;
+            border-left: 5px solid #b12b2b;
+            margin: 1.6rem 0 2rem 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #eccfcf;
+        }
+
+        .bio p {
+            margin-bottom: 0.75rem;
+        }
+
+        .bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        .game-showcase {
+            background: #0a0202aa;
+            border: 1px solid #712323;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            transition: all 0.25s ease;
+        }
+
+        .game-showcase:hover {
+            box-shadow: 0 0 22px #892828;
+            border-color: #bc4a4a;
+        }
+
+        .game-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #b15656;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-title {
+            font-size: 2.3rem;
+            font-weight: bold;
+            color: #e66767;
+            margin-bottom: 0.2rem;
+            text-shadow: 2px 2px 0 #3c0606;
+            word-break: break-word;
+        }
+
+        .game-status {
+            display: inline-block;
+            background-color: #4f1212;
+            color: #f0a7a7;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin: 0.5rem 0 1rem 0;
+            border: 0.5px solid #b15252;
+        }
+
+        .game-description {
+            color: #ddbfbf;
+            line-height: 1.55;
+            font-size: 1rem;
+            margin: 1rem 0 1.2rem 0;
+        }
+
+        .horror-tags {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .horror-tags span {
+            background: #2a0909;
+            color: #cf7f7f;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.7rem;
+            border-radius: 12px;
+            border-left: 2px solid #a13333;
+        }
+
+        .unreleased-note {
+            font-size: 0.8rem;
+            background: #270a0a;
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            color: #e6a1a1;
+            border-radius: 2px;
+            margin-top: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        .nightmare-list {
+            margin: 2rem 0 1.5rem;
+        }
+
+        .nightmare-list h3 {
+            color: #bf5a5a;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            border-left: 3px solid #a22;
+            padding-left: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .single-dream {
+            list-style: none;
+        }
+
+        .single-dream li {
+            margin: 0.7rem 0;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-bottom: 1px dashed #551c1c;
+            color: #dbb9b9;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .single-dream li strong {
+            color: #cd6b6b;
+            font-weight: 600;
+            font-size: 1rem;
+            min-width: 100px;
+        }
+
+        .status-mystery {
+            font-style: italic;
+            font-size: 0.78rem;
+            color: #a56f6f;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.68rem;
+            margin-top: 2rem;
+            color: #704545;
+            letter-spacing: 1px;
+            border-top: 1px solid #451a1a;
+            padding-top: 1.4rem;
+        }
+
+        @media (max-width: 560px) {
+            .nightmare-core {
+                padding: 1.5rem;
+            }
+            .main-title {
+                font-size: 2.2rem;
+            }
+            .game-title {
+                font-size: 1.7rem;
+            }
+            .bio {
+                font-size: 0.85rem;
+                padding: 0.8rem;
+            }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #1f0303;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #851e1e;
+            border-radius: 4px;
+        }
+        ::selection {
+            background: #a03030;
+            color: #0a0101;
+        }
+    </style>
+</head>
+<body>
+<div class="nightmare-core">
+    <div class="header">
+        <div class="main-title">
+            Creepy Nightmares
+            <small>weaving dread into pixels</small>
+        </div>
+        <div style="font-size: 0.85rem; margin-top: 0.7rem; color:#bd7a7a;">
+            >_ horror architect <span class="typewriter-cursor"></span>
+        </div>
+    </div>
+
+    <div class="bio">
+        <p>I craft interactive nightmares, retro-fused terror & psychological decay. Every game is a descent into fragile minds.</p>
+        <p>My work bleeds with film grain, uneasy silences, and the unknown. No cheap jumpscares — only creeping anxiety.</p>
+        <p>Currently forging my first major unhinged experience from the shadows.</p>
+    </div>
+
+    <div class="game-showcase">
+        <div class="game-label">/// ACTIVE PROJECT — CLASSIFIED HORROR</div>
+        <div class="game-title">PANIC 1945</div>
+        <div class="game-status">UNRELEASED | COMING FROM THE VOID</div>
+        <div class="horror-tags">
+            <span>PSYCHOLOGICAL HORROR</span>
+            <span>ALTERNATE HISTORY</span>
+            <span>SURVIVAL</span>
+            <span>PULP NIGHTMARE</span>
+        </div>
+        <div class="game-description">
+            The year folds into itself. 1945. Not the war you remember. Something else crawled out of the static.<br>
+            You are a signal operator trapped in a bunker that shouldn't exist. Reality shifts with every radio transmission. <br>
+            <strong>Panic 1945</strong> blends tense resource management, analog dread, and a branching narrative where paranoia becomes your enemy.<br>
+            No weapons. Only echoes.
+        </div>
+        <div class="unreleased-note">
+            NOT YET RELEASED — First public build: [REDACTED]
+        </div>
+    </div>
+
+    <div class="nightmare-list">
+        <h3>other nightmares brewing</h3>
+        <ul class="single-dream">
+            <li><strong>RAVEN'S DREAM</strong> <span class="status-mystery">— atmospheric horror / in deep development</span></li>
+        </ul>
+    </div>
+
+    <div class="footer-note">
+        <span style="font-size: 0.6rem;">© CREEPY NIGHTMARES 2026</span>
+        <span style="font-size: 0.6rem;">BugeStudioTeam also is my studio</span>
+    </div>
+</div>
+</body>
+</html>
