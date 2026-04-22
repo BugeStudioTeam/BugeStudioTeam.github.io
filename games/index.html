@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Creepy Nightmares</title>
-    <link rel="icon" type="image/jpg" href="creepynightmares.jpg">
+    <link rel="icon" type="image/jpeg" href="creepynightmares.jpg">
     <style>
         * {
             margin: 0;
@@ -52,6 +52,28 @@
         h1, h2, h3, p, a, .game-title, .status-badge, .footer-note {
             font-family: 'Courier New', 'Courier', 'Lucida Sans Typewriter', monospace;
             letter-spacing: 0.02em;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .top-logo {
+            max-width: 120px;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 0 12px #831e1e;
+            border: 1px solid #a13a3a;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            background-color: #0d0101;
+        }
+
+        .top-logo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #b13b3b;
+            border-color: #cc5a5a;
         }
 
         .header {
@@ -243,6 +265,9 @@
             letter-spacing: 1px;
             border-top: 1px solid #451a1a;
             padding-top: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
         }
 
         @media (max-width: 560px) {
@@ -258,6 +283,9 @@
             .bio {
                 font-size: 0.85rem;
                 padding: 0.8rem;
+            }
+            .top-logo {
+                max-width: 85px;
             }
         }
         
@@ -277,6 +305,9 @@
 </head>
 <body>
 <div class="nightmare-core">
+    <div class="logo-container">
+        <img src="creepynightmares.jpg" alt="Creepy Nightmares Logo" class="top-logo">
+    </div>
     <div class="header">
         <div class="main-title">
             Creepy Nightmares
