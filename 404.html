@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Buge Studio - 404 Page not found</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="icon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- Global variables with dark mode support ---------- */
+        :root {
+            --bg-dark: #0b1321;
+            --bg-light: #f4f9ff;
+            --text-dark: #0a1e3c;
+            --text-light: #f0f7ff;
+            --accent-blue: #1e88e5;
+            --accent-soft: #64b5f6;
+            --card-bg-light: rgba(255,255,255,0.7);
+            --card-bg-dark: rgba(15,30,50,0.8);
+            --nav-bg-light: rgba(255,255,255,0.75);
+            --nav-bg-dark: rgba(8,20,35,0.85);
+            --border-light: rgba(30,136,229,0.2);
+            --shadow-color: rgba(0,40,100,0.2);
+            --logo-filter: none;
+            --footer-text: #ffffff;
+            --white-text: #ffffff;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-dark: #030c17;
+                --bg-light: #0d1a2b;
+                --text-dark: #e0edff;
+                --text-light: #ffffff;
+                --accent-blue: #64b5f6;
+                --accent-soft: #1e4b77;
+                --card-bg-light: rgba(15,30,45,0.8);
+                --card-bg-dark: rgba(5,15,28,0.9);
+                --nav-bg-light: rgba(8,18,33,0.9);
+                --nav-bg-dark: rgba(2,10,22,0.95);
+                --border-light: rgba(100,181,246,0.25);
+                --shadow-color: rgba(0,20,60,0.6);
+                --logo-filter: brightness(0.9);
+                --footer-text: #ffffff;
+                --white-text: #ffffff;
+            }
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at 30% 10%, var(--bg-light), var(--bg-dark));
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.2s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* ----- Floating navigation bar ----- */
+        .global-nav {
+            position: fixed;
+            top: 24px;
+            left: 5%;
+            right: 5%;
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--nav-bg-light);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 80px;
+            padding: 12px 28px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 40px var(--shadow-color);
+            z-index: 100;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            object-fit: contain;
+            filter: var(--logo-filter);
+        }
+        .nav-logo span {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--accent-blue), #90caf9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        /* Main content */
+        main {
+            padding-top: 140px;
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: calc(100vh - 200px);
+        }
+        /* 404 Hero section */
+        .error-hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 0 80px;
+        }
+        .error-code {
+            font-size: clamp(8rem, 20vw, 16rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -8px;
+            background: linear-gradient(145deg, var(--accent-blue), #bbdefb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 24px;
+        }
+        .error-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        .error-message {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            color: var(--text-dark);
+            opacity: 0.85;
+        }
+        .error-desc {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--text-dark);
+            border-left: 8px solid var(--accent-blue);
+            padding: 8px 0 8px 32px;
+            text-align: left;
+            opacity: 0.9;
+        }
+        .button-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 36px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            background: var(--accent-blue);
+            text-decoration: none;
+            border-radius: 40px;
+            transition: all 0.2s;
+            box-shadow: 0 8px 16px rgba(30,136,229,0.3);
+        }
+        .home-link:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(30,136,229,0.4);
+        }
+        .report-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: var(--card-bg-light);
+            backdrop-filter: blur(8px);
+            text-decoration: none;
+            border-radius: 40px;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
+        }
+        .report-link:hover {
+            background: var(--accent-soft);
+            color: white;
+            transform: translateY(-2px);
+        }
+        footer {
+            margin-top: 60px;
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-light);
+            color: #ffffff !important;
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        footer p {
+            color: #ffffff !important;
+        }
+        @media (max-width: 900px) {
+            .global-nav {
+                top: 16px;
+                border-radius: 40px;
+                padding: 12px 20px;
+            }
+            .nav-logo span { font-size: 1.6rem; }
+            .error-code { letter-spacing: -4px; }
+            .error-desc { padding-left: 20px; }
+        }
+        @media (max-width: 600px) {
+            .error-hero { padding: 40px 0 60px; }
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .home-link, .report-link {
+                width: 80%;
+                justify-content: center;
+            }
+            .error-desc { padding-left: 20px; }
+        }
+        .fallback-emoji {
+            font-size: 3rem;
+            display: none;
+        }
+        .fade-out {
+            transition: opacity 0.5s ease, transform 0.4s;
+        }
+        .fade-out.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-out.hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="global-nav">
+        <div class="nav-logo">
+            <img src="icon.png" alt="Buge Studio" id="navIcon" onerror="this.style.display='none'; document.querySelector('.fallback-emoji').style.display='block';">
+            <span class="fallback-emoji"></span>
+            <span>Buge Studio</span>
+        </div>
+    </nav>
+    <main>
+        <section class="error-hero fade-out visible" id="errorSection">
+            <div class="error-code">404</div>
+            <div class="error-title">Page Not Found</div>
+            <div class="error-message">
+                Oops! The page you're looking for doesn't exist.
+            </div>
+            <div class="error-desc">
+                It might have been moved, deleted, or never existed.  
+                But don't worry — we'll help you find your way back.
+            </div>
+            <div class="button-group">
+                <a href="/" class="home-link">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="https://github.com/BugeStudioTeam" target="_blank" class="report-link">
+                    <i class="fab fa-github"></i> Visit GitHub
+                </a>
+            </div>
+        </section>
+        <footer>
+            <p>© 2026 Buge Studio</p>
+        </footer>
+    </main>
+    <script>
+        (function() {
+            const fadeElements = document.querySelectorAll('.fade-out');
+            function checkFade() {
+                const windowHeight = window.innerHeight;
+                fadeElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    const visiblePart = Math.min(1, (rect.top + rect.height) / windowHeight, (windowHeight - rect.top) / windowHeight);
+                    if (visiblePart > 0.2) {
+                        el.classList.add('visible');
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.remove('visible');
+                        el.classList.add('hidden');
+                    }
+                });
+            }
+            window.addEventListener('scroll', checkFade);
+            window.addEventListener('resize', checkFade);
+            checkFade();
+
+            const navIcon = document.getElementById('navIcon');
+            const fallbackEmoji = document.querySelector('.fallback-emoji');
+            if (navIcon) {
+                navIcon.onerror = function() {
+                    this.style.display = 'none';
+                    if (fallbackEmoji) {
+                        fallbackEmoji.style.display = 'block';
+                        fallbackEmoji.textContent = '⚡';
+                    }
+                };
+            }
+        })();
+    </script>
+</body>
+</html>
