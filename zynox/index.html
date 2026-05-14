@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark light">
+    <meta name="description" content="ZynoxAI - Create files and execute commands using natural language with AI">
+    <title>ZynoxAI | AI-Powered CLI Tool</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0f1420;
+            --bg-card: #13182a;
+            --bg-elevated: #1a1f35;
+            --text-primary: #e8edf5;
+            --text-secondary: #8a9bb5;
+            --text-tertiary: #5a6d8c;
+            --accent: #60a5fa;
+            --accent-dark: #3b82f6;
+            --accent-light: #93c5fd;
+            --accent-soft: rgba(96, 165, 250, 0.1);
+            --accent-glow: rgba(96, 165, 250, 0.2);
+            --border: #1e2a4a;
+            --border-light: #2a3a60;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --gradient: linear-gradient(135deg, #60a5fa, #818cf8, #a78bfa);
+            --gradient-blue: linear-gradient(135deg, #60a5fa, #3b82f6);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-primary: #f0f7ff;
+                --bg-secondary: #e8f0fe;
+                --bg-card: #ffffff;
+                --bg-elevated: #f8fafc;
+                --text-primary: #1e293b;
+                --text-secondary: #475569;
+                --text-tertiary: #64748b;
+                --accent: #3b82f6;
+                --accent-dark: #2563eb;
+                --accent-light: #93c5fd;
+                --accent-soft: rgba(59, 130, 246, 0.08);
+                --border: #e2e8f0;
+                --border-light: #cbd5e1;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 26, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        @media (prefers-color-scheme: light) {
+            .header {
+                background: rgba(240, 247, 255, 0.9);
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .logo h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        .btn-outline {
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 1rem 5rem;
+        }
+
+        .hero-icon {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-icon img {
+            width: 72px;
+            height: 72px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .hero-badge span {
+            background: var(--accent-soft);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 0.25rem 0.875rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-light);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            border-radius: 40px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: white;
+            border: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        /* Section */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            margin: 2rem 0 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.75rem;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .code-block .command {
+            color: var(--accent);
+        }
+
+        /* Command Grid */
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .command-item {
+            background: var(--bg-elevated);
+            border-radius: 12px;
+            padding: 0.875rem 1.125rem;
+            font-family: 'SF Mono', monospace;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+        }
+
+        .command-cmd {
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .command-desc {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            font-family: system-ui;
+        }
+
+        /* Providers Grid */
+        .providers-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .provider-card {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            min-width: 120px;
+        }
+
+        .provider-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .provider-model {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin: 3rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 3rem;
+            background: var(--gradient-blue);
+            border-radius: 24px;
+            margin: 4rem 0;
+        }
+
+        .cta h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-cta {
+            background: white;
+            color: var(--accent-dark);
+            border: none;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copyright {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+
+        .footer-copyright a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .hero { padding: 5rem 0 3rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 0.9rem; }
+            .feature-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .command-grid { grid-template-columns: 1fr; }
+            .stats-grid { gap: 1.5rem; }
+            .providers-grid { gap: 1rem; }
+            .nav { display: none; }
+            .section { padding: 2rem 0; }
+            .cta { padding: 2rem; }
+            .cta h3 { font-size: 1.25rem; }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="icon.png" alt="ZynoxAI">
+            <h1>ZynoxAI</h1>
+        </div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="#usage">Usage</a>
+            <a href="https://github.com/BugeStudioTeam/Zynox" target="_blank">GitHub</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-icon">
+                <img src="icon.png" alt="ZynoxAI">
+            </div>
+            <h1>Create with <span class="hero-highlight">AI</span>,<br>naturally.</h1>
+            <p>ZynoxAI turns natural language into files, folders, and commands. Powered by GPT, Gemini, Grok, and DeepSeek.</p>
+            <div class="hero-badge">
+                <span>⚡ Zero Config</span>
+                <span>🧠 Smart Memory</span>
+                <span>🔧 Auto-Install</span>
+                <span>💬 Telegram Bot</span>
+                <span>🌐 Web UI</span>
+            </div>
+            <div class="btn-group">
+                <a href="https://github.com/BugeStudioTeam/Zynox" class="btn btn-primary">
+                    <span>Get Started</span>
+                    <span>→</span>
+                </a>
+                <a href="#usage" class="btn btn-secondary">View Documentation</a>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">AI Providers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Interfaces</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Open Source</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">MIT</div>
+                    <div class="stat-label">License</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="container" id="features">
+            <div class="section">
+                <div class="section-header">
+                    <h2>Features</h2>
+                    <p>Everything you need to automate your workflow</p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🗣️</div>
+                        <h3>Natural Language</h3>
+                        <p>Describe what you want in plain English. No complex commands to memorize.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Conversation Memory</h3>
+                        <p>Remembers context across commands. Save and load sessions anytime.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Smart Auto-Install</h3>
+                        <p>Detects missing packages and installs them automatically.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Telegram Bot</h3>
+                        <p>Control ZynoxAI from anywhere via Telegram. Full remote access.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Web Dashboard</h3>
+                        <p>Modern web interface with chat, terminal, and settings panel.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Code Generation</h3>
+                        <p>Generates Python, JavaScript, HTML, JSON, and more with real content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start Section -->
+        <div class="container" id="usage">
+            <div class="section">
+                <div class="section-header">
+                    <h2>Quick Start</h2>
+                    <p>Get up and running in minutes</p>
+                </div>
+
+                <div class="code-block">
+                    <pre><span class="command"># Clone the repository</span>
+git clone https://github.com/BugeStudioTeam/Zynox.git
+cd Zynox
+
+<span class="command"># Install dependencies</span>
+chmod +x install.sh && ./install.sh
+
+<span class="command"># Set your API key</span>
+zynox --set-key deepseek --key sk-xxx
+
+<span class="command"># Create your first file</span>
+zynox "create a python file called hello.py with print('Hello World')"</pre>
+                </div>
+
+                <div class="command-grid">
+                    <div class="command-item">
+                        <div class="command-cmd">zynox "create a folder called myproject"</div>
+                        <div class="command-desc">Create a folder</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-cmd">zynox "find abc.txt and read it"</div>
+                        <div class="command-desc">Search and read file</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-cmd">zynox "list all files"</div>
+                        <div class="command-desc">Execute system commands</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-cmd">zynox --web</div>
+                        <div class="command-desc">Start web server (port 5000)</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-cmd">zynox --telegram-bot TOKEN</div>
+                        <div class="command-desc">Start Telegram bot</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-cmd">zynox --new-session</div>
+                        <div class="command-desc">Start fresh conversation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Providers -->
+        <div class="container">
+            <div class="section">
+                <div class="section-header">
+                    <h2>AI Providers</h2>
+                    <p>Choose the model that works best for you</p>
+                </div>
+
+                <div class="providers-grid">
+                    <div class="provider-card">
+                        <div class="provider-name">OpenAI</div>
+                        <div class="provider-model">GPT-4o · GPT-3.5</div>
+                    </div>
+                    <div class="provider-card">
+                        <div class="provider-name">Gemini</div>
+                        <div class="provider-model">1.5 Flash · 1.5 Pro</div>
+                    </div>
+                    <div class="provider-card">
+                        <div class="provider-name">Grok</div>
+                        <div class="provider-model">Grok-β · Grok-2</div>
+                    </div>
+                    <div class="provider-card">
+                        <div class="provider-name">DeepSeek</div>
+                        <div class="provider-model">Chat · Coder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonial -->
+        <div class="container">
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "ZynoxAI completely changed how I prototype. Instead of typing mkdir, touch, and writing boilerplate, I just describe what I need and it's done."
+                </div>
+                <div class="testimonial-author">— Developer</div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="container">
+            <div class="cta">
+                <h3>Ready to get started?</h3>
+                <p>Install ZynoxAI today and let AI handle the repetitive work.</p>
+                <a href="https://github.com/BugeStudioTeam/Zynox" class="btn btn-cta">GitHub →</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="https://github.com/BugeStudioTeam/Zynox" target="_blank">GitHub</a>
+                    <a href="https://github.com/BugeStudioTeam/Zynox/issues" target="_blank">Issues</a>
+                    <a href="https://github.com/BugeStudioTeam/Zynox/releases" target="_blank">Releases</a>
+                </div>
+                <div class="footer-copyright">
+                    © <a href="https://github.com/BugeStudioTeam" target="_blank">Buge Studio</a> 2026
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
