@@ -647,19 +647,48 @@
                 </div>
 
                 <div class="code-block">
-                    <pre><span class="command"># Clone the repository</span>
+                    <pre><span class="command"># Step 1: Install Dependencies</span>
+# Update package manager
+pkg update && pkg upgrade  # For Termux
+# OR
+sudo apt update && sudo apt upgrade  # For Linux
+
+# Install Python if not installed
+pkg install python  # Termux
+# OR
+sudo apt install python3  # Linux
+
+# Install required Python packages
+pip install requests colorama
+
+<span class="command">Step 2: Clone/Create ZynoxAI</span>
+# Download the script
 git clone https://github.com/BugeStudioTeam/Zynox.git
+
+# Rename
 mv Zynox ZynoxAI
-cd ZynoxAI
 
-<span class="command"># Install dependencies</span>
-chmod +x install.sh && ./install.sh
+cd ~/ZynoxAI
 
-<span class="command"># Set your API key</span>
-zynox --set-key deepseek --key sk-xxx
+<span class="command"># Step 3: Set Up Alias (Optional but Recommended)</span>
+# Add alias to ~/.bashrc
+echo "alias zynox='python ~/ZynoxAI/zynox.py'" >> ~/.bashrc
+source ~/.bashrc
 
-<span class="command"># Create your first file</span>
-zynox "create a python file called hello.py with print('Hello World')"</pre>
+# Or for Termux with ~/bin directory
+mkdir -p ~/bin
+ln -s ~/ZynoxAI/zynox.py ~/bin/zynox
+chmod +x ~/ZynoxAI/zynox.py
+
+<span class="command"># Step 4: Verify Installation</span>
+# Should show the ZYNOX logo
+zynox
+
+# Should show help menu
+zynox --help
+
+# Should show about menu
+zynox --about</pre>
                 </div>
 
                 <div class="command-grid">
