@@ -2,7 +2,7 @@
   <img src="https://github.com/BugeStudioTeam/BugeStudioTeam/blob/main/icon.png" alt="Buge Studio Logo" width="180">
 </p>
 
-<h1 align="center">Buge Studio Official Website</h1>
+<h1 align="center">Buge Studio Official Website</h1> 
 
 <p align="center">
   <strong>Thinking what to do, then creating software that makes a difference.</strong><br />
