@@ -66,10 +66,6 @@ We actively maintain utilities that enhance productivity, privacy, and system co
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=BugeStudioTeam&bg_color=0d1117&color=4285F4&line=26A5E4&point=ffffff&area=true&hide_border=true" width="100%" alt="Buge Studio Commits Graph" />
 </p>
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/stars?username=BugeStudioTeam&theme=transparent&hide_border=true&title_color=4285F4&icon_color=26A5E4&text_color=8b949e" width="100%" alt="Buge Studio Overall Star History" />
-</p>
-
 ---
 
 ## 🤝 Contributing & Feedback
