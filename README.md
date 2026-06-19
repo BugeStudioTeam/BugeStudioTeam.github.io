@@ -80,6 +80,7 @@ As an open-source team, we love community collaboration! Whether you want to fix
 
 ## 📫 Stay Connected
 
+-   📧 **Open Source**: Submit feedback or contribute via E-mail (CreepyNightmares@proton.me), (PCreepyNightmares@gmail.com)
 -   💬 **Telegram Channel:** [Join @bugestudio](https://t.me/bugestudio) for instant beta rollouts and announcements.
 -   📧 **GitHub Organization:** Explore all codebases at [github.com/BugeStudioTeam](https://github.com/BugeStudioTeam).
 
