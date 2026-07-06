@@ -36,6 +36,7 @@ Here, users can find the latest stable releases of our applications, explore doc
 > **"Simplicity is the ultimate sophistication."**
 
 We believe modern software has become bloated with unnecessary trackers, telemetry, and heavy UI elements. Buge Studio is dedicated to reversing this trend.
+
 - **No Bloat:** Zero heavy components or pointless animations that drain resources.
 - **No Distractions:** Ad-free, clean interfaces built strictly around functionality.
 - **100% Open Source:** Transparent codebases allowing anyone to audit, fork, or contribute.
@@ -47,16 +48,18 @@ We believe modern software has become bloated with unnecessary trackers, telemet
 We actively maintain utilities that enhance productivity, privacy, and system control.
 
 ### 📱 Android Ecosystem
-* 🤖 **[Buge App Manager](https://github.com/BugeStudioTeam/Buge-App-Manager)** *Advanced app & granular permission management utility. Utilizes Shizuku for elevated system privileges without requiring root.*
-    * **Tech Stack:** `Kotlin` | `Shizuku API` | `Material Design 3`
-* 🔒 **[Buge App Locker](https://github.com/BugeStudioTeam/Buge-App-Locker)** *A lightweight, privacy-focused application locker utilizing Android Accessibility services.*
-    * **Tech Stack:** `Java` | `Accessibility Service` | `Material 3`
-* 📁 **[Buge Files](https://github.com/BugeStudioTeam/Buge-Files)** *A sleek, modern file manager optimized for speed and clear local storage navigation.*
-    * **Tech Stack:** `Kotlin` | `Jetpack Compose`
+
+*  **[Buge App Manager](https://github.com/BugeStudioTeam/Buge-App-Manager)** *Advanced app & granular permission management utility. Utilizes Shizuku for elevated system privileges without requiring root.*
+  * **Tech Stack:** `Kotlin` | `Shizuku API` | `Material Design 3`
+*  **[Buge App Locker](https://github.com/BugeStudioTeam/Buge-App-Locker)** *A lightweight, privacy-focused application locker utilizing Android Accessibility services.*
+  * **Tech Stack:** `Java` | `Accessibility Service` | `Material 3`
+*  **[Buge Files](https://github.com/BugeStudioTeam/Buge-Files)** *A sleek, modern file manager optimized for speed and clear local storage navigation.*
+  * **Tech Stack:** `Kotlin` | `Jetpack Compose`
 
 ### 💻 Cross-Platform / Desktop
-* 🧠 **[Zynox](https://github.com/BugeStudioTeam/Zynox)** *An AI-powered cross-platform CLI tool. Generate, create, and manage files/folders or execute platform-specific commands using natural language.*
-    * **Tech Stack:** `Python` | `LLM Integrations` (GPT, Gemini, DeepSeek) | `CLI`
+
+*  **[Zynox](https://github.com/BugeStudioTeam/Zynox)** *An AI-powered cross-platform CLI tool. Generate, create, and manage files/folders or execute platform-specific commands using natural language.*
+  * **Tech Stack:** `Python` | `LLM Integrations` (GPT, Gemini, DeepSeek) | `CLI`
 
 ---
 
@@ -80,14 +83,14 @@ As an open-source team, we love community collaboration! Whether you want to fix
 
 ## 📫 Stay Connected
 
--   📧 **Open Source**: Submit feedback or contribute via E-mail (CreepyNightmares@proton.me), (PCreepyNightmares@gmail.com)
--   💬 **Telegram Channel:** [Join @bugestudio](https://t.me/bugestudio) for instant beta rollouts and announcements.
--   📧 **GitHub Organization:** Explore all codebases at [github.com/BugeStudioTeam](https://github.com/BugeStudioTeam).
+- 📧 **Open Source**: Submit feedback or contribute via E-mail (CreepyNightmares@proton.me), (PCreepyNightmares@gmail.com)
+- 💬 **Telegram Channel:** [Join @bugestudio](https://t.me/bugestudio) for instant beta rollouts and announcements.
+- 📧 **GitHub Organization:** Explore all codebases at [github.com/BugeStudioTeam](https://github.com/BugeStudioTeam).
 
 ---
 
 <p align="center">
   <sub>
-    © 2026 Buge Studio • Built with passion for power users.
+    © 2026 Buge Studio
   </sub>
 </p>
