@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buge Store</title>
+    <style>
+        /* ===== Reset & Base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f7f7fa;
+            color: #1c1c1e;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0 24px;
+            border-bottom: 1px solid #e5e5ea;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 a {
+            color: #1c1c1e;
+            text-decoration: none;
+        }
+
+        .header .count {
+            font-size: 14px;
+            color: #8e8e93;
+            background: #f0f0f5;
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+
+        /* ===== Search & Filters ===== */
+        .search-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid #e5e5ea;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #ffffff;
+            min-width: 180px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.12);
+        }
+
+        .search-bar .result-hint {
+            font-size: 14px;
+            color: #8e8e93;
+            align-self: center;
+            padding: 0 8px;
+            white-space: nowrap;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .filters button {
+            padding: 5px 16px;
+            border: 1px solid #e5e5ea;
+            border-radius: 18px;
+            background: #ffffff;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #3a3a3c;
+        }
+
+        .filters button:hover {
+            background: #f0f0f5;
+        }
+
+        .filters button.active {
+            background: #1c1c1e;
+            color: #ffffff;
+            border-color: #1c1c1e;
+        }
+
+        /* ===== App Grid ===== */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .app-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #f0f0f5;
+        }
+
+        .app-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .app-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .app-card .icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: #f7f7fa;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 1px solid #e5e5ea;
+        }
+
+        .app-card .name {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .app-card .package {
+            font-size: 12px;
+            color: #8e8e93;
+            font-family: monospace;
+            margin-bottom: 8px;
+            word-break: break-all;
+        }
+
+        .app-card .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+            font-size: 12px;
+            color: #6e6e73;
+            margin-bottom: 8px;
+        }
+
+        .app-card .meta-row span {
+            background: #f7f7fa;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .app-card .categories {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .app-card .categories span {
+            font-size: 11px;
+            background: #f0f0f5;
+            color: #555;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .app-card .developer {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-top: 2px;
+        }
+
+        .app-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f5;
+        }
+
+        .app-card .version {
+            font-size: 13px;
+            color: #3a3a3c;
+        }
+
+        .app-card .download-link {
+            font-size: 13px;
+            color: #007aff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: #f0f7ff;
+            transition: background 0.2s;
+        }
+
+        .app-card .download-link:hover {
+            background: #e1efff;
+        }
+
+        /* ===== States ===== */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 16px;
+            color: #8e8e93;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 16px;
+            color: #8e8e93;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px 20px;
+            color: #c2352b;
+            background: #fef0ef;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .error button {
+            margin-top: 12px;
+            padding: 8px 24px;
+            border-radius: 8px;
+            border: 1px solid #d2d2d7;
+            background: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            margin-top: 44px;
+            padding: 18px 0 6px;
+            border-top: 1px solid #e5e5ea;
+            text-align: center;
+            font-size: 13px;
+            color: #8e8e93;
+        }
+
+        .footer a {
+            color: #007aff;
+            text-decoration: none;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <!-- Header -->
+        <div class="header">
+            <h1><a href="/">Buge Store</a></h1>
+            <span class="count" id="appCount">loading...</span>
+        </div>
+
+        <!-- Search -->
+        <div class="search-bar">
+            <input
+            type="text"
+            id="searchInput"
+            placeholder="Search apps or package names..."
+            oninput="filterApps()"
+            />
+            <span class="result-hint" id="resultCount"></span>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters" id="filterContainer">
+            <button class="active" data-category="all" onclick="setCategory('all')">All</button>
+        </div>
+
+        <!-- App Grid -->
+        <div id="appList" class="app-grid">
+            <div class="loading">Loading</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Powered by <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">Buge Store API</a>
+            &middot; Open source app index
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // Buge Store - List Page
+        // ============================================================
+
+        const API_URL =
+            "https://raw.githubusercontent.com/BugeStudioTeam/Buge-Store-API/main/api/v1/apps.json";
+
+        let allApps = [];
+        let currentCategory = "all";
+
+        const appListEl = document.getElementById("appList");
+        const searchInput = document.getElementById("searchInput");
+        const resultCountEl = document.getElementById("resultCount");
+        const appCountEl = document.getElementById("appCount");
+        const filterContainer = document.getElementById("filterContainer");
+
+        // ---------- Fetch ----------
+        async function fetchApps() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const data = await response.json();
+                const raw = data.apps || [];
+
+                // Deduplicate
+                const seen = new Map();
+                const unique = [];
+                for (const app of raw) {
+                    if (!seen.has(app.package)) {
+                        seen.set(app.package, true);
+                        unique.push(app);
+                    }
+                }
+                allApps = unique;
+
+                appCountEl.textContent = `${allApps.length} apps`;
+                buildFilters();
+                renderApps();
+
+            } catch (error) {
+                console.error("Load error:", error);
+                appListEl.innerHTML = `
+                        <div class="error">
+                            Failed to load apps.<br />
+                            <small>${error.message}</small><br />
+                            <button onclick="fetchApps()">Retry</button>
+                        </div>
+                    `;
+                appCountEl.textContent = "error";
+            }
+        }
+
+        // ---------- Filters ----------
+        function buildFilters() {
+            const catSet = new Set();
+            allApps.forEach(app => {
+                (app.categories || []).forEach(c => catSet.add(c));
+            });
+            const cats = Array.from(catSet).sort();
+
+            filterContainer.innerHTML =
+                `<button class="active" data-category="all" onclick="setCategory('all')">All</button>`;
+
+            cats.forEach(cat => {
+                const btn = document.createElement("button");
+                btn.dataset.category = cat;
+                btn.textContent = cat;
+                btn.onclick = () => setCategory(cat);
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function setCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll(".filters button").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.category === category);
+            });
+            renderApps();
+        }
+
+        function filterApps() {
+            renderApps();
+        }
+
+        // ---------- Render ----------
+        function renderApps() {
+            const keyword = searchInput.value.trim().toLowerCase();
+
+            let filtered = allApps.filter(app => {
+                const nameMatch = app.name.toLowerCase().includes(keyword);
+                const pkgMatch = app.package.toLowerCase().includes(keyword);
+                return nameMatch || pkgMatch;
+            });
+
+            if (currentCategory !== "all") {
+                filtered = filtered.filter(app =>
+                    (app.categories || []).includes(currentCategory)
+                );
+            }
+
+            resultCountEl.textContent = filtered.length ?
+                `${filtered.length} result${filtered.length > 1 ? 's' : ''}` :
+                "No matches";
+
+            if (filtered.length === 0) {
+                appListEl.innerHTML = `<div class="empty">No apps found</div>`;
+                return;
+            }
+
+            appListEl.innerHTML = filtered.map(app => `
+                    <div class="app-card">
+                        <a href="/app/${encodeURIComponent(app.package)}">
+                            <img
+                                class="icon"
+                                src="${app.icon || ''}"
+                                alt="${app.name}"
+                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2256%22 height=%2256%22%3E%3Crect width=%2256%22 height=%2256%22 fill=%22%23f0f0f5%22/%3E%3Ctext x=%2228%22 y=%2236%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%238e8e93%22%3E📦%3C/text%3E%3C/svg%3E'"
+                            />
+                            <div class="name">${escapeHtml(app.name)}</div>
+                            <div class="package">${escapeHtml(app.package)}</div>
+                            <div class="meta-row">
+                                <span>v${escapeHtml(app.latest_version || '?')}</span>
+                                <span>${app.size_mb || '?'} MB</span>
+                                <span>SDK ${app.min_sdk || '?'}</span>
+                            </div>
+                            <div class="categories">
+                                ${(app.categories || []).map(c =>
+                                    `<span>${escapeHtml(c)}</span>`
+                                ).join("")}
+                            </div>
+                            <div class="developer">${escapeHtml(app.developer || 'Unknown')}</div>
+                            <div class="card-footer">
+                                <span class="version">${escapeHtml(app.latest_version || '')}</span>
+                                <span class="download-link" onclick="event.stopPropagation();event.preventDefault();window.open('${app.download_url || '#'}','_blank')">
+                                    Download
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                `).join("");
+        }
+
+        // ---------- Utils ----------
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ---------- Start ----------
+        fetchApps();
+    </script>
+
+</body>
+</html>
