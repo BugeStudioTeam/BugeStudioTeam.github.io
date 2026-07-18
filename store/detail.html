@@ -13,35 +13,36 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #f7f7fa;
+            background: #f5f5f7;
             color: #1c1c1e;
-            padding: 24px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 720px;
+            max-width: 860px;
             margin: 0 auto;
+            padding: 0 24px;
         }
 
+        /* ===== Header ===== */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 0 24px;
+            padding: 20px 0 16px;
             border-bottom: 1px solid #e5e5ea;
             margin-bottom: 28px;
             flex-wrap: wrap;
             gap: 12px;
         }
 
-        .header h1 {
-            font-size: 26px;
-            font-weight: 600;
+        .header .logo {
+            font-size: 24px;
+            font-weight: 700;
             letter-spacing: -0.5px;
         }
 
-        .header h1 a {
+        .header .logo a {
             color: #1c1c1e;
             text-decoration: none;
         }
@@ -50,7 +51,7 @@
             font-size: 14px;
             color: #007aff;
             text-decoration: none;
-            padding: 6px 14px;
+            padding: 6px 16px;
             border-radius: 8px;
             background: #f0f7ff;
             transition: background 0.2s;
@@ -60,72 +61,89 @@
             background: #e1efff;
         }
 
+        /* ===== Detail Card ===== */
         .detail-card {
             background: #ffffff;
             border-radius: 20px;
-            padding: 32px 28px 28px;
+            padding: 32px 32px 28px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f5;
         }
 
-        .detail-card .icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
+        /* ---- Top Row ---- */
+        .detail-top {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .detail-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
             background: #f7f7fa;
             object-fit: cover;
             border: 1px solid #e5e5ea;
-            margin-bottom: 16px;
+            flex-shrink: 0;
         }
 
-        .detail-card .name {
-            font-size: 28px;
+        .detail-top-right {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .detail-name {
+            font-size: 30px;
             font-weight: 700;
             margin-bottom: 2px;
+            letter-spacing: -0.5px;
         }
 
-        .detail-card .package {
+        .detail-package {
             font-size: 15px;
             color: #8e8e93;
             font-family: monospace;
             margin-bottom: 4px;
         }
 
-        .detail-card .developer {
+        .detail-developer {
             font-size: 15px;
             color: #8e8e93;
-            margin-bottom: 18px;
+            margin-bottom: 10px;
         }
 
-        .detail-card .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px 20px;
-            background: #f7f7fa;
-            padding: 16px 20px;
-            border-radius: 14px;
-            margin-bottom: 18px;
+        .detail-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .detail-rating-row .stars {
+            font-size: 20px;
+            color: #f5a623;
+            letter-spacing: 1px;
+        }
+
+        .detail-rating-row .rating-count {
             font-size: 14px;
-        }
-
-        .detail-card .detail-grid .label {
             color: #8e8e93;
         }
 
-        .detail-card .detail-grid .value {
-            font-weight: 500;
-            text-align: right;
-            word-break: break-all;
+        .detail-rating-row .rating-value {
+            font-size: 18px;
+            font-weight: 600;
         }
 
-        .detail-card .categories {
+        .detail-categories {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 18px;
         }
 
-        .detail-card .categories span {
+        .detail-categories span {
             font-size: 13px;
             background: #f0f0f5;
             padding: 4px 16px;
@@ -133,11 +151,92 @@
             color: #3a3a3c;
         }
 
-        .detail-card .download-btn {
-            display: block;
-            width: 100%;
+        /* ---- Detail Grid ---- */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px 20px;
+            background: #f7f7fa;
+            padding: 18px 22px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .detail-grid .label {
+            color: #8e8e93;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .detail-grid .value {
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        /* ---- Description ---- */
+        .detail-description {
+            margin-bottom: 20px;
+        }
+
+        .detail-description .desc-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8e93;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+        }
+
+        .detail-description p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #3a3a3c;
+        }
+
+        /* ---- What's New ---- */
+        .detail-changelog {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f5;
+        }
+
+        .detail-changelog .changelog-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8e93;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+        }
+
+        .detail-changelog pre {
+            white-space: pre-wrap;
+            font-family: inherit;
+            font-size: 14px;
+            color: #3a3a3c;
+            background: #f7f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-top: 4px;
+            line-height: 1.7;
+        }
+
+        /* ---- Download ---- */
+        .detail-download-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .detail-download-btn {
+            flex: 1;
+            min-width: 180px;
             text-align: center;
-            padding: 14px 0;
+            padding: 16px 24px;
             background: #1c1c1e;
             color: #ffffff;
             border-radius: 14px;
@@ -149,47 +248,67 @@
             cursor: pointer;
         }
 
-        .detail-card .download-btn:hover {
+        .detail-download-btn:hover {
             background: #3a3a3c;
         }
 
-        .detail-card .changelog {
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px solid #e5e5ea;
+        .detail-download-btn .size-hint {
+            font-weight: 400;
+            font-size: 13px;
+            opacity: 0.7;
+            display: block;
+            margin-top: 2px;
         }
 
-        .detail-card .changelog .changelog-title {
-            font-weight: 500;
-            color: #8e8e93;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-bottom: 6px;
+        .detail-meta-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .detail-card .changelog pre {
-            white-space: pre-wrap;
-            font-family: inherit;
+        .detail-meta-links a {
             font-size: 14px;
-            color: #3a3a3c;
-            background: #f7f7fa;
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-top: 4px;
-            line-height: 1.6;
+            color: #007aff;
+            text-decoration: none;
         }
 
+        .detail-meta-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- Additional Info ---- */
+        .detail-extra {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+            background: #f7f7fa;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        .detail-extra .label {
+            color: #8e8e93;
+        }
+
+        .detail-extra .value {
+            font-weight: 500;
+            text-align: right;
+            word-break: break-all;
+        }
+
+        /* ===== Loading / Error ===== */
         .loading {
             text-align: center;
-            padding: 80px 20px;
+            padding: 100px 20px;
             font-size: 16px;
             color: #8e8e93;
         }
 
         .error {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             color: #c2352b;
             background: #fef0ef;
             border-radius: 16px;
@@ -206,11 +325,15 @@
             font-size: 14px;
         }
 
+        /* ===== Footer ===== */
         .footer {
             margin-top: 44px;
-            padding: 18px 0 6px;
+            padding: 24px 0 16px;
             border-top: 1px solid #e5e5ea;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
             font-size: 13px;
             color: #8e8e93;
         }
@@ -220,26 +343,71 @@
             text-decoration: none;
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 16px;
+        .footer .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px;
             }
             .detail-card {
-                padding: 22px 18px 20px;
+                padding: 20px 16px 20px;
             }
-            .detail-card .name {
-                font-size: 22px;
+            .detail-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
-            .detail-card .detail-grid {
+            .detail-icon {
+                width: 80px;
+                height: 80px;
+            }
+            .detail-name {
+                font-size: 24px;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px 16px;
+                padding: 14px 16px;
+            }
+            .detail-grid .value {
+                text-align: right;
+            }
+            .detail-extra {
                 grid-template-columns: 1fr;
                 gap: 2px 0;
             }
-            .detail-card .detail-grid .value {
+            .detail-extra .value {
                 text-align: left;
                 margin-bottom: 4px;
             }
-            .header h1 {
-                font-size: 22px;
+            .detail-rating-row {
+                justify-content: center;
+            }
+            .detail-categories {
+                justify-content: center;
+            }
+            .detail-download-section {
+                flex-direction: column;
+            }
+            .detail-download-btn {
+                width: 100%;
+            }
+            .detail-meta-links {
+                justify-content: center;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer .footer-links {
+                justify-content: center;
+            }
+            .header .logo {
+                font-size: 20px;
             }
         }
     </style>
@@ -247,22 +415,32 @@
 <body>
 
     <div class="container" id="app">
+        <!-- Header -->
         <div class="header">
-            <h1><a href="/">Buge Store</a></h1>
-            <a class="back-link" href="/">← Back</a>
+            <div class="logo"><a href="/store/">Buge Store</a></div>
+            <a class="back-link" href="/store/">← Back</a>
         </div>
 
+        <!-- Detail Content -->
         <div id="detailContent">
             <div class="loading">Loading...</div>
         </div>
 
+        <!-- Footer -->
         <div class="footer">
-            Powered by <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">Buge Store API</a>
-            &middot; Open source app index
+            <span>Powered by <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">Buge Store API</a></span>
+            <div class="footer-links">
+                <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">GitHub</a>
+                <a href="/store/">Store</a>
+            </div>
         </div>
     </div>
 
     <script>
+        // ============================================================
+        // Buge Store - Detail Page
+        // ============================================================
+
         const API_URL =
             "https://raw.githubusercontent.com/BugeStudioTeam/Buge-Store-API/main/api/v1/apps.json";
 
@@ -273,6 +451,23 @@
             return params.get('package');
         }
 
+        function renderStars(rating) {
+            const full = Math.floor(rating);
+            const half = rating - full >= 0.5 ? 1 : 0;
+            const empty = 5 - full - half;
+            return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            try {
+                const d = new Date(dateStr);
+                return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            } catch {
+                return dateStr;
+            }
+        }
+
         async function loadDetail() {
             const packageName = getPackageFromQuery();
 
@@ -280,7 +475,7 @@
                 detailEl.innerHTML = `
                         <div class="error">
                             No app specified.<br />
-                            <button onclick="window.location.href='/'">Go to Store</button>
+                            <button onclick="window.location.href='/store/'">Go to Store</button>
                         </div>
                     `;
                 return;
@@ -295,10 +490,12 @@
 
                 const seen = new Set();
                 let app = null;
+                let fullData = null;
                 for (const a of apps) {
                     if (a.package === packageName && !seen.has(a.package)) {
                         seen.add(a.package);
                         app = a;
+                        fullData = a;
                         break;
                     }
                 }
@@ -307,7 +504,7 @@
                     detailEl.innerHTML = `
                             <div class="error">
                                 App not found.<br />
-                                <button onclick="window.location.href='/'">Back to Store</button>
+                                <button onclick="window.location.href='/store/'">Back to Store</button>
                             </div>
                         `;
                     return;
@@ -315,45 +512,101 @@
 
                 document.title = `${app.name} - Buge Store`;
 
+                // Build changelog from raw data (may have multiple versions)
+                const changelog = app.changelog || fullData?.changelog || 'No changelog provided.';
+
                 detailEl.innerHTML = `
                         <div class="detail-card">
-                            <img
-                                class="icon"
-                                src="${app.icon || ''}"
-                                alt="${app.name}"
-                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect width=%2280%22 height=%2280%22 fill=%22%23f0f0f5%22/%3E%3Ctext x=%2240%22 y=%2252%22 text-anchor=%22middle%22 font-size=%2238%22 fill=%22%238e8e93%22%3E📦%3C/text%3E%3C/svg%3E'"
-                            />
-                            <div class="name">${escapeHtml(app.name)}</div>
-                            <div class="package">${escapeHtml(app.package)}</div>
-                            <div class="developer">${escapeHtml(app.developer || 'Unknown developer')}</div>
+                            <!-- Top Row -->
+                            <div class="detail-top">
+                                <img
+                                    class="detail-icon"
+                                    src="${app.icon || ''}"
+                                    alt="${app.name}"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23f0f0f5%22/%3E%3Ctext x=%2250%22 y=%2262%22 text-anchor=%22middle%22 font-size=%2246%22 fill=%22%238e8e93%22%3E📦%3C/text%3E%3C/svg%3E'"
+                                />
+                                <div class="detail-top-right">
+                                    <div class="detail-name">${escapeHtml(app.name)}</div>
+                                    <div class="detail-package">${escapeHtml(app.package)}</div>
+                                    <div class="detail-developer">${escapeHtml(app.developer || 'Unknown developer')}</div>
+                                    <div class="detail-rating-row">
+                                        <span class="rating-value">${(app.rating || 0).toFixed(1)}</span>
+                                        <span class="stars">${renderStars(app.rating || 0)}</span>
+                                        <span class="rating-count">${app.rating_count || 0} ratings</span>
+                                    </div>
+                                    <div class="detail-categories">
+                                        ${(app.categories || []).map(c =>
+                                            `<span>${escapeHtml(c)}</span>`
+                                        ).join('')}
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- Info Grid -->
                             <div class="detail-grid">
-                                <span class="label">Version</span>
-                                <span class="value">${escapeHtml(app.latest_version || '-')}</span>
-                                <span class="label">Size</span>
-                                <span class="value">${app.size_mb ? app.size_mb + ' MB' : '-'}</span>
-                                <span class="label">Min SDK</span>
-                                <span class="value">${app.min_sdk || '-'}</span>
-                                <span class="label">Target SDK</span>
-                                <span class="value">${app.target_sdk || app.targetSdk || '-'}</span>
+                                <div>
+                                    <div class="label">Version</div>
+                                    <div class="value">${escapeHtml(app.latest_version || '-')}</div>
+                                </div>
+                                <div>
+                                    <div class="label">Size</div>
+                                    <div class="value">${app.size_mb ? app.size_mb + ' MB' : '-'}</div>
+                                </div>
+                                <div>
+                                    <div class="label">Min SDK</div>
+                                    <div class="value">${app.min_sdk || '-'}</div>
+                                </div>
+                                <div>
+                                    <div class="label">Target SDK</div>
+                                    <div class="value">${app.target_sdk || app.targetSdk || '-'}</div>
+                                </div>
+                                <div>
+                                    <div class="label">Updated</div>
+                                    <div class="value">${formatDate(app.release_date || app.updated || '')}</div>
+                                </div>
+                                <div>
+                                    <div class="label">Downloads</div>
+                                    <div class="value">${app.downloads || 0}</div>
+                                </div>
                             </div>
 
-                            <div class="categories">
-                                ${(app.categories || []).map(c =>
-                                    `<span>${escapeHtml(c)}</span>`
-                                ).join('')}
-                            </div>
-
-                            <a class="download-btn" href="${app.download_url || '#'}" target="_blank" rel="noopener noreferrer">
-                                Download APK
-                            </a>
-
-                            ${app.changelog ? `
-                                <div class="changelog">
-                                    <div class="changelog-title">What's New</div>
-                                    <pre>${escapeHtml(app.changelog)}</pre>
+                            <!-- Description -->
+                            ${app.description ? `
+                                <div class="detail-description">
+                                    <div class="desc-label">About</div>
+                                    <p>${escapeHtml(app.description)}</p>
                                 </div>
                             ` : ''}
+
+                            <!-- What's New -->
+                            <div class="detail-changelog">
+                                <div class="changelog-label">What's New</div>
+                                <pre>${escapeHtml(changelog)}</pre>
+                            </div>
+
+                            <!-- Download -->
+                            <div class="detail-download-section">
+                                <a class="detail-download-btn" href="${app.download_url || '#'}" target="_blank" rel="noopener noreferrer">
+                                    Download APK
+                                    <span class="size-hint">${app.size_mb ? app.size_mb + ' MB' : ''}</span>
+                                </a>
+                                <div class="detail-meta-links">
+                                    ${app.source_code ? `<a href="${app.source_code}" target="_blank">Source Code</a>` : ''}
+                                    ${app.website ? `<a href="${app.website}" target="_blank">Website</a>` : ''}
+                                </div>
+                            </div>
+
+                            <!-- Extra Info -->
+                            <div class="detail-extra">
+                                <span class="label">Signature</span>
+                                <span class="value" style="font-family:monospace;font-size:12px;">${escapeHtml(app.signature || '-')}</span>
+                                <span class="label">Package</span>
+                                <span class="value" style="font-family:monospace;">${escapeHtml(app.package)}</span>
+                                ${app.architectures ? `
+                                    <span class="label">Architectures</span>
+                                    <span class="value">${(app.architectures || []).join(', ')}</span>
+                                ` : ''}
+                            </div>
                         </div>
                     `;
 
