@@ -293,7 +293,7 @@
 
     <div class="container" id="app">
         <div class="header">
-            <h1><a href="/">Buge Store</a></h1>
+            <h1><a href="/store/">Buge Store</a></h1>
             <span class="count" id="appCount">loading...</span>
         </div>
 
@@ -426,7 +426,7 @@
 
             appListEl.innerHTML = filtered.map(app => `
                     <div class="app-card">
-                        <a href="/detail.html?package=${encodeURIComponent(app.package)}">
+                        <a href="/store/detail?package=${encodeURIComponent(app.package)}">
                             <img
                                 class="icon"
                                 src="${app.icon || ''}"
