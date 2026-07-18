@@ -61,6 +61,28 @@
             background: #e1efff;
         }
 
+        /* ===== Banner ===== */
+        .banner-container {
+            margin-bottom: 24px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f0f0f5;
+            max-height: 300px;
+            display: none;
+        }
+
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .banner-container.has-banner {
+            display: block;
+        }
+
         /* ===== Detail Card ===== */
         .detail-card {
             background: #ffffff;
@@ -191,8 +213,9 @@
 
         .detail-description p {
             font-size: 15px;
-            line-height: 1.7;
+            line-height: 1.8;
             color: #3a3a3c;
+            white-space: pre-wrap;
         }
 
         /* ---- What's New ---- */
@@ -276,7 +299,7 @@
             text-decoration: underline;
         }
 
-        /* ---- Additional Info ---- */
+        /* ---- Extra Info ---- */
         .detail-extra {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -468,6 +491,18 @@
             }
         }
 
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function renderDescription(text) {
+            if (!text) return '';
+            return escapeHtml(text).replace(/\n/g, '<br />');
+        }
+
         async function loadDetail() {
             const packageName = getPackageFromQuery();
 
@@ -490,12 +525,10 @@
 
                 const seen = new Set();
                 let app = null;
-                let fullData = null;
                 for (const a of apps) {
                     if (a.package === packageName && !seen.has(a.package)) {
                         seen.add(a.package);
                         app = a;
-                        fullData = a;
                         break;
                     }
                 }
@@ -512,10 +545,24 @@
 
                 document.title = `${app.name} - Buge Store`;
 
-                // Build changelog from raw data (may have multiple versions)
-                const changelog = app.changelog || fullData?.changelog || 'No changelog provided.';
+                // Banner
+                const bannerHtml = app.banner ? `
+                        <div class="banner-container has-banner">
+                            <img src="${app.banner}" alt="${app.name} banner" onerror="this.parentElement.style.display='none'" />
+                        </div>
+                    ` : '';
+
+                // Changelog
+                const changelog = app.changelog || 'No changelog provided.';
+
+                // Description
+                const description = app.description || '';
+
+                // Extra architectures
+                const architectures = (app.architectures || []).join(', ');
 
                 detailEl.innerHTML = `
+                        ${bannerHtml}
                         <div class="detail-card">
                             <!-- Top Row -->
                             <div class="detail-top">
@@ -571,10 +618,10 @@
                             </div>
 
                             <!-- Description -->
-                            ${app.description ? `
+                            ${description ? `
                                 <div class="detail-description">
                                     <div class="desc-label">About</div>
-                                    <p>${escapeHtml(app.description)}</p>
+                                    <p>${renderDescription(description)}</p>
                                 </div>
                             ` : ''}
 
@@ -602,9 +649,13 @@
                                 <span class="value" style="font-family:monospace;font-size:12px;">${escapeHtml(app.signature || '-')}</span>
                                 <span class="label">Package</span>
                                 <span class="value" style="font-family:monospace;">${escapeHtml(app.package)}</span>
-                                ${app.architectures ? `
+                                ${architectures ? `
                                     <span class="label">Architectures</span>
-                                    <span class="value">${(app.architectures || []).join(', ')}</span>
+                                    <span class="value">${escapeHtml(architectures)}</span>
+                                ` : ''}
+                                ${app.short_description ? `
+                                    <span class="label">Tagline</span>
+                                    <span class="value" style="font-style:italic;">${escapeHtml(app.short_description)}</span>
                                 ` : ''}
                             </div>
                         </div>
@@ -620,13 +671,6 @@
                         </div>
                     `;
             }
-        }
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
         }
 
         loadDetail();
