@@ -24,7 +24,6 @@
             padding: 0 24px;
         }
 
-        /* ===== Header ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -79,7 +78,6 @@
             border-radius: 20px;
         }
 
-        /* ===== Hero / Featured Banner ===== */
         .hero-banner {
             background: linear-gradient(135deg, #1c1c1e 0%, #3a3a3c 100%);
             border-radius: 20px;
@@ -164,7 +162,6 @@
             margin-top: 2px;
         }
 
-        /* ===== Search & Filters ===== */
         .search-bar {
             display: flex;
             gap: 12px;
@@ -197,7 +194,6 @@
             white-space: nowrap;
         }
 
-        /* ===== Categories ===== */
         .filters {
             display: flex;
             gap: 8px;
@@ -226,7 +222,6 @@
             border-color: #1c1c1e;
         }
 
-        /* ===== Section Title ===== */
         .section-title {
             font-size: 20px;
             font-weight: 600;
@@ -234,14 +229,12 @@
             letter-spacing: -0.3px;
         }
 
-        /* ===== App Grid ===== */
         .app-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
         }
 
-        /* ===== App Card ===== */
         .app-card {
             background: #ffffff;
             border-radius: 16px;
@@ -393,7 +386,6 @@
             background: #e1efff;
         }
 
-        /* ===== States ===== */
         .loading {
             text-align: center;
             padding: 80px 20px;
@@ -427,7 +419,6 @@
             font-size: 14px;
         }
 
-        /* ===== Footer ===== */
         .footer {
             margin-top: 48px;
             padding: 24px 0 16px;
@@ -450,7 +441,6 @@
             gap: 20px;
         }
 
-        /* ===== Responsive ===== */
         @media (max-width: 640px) {
             .container {
                 padding: 0 16px;
@@ -488,7 +478,6 @@
 <body>
 
     <div class="container" id="app">
-        <!-- Header -->
         <div class="header">
             <div class="header-left">
                 <div class="logo"><a href="/store/">Buge Store</a></div>
@@ -499,7 +488,6 @@
             </div>
         </div>
 
-        <!-- Hero Banner -->
         <div class="hero-banner" id="heroBanner" style="display:none;">
             <div class="hero-text">
                 <h2 id="heroTitle">Featured App</h2>
@@ -516,7 +504,6 @@
             </a>
         </div>
 
-        <!-- Search -->
         <div class="search-bar">
             <input
             type="text"
@@ -527,20 +514,16 @@
             <span class="result-hint" id="resultCount"></span>
         </div>
 
-        <!-- Filters -->
         <div class="filters" id="filterContainer">
             <button class="active" data-category="all" onclick="setCategory('all')">All</button>
         </div>
 
-        <!-- Section Title -->
         <div class="section-title" id="sectionTitle">All Apps</div>
 
-        <!-- App Grid -->
         <div id="appList" class="app-grid">
             <div class="loading">Loading</div>
         </div>
 
-        <!-- Footer -->
         <div class="footer">
             <span>Powered by <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">Buge Store API</a></span>
             <div class="footer-links">
@@ -552,7 +535,7 @@
 
     <script>
         // ============================================================
-        // Buge Store - List Page
+        // Buge Store - List Page with GitHub Download Stats
         // ============================================================
 
         const API_URL =
@@ -578,7 +561,70 @@
         const heroAppDev = document.getElementById("heroAppDev");
         const heroAppRating = document.getElementById("heroAppRating");
 
-        // ---------- Fetch ----------
+        // ---------- Formatting ----------
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+
+        function renderStars(rating) {
+            const full = Math.floor(rating);
+            const half = rating - full >= 0.5 ? 1 : 0;
+            const empty = 5 - full - half;
+            return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ---------- GitHub Download Stats ----------
+        async function fetchGitHubDownloads(repoUrl) {
+            if (!repoUrl) return null;
+
+            const match = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+            if (!match) return null;
+
+            const owner = match[1];
+            const repo = match[2].replace('.git', '');
+
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${owner}/${repo}/releases`,
+                    {
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json',
+                            'User-Agent': 'Buge-Store-Client'
+                        }
+                    }
+                );
+
+                if (!response.ok) return null;
+
+                const releases = await response.json();
+                let totalDownloads = 0;
+
+                for (const release of releases) {
+                    if (release.assets) {
+                        for (const asset of release.assets) {
+                            totalDownloads += asset.download_count || 0;
+                        }
+                    }
+                }
+
+                return totalDownloads;
+
+            } catch (error) {
+                console.error('GitHub API error:', error);
+                return null;
+            }
+        }
+
+        // ---------- Fetch Apps ----------
         async function fetchApps() {
             try {
                 const response = await fetch(API_URL);
@@ -606,7 +652,12 @@
                 appCountEl.textContent = `${allApps.length} apps`;
                 buildFilters();
                 renderHero();
+
+                // Render apps first with placeholder downloads
                 renderApps();
+
+                // Then fetch real download counts from GitHub
+                await fetchAllDownloads();
 
             } catch (error) {
                 console.error("Load error:", error);
@@ -621,7 +672,32 @@
             }
         }
 
-        // ---------- Hero Banner ----------
+        // ---------- Fetch Downloads for All Apps ----------
+        async function fetchAllDownloads() {
+            const downloadElements = document.querySelectorAll('[data-downloads-target]');
+            const promises = [];
+
+            for (const el of downloadElements) {
+                const packageName = el.dataset.downloadsTarget;
+                const app = allApps.find(a => a.package === packageName);
+                if (app && app.source_code) {
+                    const promise = fetchGitHubDownloads(app.source_code).then(downloads => {
+                        if (downloads !== null) {
+                            el.textContent = formatNumber(downloads);
+                        } else {
+                            el.textContent = app.downloads || '?';
+                        }
+                    });
+                    promises.push(promise);
+                } else {
+                    el.textContent = app?.downloads || '?';
+                }
+            }
+
+            await Promise.all(promises);
+        }
+
+        // ---------- Hero ----------
         function renderHero() {
             const featured = allApps.find(a => a.featured === true) || allApps[0];
             if (!featured) {
@@ -675,6 +751,8 @@
         function filterApps() {
             updateSectionTitle();
             renderApps();
+            // Re-fetch downloads after filter
+            fetchAllDownloads();
         }
 
         function updateSectionTitle() {
@@ -741,6 +819,7 @@
                                 <span>${app.size_mb || '?'} MB</span>
                                 <span>SDK ${app.min_sdk || '?'}</span>
                                 ${app.target_sdk ? `<span>Target ${app.target_sdk}</span>` : ''}
+                                <span>⬇️ <span data-downloads-target="${app.package}">...</span></span>
                             </div>
 
                             <div class="categories">
@@ -762,20 +841,7 @@
                 `).join("");
         }
 
-        function renderStars(rating) {
-            const full = Math.floor(rating);
-            const half = rating - full >= 0.5 ? 1 : 0;
-            const empty = 5 - full - half;
-            return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
-        }
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
+        // ---------- Start ----------
         fetchApps();
     </script>
 
