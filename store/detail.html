@@ -150,11 +150,6 @@
             color: #8e8e93;
         }
 
-        .detail-rating-row .rating-value {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
         .detail-categories {
             display: flex;
             gap: 6px;
@@ -190,19 +185,6 @@
         .detail-grid .value {
             font-weight: 500;
             word-break: break-all;
-        }
-
-        .detail-grid .value .loading-dots::after {
-            content: '';
-            animation: dots 1.2s steps(4) infinite;
-        }
-
-        @keyframes dots {
-            0% { content: ''; }
-            25% { content: '.'; }
-            50% { content: '..'; }
-            75% { content: '...'; }
-            100% { content: ''; }
         }
 
         .detail-description {
@@ -459,7 +441,7 @@
 
     <script>
         // ============================================================
-        // Buge Store - Detail Page with GitHub Download Stats
+        // Buge Store - Detail Page with Star Ratings
         // ============================================================
 
         const API_URL =
@@ -472,11 +454,17 @@
             return params.get('package');
         }
 
+        // ---------- Helpers ----------
         function renderStars(rating) {
-            const full = Math.floor(rating);
-            const half = rating - full >= 0.5 ? 1 : 0;
-            const empty = 5 - full - half;
-            return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+            const full = Math.round(rating || 0);
+            const empty = 5 - full;
+            return '★'.repeat(full) + '☆'.repeat(empty);
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
         }
 
         function formatDate(dateStr) {
@@ -499,12 +487,6 @@
         function renderDescription(text) {
             if (!text) return '';
             return escapeHtml(text).replace(/\n/g, '<br />');
-        }
-
-        function formatNumber(num) {
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-            return num.toString();
         }
 
         // ---------- GitHub Download Stats ----------
@@ -636,7 +618,6 @@
                                     <div class="detail-package">${escapeHtml(app.package)}</div>
                                     <div class="detail-developer">${escapeHtml(app.developer || 'Unknown developer')}</div>
                                     <div class="detail-rating-row">
-                                        <span class="rating-value">${(app.rating || 0).toFixed(1)}</span>
                                         <span class="stars">${renderStars(app.rating || 0)}</span>
                                         <span class="rating-count">${app.rating_count || 0} ratings</span>
                                     </div>

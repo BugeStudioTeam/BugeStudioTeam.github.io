@@ -499,7 +499,7 @@
                 <div class="hero-app-info">
                     <div class="hero-app-name" id="heroAppName">App Name</div>
                     <div class="hero-app-dev" id="heroAppDev">Developer</div>
-                    <div class="hero-app-rating" id="heroAppRating">★ 0.0</div>
+                    <div class="hero-app-rating" id="heroAppRating">☆☆☆☆☆</div>
                 </div>
             </a>
         </div>
@@ -535,7 +535,7 @@
 
     <script>
         // ============================================================
-        // Buge Store - List Page with GitHub Download Stats
+        // Buge Store - List Page with Star Ratings
         // ============================================================
 
         const API_URL =
@@ -561,18 +561,17 @@
         const heroAppDev = document.getElementById("heroAppDev");
         const heroAppRating = document.getElementById("heroAppRating");
 
-        // ---------- Formatting ----------
+        // ---------- Helpers ----------
+        function renderStars(rating) {
+            const full = Math.round(rating || 0);
+            const empty = 5 - full;
+            return '★'.repeat(full) + '☆'.repeat(empty);
+        }
+
         function formatNumber(num) {
             if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
             if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
             return num.toString();
-        }
-
-        function renderStars(rating) {
-            const full = Math.floor(rating);
-            const half = rating - full >= 0.5 ? 1 : 0;
-            const empty = 5 - full - half;
-            return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
         }
 
         function escapeHtml(text) {
@@ -652,11 +651,7 @@
                 appCountEl.textContent = `${allApps.length} apps`;
                 buildFilters();
                 renderHero();
-
-                // Render apps first with placeholder downloads
                 renderApps();
-
-                // Then fetch real download counts from GitHub
                 await fetchAllDownloads();
 
             } catch (error) {
@@ -672,7 +667,7 @@
             }
         }
 
-        // ---------- Fetch Downloads for All Apps ----------
+        // ---------- Fetch Downloads ----------
         async function fetchAllDownloads() {
             const downloadElements = document.querySelectorAll('[data-downloads-target]');
             const promises = [];
@@ -716,7 +711,7 @@
             };
             heroAppName.textContent = featured.name || 'Unknown';
             heroAppDev.textContent = featured.developer || 'Unknown developer';
-            heroAppRating.textContent = `★ ${(featured.rating || 0).toFixed(1)} (${featured.rating_count || 0} ratings)`;
+            heroAppRating.textContent = renderStars(featured.rating || 0) + ' (' + (featured.rating_count || 0) + ')';
         }
 
         // ---------- Filters ----------
@@ -751,7 +746,6 @@
         function filterApps() {
             updateSectionTitle();
             renderApps();
-            // Re-fetch downloads after filter
             fetchAllDownloads();
         }
 
