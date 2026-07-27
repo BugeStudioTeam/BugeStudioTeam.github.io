@@ -42,16 +42,19 @@
       background-color: var(--md-sys-color-surface-container-high);
     }
     .modal-overlay {
-      display: none;
+      display: flex;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0);
       z-index: 1000;
       align-items: center;
       justify-content: center;
+      pointer-events: none;
+      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1);
     }
     .modal-overlay.open {
-      display: flex;
+      background-color: rgba(0, 0, 0, 0.5);
+      pointer-events: auto;
     }
     .modal-card {
       background-color: var(--md-sys-color-surface);
@@ -61,6 +64,13 @@
       max-width: 400px;
       width: 90%;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transform: scale(0.9) translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .modal-overlay.open .modal-card {
+      transform: scale(1) translateY(0);
+      opacity: 1;
     }
     .modal-title {
       font-size: 1.25rem;
@@ -126,7 +136,7 @@
           </svg>
         </a>
 
-        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
+        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" rel="noopener" aria-label="Email">
           <svg class="custom-icon" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
