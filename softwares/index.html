@@ -1,418 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>All Softwares - Buge Studio</title>
-    <link rel="icon" href="icon.png" type="image/png">
-    <link rel="apple-touch-icon" href="icon.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --bg-dark: #0b1321;
-            --bg-light: #f4f9ff;
-            --text-dark: #0a1e3c;
-            --text-light: #f0f7ff;
-            --accent-blue: #1e88e5;
-            --accent-soft: #64b5f6;
-            --card-bg-light: rgba(255,255,255,0.7);
-            --card-bg-dark: rgba(15,30,50,0.8);
-            --nav-bg-light: rgba(255,255,255,0.75);
-            --nav-bg-dark: rgba(8,20,35,0.85);
-            --border-light: rgba(30,136,229,0.2);
-            --shadow-color: rgba(0,40,100,0.2);
-            --logo-filter: none;
-            --footer-text: #ffffff;
-            --white-text: #ffffff;
-            --github-green: #2e7d32;
-            --github-green-hover: #1b5e20;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-dark: #030c17;
-                --bg-light: #0d1a2b;
-                --text-dark: #e0edff;
-                --text-light: #ffffff;
-                --accent-blue: #64b5f6;
-                --accent-soft: #1e4b77;
-                --card-bg-light: rgba(15,30,45,0.8);
-                --card-bg-dark: rgba(5,15,28,0.9);
-                --nav-bg-light: rgba(8,18,33,0.9);
-                --nav-bg-dark: rgba(2,10,22,0.95);
-                --border-light: rgba(100,181,246,0.25);
-                --shadow-color: rgba(0,20,60,0.6);
-                --logo-filter: brightness(0.9);
-            }
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: radial-gradient(circle at 30% 10%, var(--bg-light), var(--bg-dark));
-            color: var(--text-dark);
-            line-height: 1.5;
-            overflow-x: hidden;
-            transition: background 0.3s, color 0.2s;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .global-nav {
-            position: fixed;
-            top: 24px;
-            left: 5%;
-            right: 5%;
-            width: 90%;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--nav-bg-light);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 80px;
-            padding: 12px 28px;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 20px 40px var(--shadow-color);
-            z-index: 100;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .nav-logo img {
-            width: 44px;
-            height: 44px;
-            border-radius: 16px;
-            object-fit: contain;
-            filter: var(--logo-filter);
-        }
-        .nav-logo span {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--accent-blue), #90caf9);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .lang-switch {
-            display: flex;
-            gap: 8px;
-            background: rgba(128,128,128,0.1);
-            padding: 6px;
-            border-radius: 40px;
-            backdrop-filter: blur(4px);
-        }
-        .lang-option {
-            padding: 8px 16px;
-            border-radius: 32px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.15s;
-            color: var(--text-dark);
-            border: 1px solid transparent;
-            font-size: 0.95rem;
-            text-decoration: none;
-        }
-        .lang-option.active {
-            background: var(--accent-blue);
-            color: white;
-            border-color: var(--accent-blue);
-            pointer-events: none;
-        }
-        .lang-option:not(.active):hover {
-            background: rgba(100,181,246,0.2);
-            border-color: var(--accent-soft);
-        }
-        main {
-            padding-top: 140px;
-            width: 90%;
-            max-width: 1400px;
-            margin: 0 auto;
-            flex: 1;
-        }
-        .page-header {
-            margin-bottom: 40px;
-            padding: 20px 0 40px;
-            border-bottom: 2px solid var(--border-light);
-        }
-        .page-header h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 800;
-            background: linear-gradient(145deg, var(--accent-blue), #bbdefb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-        }
-        .page-header p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            color: var(--text-dark);
-            opacity: 0.85;
-            border-left: 5px solid var(--accent-blue);
-            padding-left: 24px;
-        }
-        .all-softwares-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 40px;
-            margin: 40px 0 80px;
-        }
-        .software-card {
-            background: var(--card-bg-light);
-            backdrop-filter: blur(16px);
-            border-radius: 64px;
-            padding: 40px 32px;
-            border: 2px solid var(--border-light);
-            box-shadow: 0 30px 60px -10px var(--shadow-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        .software-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 40px 80px -10px var(--accent-blue);
-        }
-        .card-icon {
-            width: 110px;
-            height: 110px;
-            border-radius: 32px;
-            overflow: hidden;
-            background: rgba(30,136,229,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 28px;
-        }
-        .card-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .card-icon i {
-            font-size: 3.8rem;
-            color: var(--accent-blue);
-            display: none;
-        }
-        .software-card h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-        .software-card .description {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            margin-bottom: 28px;
-            line-height: 1.5;
-            flex-grow: 1;
-            color: var(--text-dark);
-        }
-        .button-container {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-        .card-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: white;
-            background: var(--accent-blue);
-            text-decoration: none;
-            border-radius: 40px;
-            transition: all 0.2s;
-            box-shadow: 0 6px 12px rgba(30,136,229,0.25);
-            cursor: pointer;
-        }
-        .github-link:hover {
-            background: #1565c0;
-        }
-        .download-link {
-            background: var(--github-green);
-        }
-        .download-link:hover {
-            background: var(--github-green-hover);
-        }
-        footer {
-            margin-top: auto;
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid var(--border-light);
-            color: #ffffff !important;
-            font-size: 1rem;
-            font-weight: 400;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        footer p {
-            color: #ffffff !important;
-        }
-        @media (max-width: 800px) {
-            .global-nav {
-                top: 16px;
-                border-radius: 40px;
-                padding: 10px 20px;
-            }
-            .nav-logo span { font-size: 1.5rem; }
-            .software-card { padding: 32px 24px; }
-            .software-card h3 { font-size: 1.8rem; }
-            .card-icon {
-                width: 85px;
-                height: 85px;
-            }
-        }
-        @media (max-width: 600px) {
-            main { padding-top: 120px; }
-            .button-container {
-                flex-direction: column;
-                width: 100%;
-            }
-            .card-link { width: 100%; }
-            .page-header p { font-size: 1.1rem; }
-        }
-        .fade-out {
-            transition: opacity 0.5s ease, transform 0.4s;
-        }
-        .fade-out.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .fade-out.hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            pointer-events: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Softwares - Buge Studio</title>
+  
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-    <nav class="global-nav">
-        <a href="https://bugestudioteam.github.io" class="nav-logo">
-            <img src="icon.png" alt="Buge Studio" id="navIcon" onerror="this.style.display='none'; this.parentNode.querySelector('.fallback-emoji').style.display='block';">
-            <span class="fallback-emoji" style="display:none;">⚡</span>
-            <span>Buge Studio</span>
-        </a>
-        <div class="lang-switch">
-            <span class="lang-option active">EN</span>
-            <a href="https://bugestudioteam.github.io/de-DE/softwares" class="lang-option">DE</a>
-            <a href="https://bugestudioteam.github.io/re-RU/softwares" class="lang-option">RU</a>
-            <a href="https://bugestudioteam.github.io/zh-CN/softwares" class="lang-option">中文</a>
+
+  <main class="container">
+
+    <header class="hero">
+      <img src="icon.png" alt="Buge Studio Logo" class="hero-logo" />
+      <h1>All Softwares</h1>
+      
+      <div class="hero-pills">
+        <span class="m3-pill">
+          <span class="material-symbols-outlined">android</span>
+          Android
+        </span>
+        <span class="m3-pill">
+          <span class="material-symbols-outlined">desktop_windows</span>
+          Windows
+        </span>
+        <span class="m3-pill">
+          <span class="material-symbols-outlined">computer</span>
+          Linux
+        </span>
+      </div>
+
+      <div class="wavy-line"></div>
+
+      <p class="hero-subtitle">Discover all tools built by Buge Studio</p>
+      <p class="hero-desc">Open-source, powerful, and designed for everyone.</p>
+    </header>
+
+    <section>
+      <h2 class="section-title">
+        <span class="material-symbols-outlined">apps</span>
+        Softwares List
+      </h2>
+
+      <div class="m3-group">
+        <div class="card corner-single">
+          <div class="software-header clickable-header" onclick="window.location.href='https://bugestudio.website/appmanager/'">
+            <div class="software-title">
+              <img src="AppManager.jpg" alt="Buge App Manager Icon" class="app-icon" />
+              <h3>Buge App Manager</h3>
+            </div>
+            <span class="badge">Shizuku Required</span>
+          </div>
+
+          <p class="software-desc">
+            Powerful Android app &amp; permission manager (requires Shizuku). Manage apps like a pro.
+          </p>
+
+          <div class="action-row">
+            <a href="https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager9.58.105/BugeAppManager-v9.58.105-release.apk" class="btn btn-filled" rel="noopener">
+              <span class="material-symbols-outlined">download</span>
+              Download
+            </a>
+            <a href="https://github.com/BugeStudioTeam/Buge-App-Manager" class="btn btn-outlined" rel="noopener">
+              <span class="material-symbols-outlined">code</span>
+              GitHub
+            </a>
+          </div>
         </div>
-    </nav>
-    <main>
-        <div class="page-header fade-out visible">
-            <h1>All Softwares</h1>
-            <p>Discover all tools built by Buge Studio. Open-source, powerful, and designed for everyone.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">
+        © 2026 Buge Studio
+      </div>
+
+      <div class="footer-controls">
+        
+        <div class="md3-dropdown-container" id="langDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Language</span>
+              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectLanguage('English', '', this)">
+              <span>English</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/', this)">
+              <span>Deutsch</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/', this)">
+              <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/', this)">
+              <span>简体中文</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
         </div>
-        <div class="all-softwares-grid fade-out visible" id="softwareGrid"></div>
-    </main>
-    <footer>
-        <p>© 2026 Buge Studio</p>
-    </footer>
 
-    <script>
-        // 完全使用你提供的旧版本数据逻辑
-        const softwaresList = [
-            {
-                id: "appmanager",
-                name: "Buge App Manager",
-                desc: "Powerful Android app & permission manager (requires Shizuku). Manage apps like a pro.",
-                iconImg: "AppManager.jpg",
-                fallbackIcon: "fas fa-cubes",
-                github: "https://github.com/BugeStudioTeam/Buge-App-Manager",
-                downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager9.58.105/BugeAppManager-v9.58.105-release.apk",
-                website: "https://bugestudioteam.github.io/appmanager",
-                extraClass: ""
-            },
-            {
-                id: "applocker",
-                name: "Buge App Locker",
-                desc: "This Material Design 3 App will help you lock apps with Accessibility function.",
-                iconImg: "applocker.jpg",
-                fallbackIcon: "fas fa-lock",
-                github: "https://github.com/BugeStudioTeam/Buge-App-Locker",
-                downloadUrl: "https://github.com/BugeStudioTeam/Buge-App-Locker/releases/download/AppLocker1.0.2/Buge.App.Locker_1.0.2.apk",
-                website: "https://bugestudioteam.github.io/applocker",
-                extraClass: ""
-            },
-            {
-                id: "files",
-                name: "Buge Files",
-                desc: "This is a MATERIAL DESIGN 3 ANDROID APP, it can manage your phone storage.",
-                iconImg: "files.png",
-                fallbackIcon: "fas fa-folder-open",
-                github: "https://github.com/BugeStudioTeam/Buge-Files",
-                downloadUrl: "https://github.com/BugeStudioTeam/Buge-Files/releases/download/Files1.7.0/app-release.apk",
-website: "https://bugestudioteam.github.io/files",
-                extraClass: ""
-            }
-        ];
+        <div class="md3-dropdown-container" id="themeDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Theme</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
 
-        // 动态渲染卡片 + 修复图标偏移
-        document.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('softwareGrid');
-            softwaresList.forEach(app => {
-                const card = document.createElement('div');
-                card.className = `software-card ${app.extraClass}`;
-                card.onclick = () => app.website && (window.location.href = app.website);
-                
-                card.innerHTML = `
-                    <div class="card-icon">
-                        <img src="${app.iconImg}" alt="${app.name}" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <i class="${app.fallbackIcon}"></i>
-                    </div>
-                    <h3>${app.name}</h3>
-                    <div class="description">${app.desc}</div>
-                    <div class="button-container">
-                        <a href="${app.github}" target="_blank" class="card-link github-link" onclick="event.stopPropagation()">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                        <a href="${app.downloadUrl}" target="_blank" class="card-link download-link" onclick="event.stopPropagation()">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        });
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
+              <span>Light</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
+              <span>Light (Medium)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
+              <span>Light (High)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
+              <span>Dark</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
+              <span>Dark (Medium)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
+              <span>Dark (High)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
 
-        // 滚动动画
-        (function() {
-            const fadeElements = document.querySelectorAll('.fade-out');
-            function checkFade() {
-                const h = window.innerHeight;
-                fadeElements.forEach(el => {
-                    const r = el.getBoundingClientRect();
-                    const show = (r.top + r.height) / h > 0.2 && (h - r.top) / h > 0.2;
-                    el.classList.toggle('visible', show);
-                    el.classList.toggle('hidden', !show);
-                });
-            }
-            window.addEventListener('scroll', checkFade);
-            window.addEventListener('resize', checkFade);
-            checkFade();
-        })();
-    </script>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
