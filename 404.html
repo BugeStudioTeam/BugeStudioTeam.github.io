@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 Not Found - Buge Studio</title>
+  <title data-translate="title">404 Not Found - Buge Studio</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -23,13 +23,13 @@
       <div class="hero-pills">
         <span class="m3-pill">
           <span class="material-symbols-outlined">error</span>
-          Page Not Found
+          <span data-translate="badge">Page Not Found</span>
         </span>
       </div>
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle" style="font-size: 1.5rem; font-weight: 500;">Page Not Found</p>
+      <p class="hero-subtitle" style="font-size: 1.5rem; font-weight: 500;" data-translate="subtitle">Page Not Found</p>
     </header>
 
     <section>
@@ -38,22 +38,22 @@
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">warning</span>
-              <h3>Oops! The page you're looking for doesn't exist.</h3>
+              <h3 data-translate="card_title">Oops! The page you're looking for doesn't exist.</h3>
             </div>
           </div>
 
-          <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
+          <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;" data-translate="card_desc">
             It might have been moved, deleted, or never existed. But don't worry — we'll help you find your way back.
           </p>
 
           <div class="action-row" style="margin-top: 1.5rem;">
             <a href="https://bugestudio.website/" class="btn btn-filled" rel="noopener">
               <span class="material-symbols-outlined">home</span>
-              Back to Home
+              <span data-translate="btn_home">Back to Home</span>
             </a>
             <a href="https://github.com/BugeStudioTeam" class="btn btn-outlined" rel="noopener">
               <span class="material-symbols-outlined">code</span>
-              GitHub
+              <span data-translate="btn_github">GitHub</span>
             </a>
           </div>
         </div>
@@ -93,26 +93,26 @@
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Language</span>
+              <span class="md3-dropdown-label" data-translate="footer_lang_label">Language</span>
               <span class="md3-dropdown-value" id="selectedLangText">English</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', '', this)">
+            <div class="md3-menu-item selected" onclick="changeLanguage('English', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', '', this)">
+            <div class="md3-menu-item" onclick="changeLanguage('Deutsch', this)">
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', '', this)">
+            <div class="md3-menu-item" onclick="changeLanguage('Русский', this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', '', this)">
+            <div class="md3-menu-item" onclick="changeLanguage('简体中文', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -122,7 +122,7 @@
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Theme</span>
+              <span class="md3-dropdown-label" data-translate="footer_theme_label">Theme</span>
               <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
@@ -160,6 +160,75 @@
     </div>
   </footer>
 
+  <script>
+    const translations = {
+      "English": {
+        "title": "404 Not Found - Buge Studio",
+        "badge": "Page Not Found",
+        "subtitle": "Page Not Found",
+        "card_title": "Oops! The page you're looking for doesn't exist.",
+        "card_desc": "It might have been moved, deleted, or never existed. But don't worry — we'll help you find your way back.",
+        "btn_home": "Back to Home",
+        "btn_github": "GitHub",
+        "footer_lang_label": "Language",
+        "footer_theme_label": "Theme"
+      },
+      "Deutsch": {
+        "title": "404 Nicht Gefunden - Buge Studio",
+        "badge": "Seite nicht gefunden",
+        "subtitle": "Seite nicht gefunden",
+        "card_title": "Hoppla! Die von Ihnen gesuchte Seite existiert nicht.",
+        "card_desc": "Sie wurde möglicherweise verschoben, gelöscht oder hat nie existiert. Aber keine Sorge — wir helfen Ihnen, den Weg zurück zu finden.",
+        "btn_home": "Zurück zur Startseite",
+        "btn_github": "GitHub",
+        "footer_lang_label": "Sprache",
+        "footer_theme_label": "Design"
+      },
+      "Русский": {
+        "title": "404 Не найдено - Buge Studio",
+        "badge": "Страница не найдена",
+        "subtitle": "Страница не найдена",
+        "card_title": "Ой! Страница, которую вы ищете, не существует.",
+        "card_desc": "Возможно, она была перемещена, удалена или никогда не существовала. Но не волнуйтесь — мы поможем вам найти путь назад.",
+        "btn_home": "На главную",
+        "btn_github": "GitHub",
+        "footer_lang_label": "Язык",
+        "footer_theme_label": "Тема"
+      },
+      "简体中文": {
+        "title": "404 未找到 - Buge Studio",
+        "badge": "页面未找到",
+        "subtitle": "页面未找到",
+        "card_title": "哎呀！您寻找的页面不存在。",
+        "card_desc": "它可能已被移动、删除或从未存在。但别担心 —— 我们会帮您找到回去的路。",
+        "btn_home": "返回主页",
+        "btn_github": "GitHub",
+        "footer_lang_label": "语言",
+        "footer_theme_label": "主题"
+      }
+    };
+
+    function changeLanguage(langText, itemEl) {
+      document.getElementById('selectedLangText').textContent = langText;
+      
+      const parent = itemEl.parentElement;
+      parent.querySelectorAll('.md3-menu-item').forEach(el => el.classList.remove('selected'));
+      itemEl.classList.add('selected');
+      
+      document.getElementById('langDropdownContainer').classList.remove('open');
+
+      // 切换文本
+      const t = translations[langText];
+      if (t) {
+        document.querySelectorAll('[data-translate]').forEach(el => {
+          const key = el.getAttribute('data-translate');
+          if (t[key]) {
+            el.textContent = t[key];
+          }
+        });
+      }
+    }
+  </script>
   <script src="js/main.js"></script>
 </body>
 </html>
