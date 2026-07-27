@@ -286,6 +286,18 @@ body {
   flex-wrap: wrap;
 }
 
+.clickable-header {
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-radius: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.clickable-header:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
 .software-title {
   display: flex;
   align-items: center;
