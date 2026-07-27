@@ -25,13 +25,13 @@
       cursor: pointer;
       background-color: var(--md-sys-color-surface-container);
       color: var(--md-sys-color-on-surface);
-      transition: all 0.2s ease;
       user-select: none;
       font-family: 'Google Sans', sans-serif;
       font-size: 0.95rem;
       box-shadow: none;
       border: 1px solid transparent;
-      border-radius: 16px;
+      border-radius: 24px;
+      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1), color 0.3s cubic-bezier(0.2, 0, 0, 1), border-radius 0.4s cubic-bezier(0.2, 0, 0, 1);
     }
     .support-tab.active {
       background-color: var(--md-sys-color-primary-container);
@@ -126,7 +126,7 @@
           </svg>
         </a>
 
-        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
+        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" rel="noopener" aria-label="Email">
           <svg class="custom-icon" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
@@ -244,7 +244,7 @@
           <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
             Secure international payments &amp; credit cards
           </p>
-          <div class="action-row" style="margin-top: 1.5rem;">
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
             <button class="btn btn-filled" onclick="openModal()">
               <span class="material-symbols-outlined">open_in_new</span>
               Donate via PayPal
@@ -263,8 +263,8 @@
           <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
             Scan QR code with mobile app
           </p>
-          <div style="margin-top: 1.5rem; text-align: center;">
-            <img src="wechat_qr.png" alt="WeChat Pay QR Code" style="max-width: 200px; border-radius: 12px; border: 1px solid var(--md-sys-color-outline-variant);" />
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+            <img src="wechat_qr.png" alt="WeChat Pay QR Code" style="width: 200px; height: 200px; object-fit: contain; border-radius: 24px; border: 1px solid var(--md-sys-color-outline-variant);" />
           </div>
         `;
       } else if (type === 'alipay') {
@@ -279,8 +279,8 @@
           <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
             Scan QR code with mobile app
           </p>
-          <div style="margin-top: 1.5rem; text-align: center;">
-            <img src="alipay_qr.png" alt="Alipay QR Code" style="max-width: 200px; border-radius: 12px; border: 1px solid var(--md-sys-color-outline-variant);" />
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+            <img src="alipay_qr.png" alt="Alipay QR Code" style="width: 200px; height: 200px; object-fit: contain; border-radius: 24px; border: 1px solid var(--md-sys-color-outline-variant);" />
           </div>
         `;
       }
