@@ -31,7 +31,7 @@
       box-shadow: none;
       border: 1px solid transparent;
       border-radius: 12px;
-      transition: background-color 0.4s cubic-bezier(0.2, 0, 0, 1), color 0.4s cubic-bezier(0.2, 0, 0, 1), border-radius 0.4s cubic-bezier(0.2, 0, 0, 1);
+      transition: background-color 0.4s cubic-bezier(0.2, 0, 0, 1), color 0.4s cubic-bezier(0.2, 0, 0, 1), border-radius 0.5s cubic-bezier(0.2, 0, 0, 1);
     }
     .support-tab.active {
       background-color: var(--md-sys-color-primary-container);
@@ -41,53 +41,57 @@
     .support-tab:hover:not(.active) {
       background-color: var(--md-sys-color-surface-container-high);
     }
-    .modal-overlay {
-      display: flex;
+    .dialog-backdrop {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0);
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       z-index: 1000;
+      display: flex;
       align-items: center;
       justify-content: center;
-      pointer-events: none;
-      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s cubic-bezier(0.2, 0, 0, 1), visibility 0.3s cubic-bezier(0.2, 0, 0, 1);
     }
-    .modal-overlay.open {
-      background-color: rgba(0, 0, 0, 0.5);
-      pointer-events: auto;
+    .dialog-backdrop.active {
+      opacity: 1;
+      visibility: visible;
     }
-    .modal-card {
+    .dialog {
       background-color: var(--md-sys-color-surface);
       color: var(--md-sys-color-on-surface);
-      padding: 2rem;
       border-radius: 28px;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transform: scale(0.9) translateY(20px);
+      padding: 24px;
+      width: calc(100% - 48px);
+      max-width: 560px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transform: scale(0.8) translateY(20px);
       opacity: 0;
-      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.3s cubic-bezier(0.2, 0, 0, 1);
+      transition: transform 0.3s cubic-bezier(0.05, 0.7, 0.1, 1), opacity 0.3s cubic-bezier(0.05, 0.7, 0.1, 1);
     }
-    .modal-overlay.open .modal-card {
+    .dialog-backdrop.active .dialog {
       transform: scale(1) translateY(0);
       opacity: 1;
     }
-    .modal-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      color: var(--md-sys-color-primary);
+    .dialog-headline {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 2rem;
+      margin-bottom: 16px;
+      color: var(--md-sys-color-on-surface);
     }
-    .modal-desc {
+    .dialog-content {
       font-size: 0.95rem;
+      line-height: 1.5rem;
       color: var(--md-sys-color-on-surface-variant);
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
+      margin-bottom: 24px;
     }
-    .modal-actions {
+    .dialog-actions {
       display: flex;
       justify-content: flex-end;
-      gap: 1rem;
+      gap: 8px;
     }
   </style>
 </head>
@@ -136,7 +140,7 @@
           </svg>
         </a>
 
-        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" rel="noopener" aria-label="Email">
+        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
           <svg class="custom-icon" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
@@ -146,12 +150,12 @@
 
   </main>
 
-  <div class="modal-overlay" id="paypalModal">
-    <div class="modal-card">
-      <div class="modal-title">Notice</div>
-      <div class="modal-desc">Thank you for your support, please click confirm to proceed to the target link.</div>
-      <div class="modal-actions">
-        <button class="btn btn-outlined" onclick="closeModal()">Cancel</button>
+  <div class="dialog-backdrop" id="dialogBackdrop" onclick="closeDialogOnBackdrop(event)">
+    <div class="dialog">
+      <div class="dialog-headline">Notice</div>
+      <div class="dialog-content">Thank you for your support, please click confirm to proceed to the target link.</div>
+      <div class="dialog-actions">
+        <button class="btn btn-outlined" onclick="closeDialog()">Cancel</button>
         <button class="btn btn-filled" onclick="confirmPayPal()">Confirm</button>
       </div>
     </div>
@@ -255,7 +259,7 @@
             Secure international payments &amp; credit cards
           </p>
           <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
-            <button class="btn btn-filled" onclick="openModal()">
+            <button class="btn btn-filled" onclick="openDialog()">
               <span class="material-symbols-outlined">open_in_new</span>
               Donate via PayPal
             </button>
@@ -300,12 +304,18 @@
       }
     }
 
-    function openModal() {
-      document.getElementById('paypalModal').classList.add('open');
+    function openDialog() {
+      document.getElementById('dialogBackdrop').classList.add('active');
     }
 
-    function closeModal() {
-      document.getElementById('paypalModal').classList.remove('open');
+    function closeDialog() {
+      document.getElementById('dialogBackdrop').classList.remove('active');
+    }
+
+    function closeDialogOnBackdrop(event) {
+      if (event.target.id === 'dialogBackdrop') {
+        closeDialog();
+      }
     }
 
     function confirmPayPal() {
