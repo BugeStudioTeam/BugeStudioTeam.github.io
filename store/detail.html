@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buge Store - App Detail</title>
+  <title>Buge Store - 应用详情</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -55,7 +55,7 @@
       <div style="display: flex; align-items: center; justify-content: flex-start; width: 100%; margin-bottom: 1rem;">
         <a href="index.html" class="btn btn-outlined" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
           <span class="material-symbols-outlined">arrow_back</span>
-          Back to Store
+          返回应用商店
         </a>
       </div>
       <div class="wavy-line" style="margin-top: 0.5rem;"></div>
@@ -63,7 +63,7 @@
 
     <section id="app-detail">
       <div class="detail-card" style="text-align: center; color: var(--md-sys-color-on-surface-variant);">
-        Loading app details...
+        正在加载应用详情...
       </div>
     </section>
 
@@ -100,12 +100,12 @@
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
               <span class="md3-dropdown-label">Language</span>
-              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+              <span class="md3-dropdown-value" id="selectedLangText">简体中文</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/store/detail.html', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/store/detail.html', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -117,7 +117,7 @@
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/store/detail.html', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/store/detail.html', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -177,7 +177,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const appId = urlParams.get('id');
         if (!appId) {
-          throw new Error("No app ID provided.");
+          throw new Error("未提供应用 ID。");
         }
 
         const response = await fetch('apps.json');
@@ -185,7 +185,7 @@
         const app = apps.find(item => item.id === appId);
 
         if (!app) {
-          throw new Error("App not found.");
+          throw new Error("未找到该应用。");
         }
 
         document.title = `${app.name} - Buge Store`;
@@ -197,11 +197,11 @@
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
               <div>
                 <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem;">${escapeHtml(app.name)}</h2>
-                <p style="color: var(--md-sys-color-on-surface-variant); font-size: 0.95rem;">By ${escapeHtml(app.developer || 'Buge Studio')}</p>
+                <p style="color: var(--md-sys-color-on-surface-variant); font-size: 0.95rem;">开发者：${escapeHtml(app.developer || 'Buge Studio')}</p>
               </div>
-              <a href="${app.download_url || '#'}" target="_blank" class="btn btn-filled">
+              <a href="${escapeHtml(app.download_url || '#')}" target="_blank" class="btn btn-filled">
                 <span class="material-symbols-outlined">download</span>
-                Download v${escapeHtml(app.latest_version || '')}
+                下载 v${escapeHtml(app.latest_version || '')}
               </a>
             </div>
 
@@ -211,34 +211,34 @@
 
             <div class="detail-meta-grid">
               <div class="meta-item">
-                <span class="label">Latest Version</span>
+                <span class="label">最新版本</span>
                 <span class="value">${escapeHtml(app.latest_version || '-')}</span>
               </div>
               <div class="meta-item">
-                <span class="label">File Size</span>
+                <span class="label">文件大小</span>
                 <span class="value">${app.size_mb || '-'} MB</span>
               </div>
               <div class="meta-item">
-                <span class="label">Min SDK</span>
+                <span class="label">最低 SDK</span>
                 <span class="value">Android ${app.min_sdk || '-'}</span>
               </div>
               ${app.target_sdk ? `
                 <div class="meta-item">
-                  <span class="label">Target SDK</span>
+                  <span class="label">目标 SDK</span>
                   <span class="value">Android ${app.target_sdk}</span>
                 </div>
               ` : ''}
               <div class="meta-item">
-                <span class="label">Package Name</span>
+                <span class="label">包名 (Package)</span>
                 <span class="value" style="font-family: monospace; font-size: 0.85rem;">${escapeHtml(app.package || '-')}</span>
               </div>
               <div class="meta-item">
-                <span class="label">Signature</span>
+                <span class="label">签名 (Signature)</span>
                 <span class="value" style="font-family: monospace; font-size: 0.85rem;">${escapeHtml(app.signature || '-')}</span>
               </div>
               ${architectures ? `
                 <div class="meta-item">
-                  <span class="label">Architectures</span>
+                  <span class="label">支持架构</span>
                   <span class="value">${escapeHtml(architectures)}</span>
                 </div>
               ` : ''}
@@ -247,12 +247,12 @@
         `;
 
       } catch (error) {
-        console.error("Load error:", error);
+        console.error("加载详情错误:", error);
         detailEl.innerHTML = `
           <div class="detail-card" style="text-align: center;">
-            <p style="color: var(--md-sys-color-error); font-weight: 500; margin-bottom: 0.5rem;">Failed to load app details.</p>
+            <p style="color: var(--md-sys-color-error); font-weight: 500; margin-bottom: 0.5rem;">无法加载应用详情。</p>
             <p style="font-size: 0.9rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 1.25rem;">${escapeHtml(error.message)}</p>
-            <button class="btn btn-outlined" onclick="loadDetail()">Retry</button>
+            <button class="btn btn-outlined" onclick="loadDetail()">重试</button>
           </div>
         `;
       }

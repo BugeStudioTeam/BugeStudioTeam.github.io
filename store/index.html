@@ -12,6 +12,45 @@
 
   <link rel="stylesheet" href="styles/style.css" />
   <style>
+    .store-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 240px;
+      max-width: 400px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      background-color: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: 9999px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1), border-color 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .search-box input:focus {
+      background-color: var(--md-sys-color-surface-container-high);
+      border-color: var(--md-sys-color-primary);
+    }
+    .search-box .material-symbols-outlined {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 1.25rem;
+    }
+
     .store-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -56,6 +95,11 @@
       padding: 0.2rem 0.6rem;
       border-radius: 9999px;
     }
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--md-sys-color-on-surface-variant);
+    }
   </style>
 </head>
 <body>
@@ -64,13 +108,21 @@
 
     <header class="hero" style="padding: 2rem 0 1rem;">
       <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem;">Buge Store</h1>
-      <p class="hero-subtitle" style="margin-bottom: 1rem;">Discover and download modern, open-source Android tools and software.</p>
+      <p class="hero-subtitle" style="margin-bottom: 1rem;">发现并下载现代、开源的 Android 工具与软件。</p>
       <div class="wavy-line"></div>
     </header>
 
     <section>
-      <div id="app-list" class="store-grid">
+      <div class="store-header-row">
+        <div class="search-box">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" id="searchInput" placeholder="搜索应用..." oninput="filterApps()" />
         </div>
+      </div>
+
+      <div id="app-list" class="store-grid">
+        <div class="empty-state">正在加载应用列表...</div>
+      </div>
 
       <div class="social-row">
         <a href="https://github.com/BugeStudioTeam" class="btn-icon" rel="noopener" aria-label="GitHub">
@@ -106,12 +158,12 @@
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
               <span class="md3-dropdown-label">Language</span>
-              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+              <span class="md3-dropdown-value" id="selectedLangText">简体中文</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/store/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/store/', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -123,7 +175,7 @@
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/store/', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/store/', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -170,49 +222,78 @@
   </footer>
 
   <script>
-    // 保留原本的 fetchApps 逻辑，只适配新的卡片渲染结构
+    let allApps = [];
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
     async function fetchApps() {
       try {
-        const response = await fetch('apps.json'); // 视原本接口而定
-        const apps = await response.json();
-        const listEl = document.getElementById('app-list');
-        
-        listEl.innerHTML = apps.map(app => `
-          <a href="detail.html?id=${app.id}" class="store-card">
-            <div>
-              <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;">${escapeHtml(app.name)}</h3>
-              <div style="font-size: 0.9rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 0.5rem;">${escapeHtml(app.short_description || '')}</div>
-              
-              <div class="app-meta-row">
-                <span>v${escapeHtml(app.latest_version || '?')}</span>
-                <span>•</span>
-                <span>${app.size_mb || '?'} MB</span>
-                <span>•</span>
-                <span>SDK ${app.min_sdk || '?'}</span>
-              </div>
-
-              <div class="app-categories">
-                ${(app.categories || []).map(c => `<span>${escapeHtml(c)}</span>`).join("")}
-              </div>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--md-sys-color-outline-variant); padding-top: 0.75rem; margin-top: 0.5rem;">
-              <span style="font-size: 0.85rem; color: var(--md-sys-color-primary); font-weight: 500;">${escapeHtml(app.developer || 'Buge Studio')}</span>
-              <span class="btn btn-filled" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;" onclick="event.stopPropagation();event.preventDefault();window.open('${app.download_url || '#'}','_blank')">
-                Download
-              </span>
-            </div>
-          </a>
-        `).join("");
+        const response = await fetch('apps.json');
+        allApps = await response.json();
+        renderApps(allApps);
       } catch (e) {
-        console.error(e);
+        console.error("加载应用失败:", e);
+        document.getElementById('app-list').innerHTML = `
+          <div class="empty-state" style="color: var(--md-sys-color-error);">
+            无法加载 apps.json，请确保接口正常。
+          </div>
+        `;
       }
     }
 
-    function escapeHtml(str) {
-      return str.replace(/[&<>'"]/g, 
-        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-      );
+    function renderApps(apps) {
+      const listEl = document.getElementById('app-list');
+      if (!apps || apps.length === 0) {
+        listEl.innerHTML = `<div class="empty-state">没有找到匹配的应用。</div>`;
+        return;
+      }
+      
+      listEl.innerHTML = apps.map(app => `
+        <a href="detail.html?id=${encodeURIComponent(app.id)}" class="store-card">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;">${escapeHtml(app.name)}</h3>
+            <div style="font-size: 0.9rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 0.5rem;">${escapeHtml(app.short_description || '')}</div>
+            
+            <div class="app-meta-row">
+              <span>v${escapeHtml(app.latest_version || '?')}</span>
+              <span>•</span>
+              <span>${app.size_mb || '?'} MB</span>
+              <span>•</span>
+              <span>SDK ${app.min_sdk || '?'}</span>
+            </div>
+
+            <div class="app-categories">
+              ${(app.categories || []).map(c => `<span>${escapeHtml(c)}</span>`).join("")}
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--md-sys-color-outline-variant); padding-top: 0.75rem; margin-top: 0.5rem;">
+            <span style="font-size: 0.85rem; color: var(--md-sys-color-primary); font-weight: 500;">${escapeHtml(app.developer || 'Buge Studio')}</span>
+            <span class="btn btn-filled" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;" onclick="event.stopPropagation();event.preventDefault();window.open('${escapeHtml(app.download_url || '#')}','_blank')">
+              下载
+            </span>
+          </div>
+        </a>
+      `).join("");
+    }
+
+    function filterApps() {
+      const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+      if (!keyword) {
+        renderApps(allApps);
+        return;
+      }
+      const filtered = allApps.filter(app => {
+        return (app.name && app.name.toLowerCase().includes(keyword)) ||
+               (app.short_description && app.short_description.toLowerCase().includes(keyword)) ||
+               (app.description && app.description.toLowerCase().includes(keyword));
+      });
+      renderApps(filtered);
     }
 
     fetchApps();
