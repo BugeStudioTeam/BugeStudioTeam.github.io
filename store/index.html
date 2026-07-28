@@ -1,303 +1,830 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buge Store</title>
-  
-  <link rel="icon" href="icon.png" type="image/png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buge Store</title>
+    <link rel="icon" href="/store/icon.png" type="image/png" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="styles/style.css" />
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link rel="stylesheet" href="styles/style.css" />
-  <style>
-    .store-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .search-box {
-      position: relative;
-      flex: 1;
-      min-width: 240px;
-      max-width: 400px;
-    }
-    .search-box input {
-      width: 100%;
-      padding: 0.75rem 1rem 0.75rem 2.75rem;
-      background-color: var(--md-sys-color-surface-container);
-      color: var(--md-sys-color-on-surface);
-      border: 1px solid var(--md-sys-color-outline-variant);
-      border-radius: 9999px;
-      font-family: 'Google Sans', sans-serif;
-      font-size: 0.95rem;
-      outline: none;
-      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1), border-color 0.3s cubic-bezier(0.2, 0, 0, 1);
-    }
-    .search-box input:focus {
-      background-color: var(--md-sys-color-surface-container-high);
-      border-color: var(--md-sys-color-primary);
-    }
-    .search-box .material-symbols-outlined {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--md-sys-color-on-surface-variant);
-      font-size: 1.25rem;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1c1c1e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .store-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .store-card {
-      background-color: var(--md-sys-color-surface-container);
-      color: var(--md-sys-color-on-surface);
-      border-radius: 24px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1), transform 0.3s cubic-bezier(0.2, 0, 0, 1);
-      border: 1px solid transparent;
-    }
-    .store-card:hover {
-      background-color: var(--md-sys-color-surface-container-high);
-      transform: translateY(-2px);
-    }
-    .app-meta-row {
-      display: flex;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--md-sys-color-on-surface-variant);
-      margin: 0.75rem 0;
-      flex-wrap: wrap;
-    }
-    .app-categories {
-      display: flex;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    .app-categories span {
-      background-color: var(--md-sys-color-secondary-container);
-      color: var(--md-sys-color-on-secondary-container);
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 9999px;
-    }
-    .empty-state {
-      text-align: center;
-      padding: 3rem;
-      color: var(--md-sys-color-on-surface-variant);
-    }
-  </style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0 16px;
+            border-bottom: 1px solid #e5e5ea;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-left .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header-left .logo a {
+            color: #1c1c1e;
+            text-decoration: none;
+        }
+
+        .header-left .tagline {
+            font-size: 14px;
+            color: #8e8e93;
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .header-left .tagline {
+                display: inline;
+            }
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-right .count {
+            font-size: 14px;
+            color: #8e8e93;
+            background: #f0f0f5;
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #1c1c1e 0%, #3a3a3c 100%);
+            border-radius: 20px;
+            padding: 28px 28px;
+            margin-bottom: 28px;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            min-height: 120px;
+        }
+
+        .hero-banner .hero-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .hero-banner .hero-text h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .hero-banner .hero-text p {
+            font-size: 14px;
+            color: #aeaeb2;
+            max-width: 500px;
+            line-height: 1.5;
+        }
+
+        .hero-banner .hero-text .hero-badge {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 14px;
+            border-radius: 20px;
+            color: #aeaeb2;
+        }
+
+        .hero-banner .hero-app {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 12px 20px 12px 14px;
+            border-radius: 14px;
+            transition: background 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .hero-banner .hero-app:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-banner .hero-app .hero-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #2a2a2c;
+        }
+
+        .hero-banner .hero-app .hero-app-info .hero-app-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .hero-banner .hero-app .hero-app-info .hero-app-dev {
+            font-size: 12px;
+            color: #aeaeb2;
+        }
+
+        .hero-banner .hero-app .hero-app-info .hero-app-stars {
+            font-size: 13px;
+            color: #f5a623;
+            margin-top: 2px;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 11px 18px;
+            border: 1px solid #e5e5ea;
+            border-radius: 12px;
+            font-size: 15px;
+            background: #ffffff;
+            min-width: 180px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.12);
+        }
+
+        .search-bar .result-hint {
+            font-size: 14px;
+            color: #8e8e93;
+            align-self: center;
+            padding: 0 8px;
+            white-space: nowrap;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .filters button {
+            padding: 6px 18px;
+            border: 1px solid #e5e5ea;
+            border-radius: 20px;
+            background: #ffffff;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #3a3a3c;
+        }
+
+        .filters button:hover {
+            background: #f0f0f5;
+        }
+
+        .filters button.active {
+            background: #1c1c1e;
+            color: #ffffff;
+            border-color: #1c1c1e;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .app-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 20px 18px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #f0f0f5;
+        }
+
+        .app-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+        }
+
+        .app-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .app-card .card-top {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .app-card .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            background: #f7f7fa;
+            object-fit: cover;
+            border: 1px solid #e5e5ea;
+            flex-shrink: 0;
+        }
+
+        .app-card .card-top-right {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-card .name {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 1px;
+            line-height: 1.3;
+        }
+
+        .app-card .package {
+            font-size: 12px;
+            color: #8e8e93;
+            font-family: monospace;
+            word-break: break-all;
+            margin-bottom: 4px;
+        }
+
+        .app-card .stars-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #6e6e73;
+        }
+
+        .app-card .stars-row .star-icon {
+            color: #f5a623;
+            font-size: 16px;
+        }
+
+        .app-card .stars-row .star-count {
+            color: #8e8e93;
+            font-size: 12px;
+        }
+
+        .app-card .short-desc {
+            font-size: 13px;
+            color: #6e6e73;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .app-card .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+            font-size: 12px;
+            color: #6e6e73;
+            margin-bottom: 10px;
+        }
+
+        .app-card .meta-row span {
+            background: #f7f7fa;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .app-card .categories {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .app-card .categories span {
+            font-size: 11px;
+            background: #f0f0f5;
+            color: #555;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+
+        .app-card .developer {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-bottom: 12px;
+        }
+
+        .app-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px solid #f0f0f5;
+        }
+
+        .app-card .version {
+            font-size: 13px;
+            color: #3a3a3c;
+        }
+
+        .app-card .download-btn {
+            font-size: 13px;
+            color: #007aff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 8px;
+            background: #f0f7ff;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .app-card .download-btn:hover {
+            background: #e1efff;
+        }
+
+        .loading, .empty {
+            text-align: center;
+            padding: 80px 20px;
+            font-size: 16px;
+            color: #8e8e93;
+        }
+
+        .error {
+            text-align: center;
+            padding: 60px 20px;
+            color: #c2352b;
+            background: #fef0ef;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .error button {
+            margin-top: 14px;
+            padding: 10px 28px;
+            border-radius: 10px;
+            border: 1px solid #d2d2d7;
+            background: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Footer layout matching your requirements with 3 utility actions (Copyright, Language, Theme) */
+        .footer {
+            margin-top: 48px;
+            padding: 24px 0 16px;
+            border-top: 1px solid #e5e5ea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 13px;
+            color: #8e8e93;
+        }
+
+        .footer a {
+            color: #007aff;
+            text-decoration: none;
+        }
+
+        .footer-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-btn {
+            background: #ffffff;
+            border: 1px solid #e5e5ea;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #3a3a3c;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background 0.2s;
+        }
+
+        .footer-btn:hover {
+            background: #f0f0f5;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px;
+            }
+            .header {
+                padding: 16px 0 12px;
+            }
+            .header-left .logo {
+                font-size: 22px;
+            }
+            .hero-banner {
+                padding: 20px 18px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero-banner .hero-text h2 {
+                font-size: 18px;
+            }
+            .hero-banner .hero-app {
+                width: 100%;
+            }
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <main class="container">
-
-    <header class="hero" style="padding: 2rem 0 1rem;">
-      <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem;">Buge Store</h1>
-      <p class="hero-subtitle" style="margin-bottom: 1rem;">发现并下载现代、开源的 Android 工具与软件。</p>
-      <div class="wavy-line"></div>
-    </header>
-
-    <section>
-      <div class="store-header-row">
-        <div class="search-box">
-          <span class="material-symbols-outlined">search</span>
-          <input type="text" id="searchInput" placeholder="搜索应用..." oninput="filterApps()" />
-        </div>
-      </div>
-
-      <div id="app-list" class="store-grid">
-        <div class="empty-state">正在加载应用列表...</div>
-      </div>
-
-      <div class="social-row">
-        <a href="https://github.com/BugeStudioTeam" class="btn-icon" rel="noopener" aria-label="GitHub">
-          <svg class="custom-icon" viewBox="0 0 24 24">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-        </a>
-
-        <a href="https://t.me/bugestudio" class="btn-icon" rel="noopener" aria-label="Telegram">
-          <svg class="custom-icon" viewBox="0 0 24 24">
-            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-          </svg>
-        </a>
-
-        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
-          <svg class="custom-icon" viewBox="0 0 24 24">
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
-        </a>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-content">
-      <div class="copyright">
-        © 2026 Buge Studio
-      </div>
-
-      <div class="footer-controls">
-        <div class="md3-dropdown-container" id="langDropdownContainer">
-          <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
-            <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Language</span>
-              <span class="md3-dropdown-value" id="selectedLangText">简体中文</span>
+    <div class="container" id="app">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo"><a href="/store/">Buge Store</a></div>
+                <span class="tagline">Open Source App Store</span>
             </div>
-            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
-          </div>
-          <div class="md3-dropdown-menu">
-            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/store/', this)">
-              <span>English</span>
-              <span class="material-symbols-outlined check-icon">check</span>
+            <div class="header-right">
+                <span class="count" id="appCount">loading...</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/store/', this)">
-              <span>Deutsch</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/store/', this)">
-              <span>Русский</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-            <div class="md3-menu-item selected" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/store/', this)">
-              <span>简体中文</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-          </div>
         </div>
 
-        <div class="md3-dropdown-container" id="themeDropdownContainer">
-          <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
-            <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Theme</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+        <div class="hero-banner" id="heroBanner" style="display:none;">
+            <div class="hero-text">
+                <h2 id="heroTitle">Featured Apps</h2>
+                <p id="heroDesc">Discover the most popular open source apps curated by the community.</p>
+                <span class="hero-badge" id="heroBadge">Top 2 Starred</span>
             </div>
-            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
-          </div>
-          <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
-              <span>Light</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
-              <span>Light (Medium)</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
-              <span>Light (High)</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
-              <span>Dark</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
-              <span>Dark (Medium)</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
-              <span>Dark (High)</span>
-              <span class="material-symbols-outlined check-icon">check</span>
-            </div>
-          </div>
+            <div id="heroApps" style="display:flex;flex-wrap:wrap;gap:12px;"></div>
         </div>
-      </div>
+
+        <div class="search-bar">
+            <input
+            type="text"
+            id="searchInput"
+            placeholder="Search apps by name or package..."
+            oninput="filterApps()"
+            />
+            <span class="result-hint" id="resultCount"></span>
+        </div>
+
+        <div class="filters" id="filterContainer">
+            <button class="active" data-category="all" onclick="setCategory('all')">All</button>
+        </div>
+
+        <div class="section-title" id="sectionTitle">All Apps</div>
+
+        <div id="appList" class="app-grid">
+            <div class="loading">Loading</div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-copyright">
+                Powered by <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">Buge Store API</a>
+            </div>
+            <div class="footer-controls">
+                <button class="footer-btn" id="langBtn" onclick="toggleLanguage()">Language: EN</button>
+                <button class="footer-btn" id="themeBtn" onclick="toggleTheme()">Theme: Light</button>
+                <button class="footer-btn" onclick="window.open('https://github.com/BugeStudioTeam/Buge-Store-API', '_blank')">GitHub</button>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <script>
-    let allApps = [];
+    <script src="js/main.js"></script>
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/[&<>'"]/g, 
-        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-      );
-    }
+    <script>
+        const API_URL =
+            "https://raw.githubusercontent.com/BugeStudioTeam/Buge-Store-API/main/api/v1/apps.json";
 
-    async function fetchApps() {
-      try {
-        const response = await fetch('apps.json');
-        allApps = await response.json();
-        renderApps(allApps);
-      } catch (e) {
-        console.error("加载应用失败:", e);
-        document.getElementById('app-list').innerHTML = `
-          <div class="empty-state" style="color: var(--md-sys-color-error);">
-            无法加载 apps.json，请确保接口正常。
-          </div>
-        `;
-      }
-    }
+        let allApps = [];
+        let currentCategory = "all";
 
-    function renderApps(apps) {
-      const listEl = document.getElementById('app-list');
-      if (!apps || apps.length === 0) {
-        listEl.innerHTML = `<div class="empty-state">没有找到匹配的应用。</div>`;
-        return;
-      }
-      
-      listEl.innerHTML = apps.map(app => `
-        <a href="detail.html?id=${encodeURIComponent(app.id)}" class="store-card">
-          <div>
-            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;">${escapeHtml(app.name)}</h3>
-            <div style="font-size: 0.9rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 0.5rem;">${escapeHtml(app.short_description || '')}</div>
-            
-            <div class="app-meta-row">
-              <span>v${escapeHtml(app.latest_version || '?')}</span>
-              <span>•</span>
-              <span>${app.size_mb || '?'} MB</span>
-              <span>•</span>
-              <span>SDK ${app.min_sdk || '?'}</span>
-            </div>
+        const appListEl = document.getElementById("appList");
+        const searchInput = document.getElementById("searchInput");
+        const resultCountEl = document.getElementById("resultCount");
+        const appCountEl = document.getElementById("appCount");
+        const filterContainer = document.getElementById("filterContainer");
+        const sectionTitle = document.getElementById("sectionTitle");
 
-            <div class="app-categories">
-              ${(app.categories || []).map(c => `<span>${escapeHtml(c)}</span>`).join("")}
-            </div>
-          </div>
+        const heroBanner = document.getElementById("heroBanner");
+        const heroTitle = document.getElementById("heroTitle");
+        const heroDesc = document.getElementById("heroDesc");
+        const heroBadge = document.getElementById("heroBadge");
+        const heroApps = document.getElementById("heroApps");
 
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--md-sys-color-outline-variant); padding-top: 0.75rem; margin-top: 0.5rem;">
-            <span style="font-size: 0.85rem; color: var(--md-sys-color-primary); font-weight: 500;">${escapeHtml(app.developer || 'Buge Studio')}</span>
-            <span class="btn btn-filled" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;" onclick="event.stopPropagation();event.preventDefault();window.open('${escapeHtml(app.download_url || '#')}','_blank')">
-              下载
-            </span>
-          </div>
-        </a>
-      `).join("");
-    }
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
 
-    function filterApps() {
-      const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
-      if (!keyword) {
-        renderApps(allApps);
-        return;
-      }
-      const filtered = allApps.filter(app => {
-        return (app.name && app.name.toLowerCase().includes(keyword)) ||
-               (app.short_description && app.short_description.toLowerCase().includes(keyword)) ||
-               (app.description && app.description.toLowerCase().includes(keyword));
-      });
-      renderApps(filtered);
-    }
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
-    fetchApps();
-  </script>
-  <script src="js/main.js"></script>
+        async function fetchGitHubStars(repoUrl) {
+            if (!repoUrl) return null;
+            const match = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+            if (!match) return null;
+            const owner = match[1];
+            const repo = match[2].replace('.git', '');
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${owner}/${repo}`,
+                    {
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json',
+                            'User-Agent': 'Buge-Store-Client'
+                        }
+                    }
+                );
+                if (!response.ok) return null;
+                const data = await response.json();
+                return data.stargazers_count || 0;
+            } catch (error) {
+                console.error('GitHub API error:', error);
+                return null;
+            }
+        }
+
+        async function fetchApps() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const data = await response.json();
+                const raw = data.apps || [];
+
+                const seen = new Map();
+                const unique = [];
+                for (const app of raw) {
+                    if (!seen.has(app.package)) {
+                        seen.set(app.package, true);
+                        unique.push(app);
+                    }
+                }
+                allApps = unique;
+
+                for (const app of allApps) {
+                    if (app.source_code) {
+                        const stars = await fetchGitHubStars(app.source_code);
+                        app.stars = stars !== null ? stars : 0;
+                    } else {
+                        app.stars = 0;
+                    }
+                }
+
+                allApps.sort((a, b) => (b.stars || 0) - (a.stars || 0));
+
+                appCountEl.textContent = `${allApps.length} apps`;
+                buildFilters();
+                renderHero();
+                renderApps();
+
+            } catch (error) {
+                console.error("Load error:", error);
+                appListEl.innerHTML = `
+                        <div class="error">
+                            Failed to load apps.<br />
+                            <small>${error.message}</small><br />
+                            <button onclick="fetchApps()">Retry</button>
+                        </div>
+                    `;
+                appCountEl.textContent = "error";
+            }
+        }
+
+        function renderHero() {
+            const topApps = allApps.filter(a => a.stars > 0).slice(0, 2);
+
+            if (topApps.length === 0) {
+                heroBanner.style.display = 'none';
+                return;
+            }
+
+            heroBanner.style.display = 'flex';
+            heroTitle.textContent = 'Featured Apps';
+            heroDesc.textContent = 'Discover the most popular open source apps curated by the community.';
+            heroBadge.textContent = 'Top 2 Starred';
+
+            heroApps.innerHTML = topApps.map(app => `
+                    <a class="hero-app" href="/store/detail?package=${encodeURIComponent(app.package)}">
+                        <img class="hero-icon" src="${app.icon || ''}" alt="${app.name}"
+                            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect width=%2248%22 height=%2248%22 fill=%22%232a2a2c%22/%3E%3Ctext x=%2224%22 y=%2234%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%238e8e93%22%3E📦%3C/text%3E%3C/svg%3E'"
+                        />
+                        <div class="hero-app-info">
+                            <div class="hero-app-name">${escapeHtml(app.name)}</div>
+                            <div class="hero-app-dev">${escapeHtml(app.developer || 'Unknown')}</div>
+                            <div class="hero-app-stars">★ ${formatNumber(app.stars || 0)}</div>
+                        </div>
+                    </a>
+                `).join('');
+        }
+
+        function buildFilters() {
+            const catSet = new Set();
+            allApps.forEach(app => {
+                (app.categories || []).forEach(c => catSet.add(c));
+            });
+            const cats = Array.from(catSet).sort();
+
+            filterContainer.innerHTML =
+                `<button class="active" data-category="all" onclick="setCategory('all')">All</button>`;
+
+            cats.forEach(cat => {
+                const btn = document.createElement("button");
+                btn.dataset.category = cat;
+                btn.textContent = cat;
+                btn.onclick = () => setCategory(cat);
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function setCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll(".filters button").forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.category === category);
+            });
+            updateSectionTitle();
+            renderApps();
+        }
+
+        function filterApps() {
+            updateSectionTitle();
+            renderApps();
+        }
+
+        function updateSectionTitle() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (keyword) {
+                sectionTitle.textContent = `Results for "${keyword}"`;
+            } else if (currentCategory !== "all") {
+                sectionTitle.textContent = `${currentCategory}`;
+            } else {
+                sectionTitle.textContent = 'All Apps';
+            }
+        }
+
+        function renderApps() {
+            const keyword = searchInput.value.trim().toLowerCase();
+
+            let filtered = allApps.filter(app => {
+                const nameMatch = app.name.toLowerCase().includes(keyword);
+                const pkgMatch = app.package.toLowerCase().includes(keyword);
+                const devMatch = (app.developer || '').toLowerCase().includes(keyword);
+                return nameMatch || pkgMatch || devMatch;
+            });
+
+            if (currentCategory !== "all") {
+                filtered = filtered.filter(app =>
+                    (app.categories || []).includes(currentCategory)
+                );
+            }
+
+            resultCountEl.textContent = filtered.length ?
+                `${filtered.length} result${filtered.length > 1 ? 's' : ''}` :
+                "No matches";
+
+            if (filtered.length === 0) {
+                appListEl.innerHTML = `<div class="empty">No apps found</div>`;
+                return;
+            }
+
+            appListEl.innerHTML = filtered.map(app => `
+                    <div class="app-card">
+                        <a href="/store/detail?package=${encodeURIComponent(app.package)}">
+                            <div class="card-top">
+                                <img
+                                    class="icon"
+                                    src="${app.icon || ''}"
+                                    alt="${app.name}"
+                                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect width=%2260%22 height=%2260%22 fill=%22%23f0f0f5%22/%3E%3Ctext x=%2230%22 y=%2238%22 text-anchor=%22middle%22 font-size=%2230%22 fill=%22%238e8e93%22%3E📦%3C/text%3E%3C/svg%3E'"
+                                />
+                                <div class="card-top-right">
+                                    <div class="name">${escapeHtml(app.name)}</div>
+                                    <div class="package">${escapeHtml(app.package)}</div>
+                                    <div class="stars-row">
+                                        <span class="star-icon">★</span>
+                                        <span class="star-count">${formatNumber(app.stars || 0)}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${app.short_description ? `<div class="short-desc">${escapeHtml(app.short_description)}</div>` : ''}
+
+                            <div class="meta-row">
+                                <span>v${escapeHtml(app.latest_version || '?')}</span>
+                                <span>${app.size_mb || '?'} MB</span>
+                                <span>SDK ${app.min_sdk || '?'}</span>
+                                ${app.target_sdk ? `<span>Target ${app.target_sdk}</span>` : ''}
+                            </div>
+
+                            <div class="categories">
+                                ${(app.categories || []).map(c =>
+                                    `<span>${escapeHtml(c)}</span>`
+                                ).join("")}
+                            </div>
+
+                            <div class="developer">${escapeHtml(app.developer || 'Unknown')}</div>
+
+                            <div class="card-footer">
+                                <span class="version">${escapeHtml(app.latest_version || '')}</span>
+                                <span class="download-btn" onclick="event.stopPropagation();event.preventDefault();window.open('${app.download_url || '#'}','_blank')">
+                                    Download
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                `).join("");
+        }
+
+        function toggleLanguage() {
+            const btn = document.getElementById("langBtn");
+            if (btn.textContent.includes("EN")) {
+                btn.textContent = "Language: ZH";
+            } else {
+                btn.textContent = "Language: EN";
+            }
+        }
+
+        function toggleTheme() {
+            const btn = document.getElementById("themeBtn");
+            if (btn.textContent.includes("Light")) {
+                btn.textContent = "Theme: Dark";
+                document.body.style.background = "#1c1c1e";
+                document.body.style.color = "#f5f5f7";
+            } else {
+                btn.textContent = "Theme: Light";
+                document.body.style.background = "#f5f5f7";
+                document.body.style.color = "#1c1c1e";
+            }
+        }
+
+        fetchApps();
+    </script>
 </body>
 </html>
