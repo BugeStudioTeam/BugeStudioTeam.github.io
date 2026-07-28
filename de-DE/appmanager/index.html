@@ -1,250 +1,191 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Buge App Manager - Professionelles Android-Verwaltungstool</title>
-    <link rel="icon" href="AppManager.jpg" type="image/jpeg">
-    <link rel="apple-touch-icon" href="AppManager.jpg">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-dark: #0b1321;
-            --bg-light: #f4f9ff;
-            --text-main: #0a1e3c;
-            --accent-blue: #1e88e5;
-            --card-bg: rgba(255,255,255,0.7);
-            --nav-bg: rgba(255,255,255,0.75);
-            --border-color: rgba(30,136,229,0.2);
-            --shadow-color: rgba(0,40,100,0.15);
-            --github-green: #2e7d32;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-dark: #030c17;
-                --bg-light: #0d1a2b;
-                --text-main: #e0edff;
-                --card-bg: rgba(15,30,45,0.8);
-                --nav-bg: rgba(8,18,33,0.9);
-                --border-color: rgba(100,181,246,0.2);
-                --shadow-color: rgba(0,0,0,0.4);
-            }
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: radial-gradient(circle at 30% 10%, var(--bg-light), var(--bg-dark));
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 100vh;
-            /* Flexbox ensures the footer stays at the bottom */
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-        /* --- Animations --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.6s cubic-bezier(0.15, 0.45, 0.37, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Navigation */
-        .global-nav {
-            position: fixed;
-            top: 24px;
-            left: 5%;
-            right: 5%;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 80px;
-            padding: 10px 24px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px var(--shadow-color);
-            z-index: 100;
-        }
-        .nav-logo { display: flex; align-items: center; gap: 12px; }
-        .nav-logo img { width: 36px; height: 36px; border-radius: 10px; object-fit: cover; }
-        .nav-logo span { font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); }
-        .lang-switch { display: flex; gap: 4px; background: rgba(0,0,0,0.05); padding: 4px; border-radius: 30px; }
-        .lang-option {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            font-weight: 700;
-            transition: 0.2s;
-            color: var(--text-main);
-            text-decoration: none;
-        }
-        .lang-option.active { background: var(--accent-blue); color: white; pointer-events: none; }
-        /* Main Content wrapper */
-        main { 
-            flex: 1; /* This fills the available space to push footer down */
-            padding-top: 140px; 
-            width: 90%; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        .hero {
-            padding: 60px 0 80px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .hero-icon {
-            width: 160px;
-            height: 160px;
-            border-radius: 40px;
-            margin-bottom: 35px;
-            box-shadow: 0 25px 50px -12px var(--shadow-color);
-            object-fit: cover;
-        }
-        .hero-title {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-blue), #90caf9);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 15px;
-        }
-        .hero-sub {
-            font-size: 1.4rem;
-            opacity: 0.85;
-            max-width: 750px;
-            margin-bottom: 45px;
-        }
-        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-        .btn {
-            padding: 16px 36px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
-        }
-        .btn-primary { background: var(--github-green); color: white; }
-        .btn-secondary { background: var(--accent-blue); color: white; }
-        .btn:hover { transform: translateY(-3px); }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0 100px;
-        }
-        .feature-card {
-            background: var(--card-bg);
-            padding: 50px 40px;
-            border-radius: 40px;
-            border: 1px solid var(--border-color);
-        }
-        .feature-card h3 { font-size: 1.8rem; margin-bottom: 18px; color: var(--accent-blue); font-weight: 700; }
-        .feature-card p { font-size: 1.15rem; opacity: 0.8; }
-        /* Footer always at the bottom */
-        footer {
-            padding: 60px 0 40px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            width: 100%;
-        }
-        footer p {
-            color: #ffffff !important; 
-            font-weight: 500;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-        @media (max-width: 600px) {
-            .btn { width: 100%; justify-content: center; }
-            .global-nav { flex-direction: column; gap: 12px; border-radius: 30px; padding: 15px; }
-            main { padding-top: 180px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buge App Manager - Professionelles Android-Verwaltungstool</title>
+  
+  <link rel="icon" href="AppManager.jpg" type="image/jpeg" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-    <nav class="global-nav">
-        <div class="nav-logo">
-            <img src="AppManager.jpg" alt="Logo">
-            <span>Buge App Manager</span>
+
+  <main class="container">
+
+    <header class="hero">
+      <img src="AppManager.jpg" alt="Buge App Manager Logo" class="hero-logo" />
+      <h1>Buge App Manager</h1>
+      
+      <div class="hero-pills">
+        <span class="m3-pill">
+          <span class="material-symbols-outlined">android</span>
+          Android
+        </span>
+        <span class="m3-pill">
+          <span class="material-symbols-outlined">info</span>
+          9.58.106
+        </span>
+      </div>
+
+      <div class="wavy-line"></div>
+
+      <p class="hero-subtitle">Ein leistungsstarkes Android-Tool für App- und Berechtigungsverwaltung, unterstützt von Shizuku.</p>
+    </header>
+
+    <section>
+      <div class="action-row" style="margin-bottom: 2rem; justify-content: center;">
+        <a href="https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager9.58.106/BugeAppManager-v9.58.106-release.apk" class="btn btn-filled">
+          <span class="material-symbols-outlined">download</span>
+          Herunterladen
+        </a>
+        <a href="https://github.com/BugeStudioTeam/Buge-App-Manager" class="btn btn-outlined">
+          <svg class="custom-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+
+      <div class="m3-group">
+        <div class="card corner-top">
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">security</span>
+              <h3>Erweiterte Berechtigungen</h3>
+            </div>
+            <span class="badge">Datenschutz</span>
+          </div>
+          <p class="software-desc">Übernimm die volle Kontrolle über Android-Berechtigungen, einschließlich versteckter, und stelle sicher, dass deine Privatsphäre geschützt bleibt.</p>
         </div>
-        <div class="lang-switch">
-            <a href="https://bugestudioteam.github.io/appmanager" class="lang-option">EN</a>
-            <span class="lang-option active">DE</span>
-            <a href="https://bugestudioteam.github.io/re-RU/appmanager" class="lang-option">RU</a>
-            <a href="https://bugestudioteam.github.io/zh-CN/appmanager" class="lang-option">中文</a>
+
+        <div class="card corner-middle">
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">ac_unit</span>
+              <h3>App-Einfrieren</h3>
+            </div>
+            <span class="badge">Leistung</span>
+          </div>
+          <p class="software-desc">Deaktiviere oder "friere" Hintergrund-Apps einfach ein, um Akku zu sparen und die Systemleistung zu verbessern.</p>
         </div>
-    </nav>
-    <main>
-        <section class="hero">
-            <img src="AppManager.jpg" alt="App Icon" class="hero-icon reveal">
-            <h1 class="hero-title reveal" style="transition-delay: 0.1s;">Buge App Manager</h1>
-            <p class="hero-sub reveal" style="transition-delay: 0.2s;">Ein leistungsstarkes Android-Tool für App- und Berechtigungsverwaltung, unterstützt von Shizuku.</p>
-            
-            <div class="btn-group reveal" style="transition-delay: 0.3s;">
-                <a href="https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager9.58.105/BugeAppManager-v9.58.105-release.apk" class="btn btn-primary">
-                    <i class="fas fa-download"></i> Download v9.58.105
-                </a>
-                <a href="https://github.com/BugeStudioTeam/Buge-App-Manager" target="_blank" class="btn btn-secondary">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
+
+        <div class="card corner-bottom">
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">bolt</span>
+              <h3>Shizuku-unterstützt</h3>
             </div>
-        </section>
-        <section class="features">
-            <div class="feature-card reveal">
-                <h3>Erweiterte Rechte</h3>
-                <p>Behalten Sie die volle Kontrolle über Android-Berechtigungen, einschließlich verborgener, um Ihre Privatsphäre zu schützen.</p>
+            <span class="badge">Ohne Root</span>
+          </div>
+          <p class="software-desc">Nutze die Leistung von Shizuku für erweiterte Operationen ohne Root mit hoher Effizienz.</p>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a href="https://github.com/BugeStudioTeam" class="btn-icon" rel="noopener" aria-label="GitHub">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <a href="https://t.me/bugestudio" class="btn-icon" rel="noopener" aria-label="Telegram">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+        </a>
+
+        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" rel="noopener" aria-label="E-Mail">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">
+        © 2026 Buge Studio
+      </div>
+
+      <div class="footer-controls">
+        
+        <div class="md3-dropdown-container" id="langDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Sprache</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Deutsch</span>
             </div>
-            <div class="feature-card reveal" style="transition-delay: 0.1s;">
-                <h3>App-Einfrieren</h3>
-                <p>Deaktivieren Sie einfach Hintergrund-Apps, um Akku zu sparen und die Systemleistung zu verbessern.</p>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/appmanager/', this)">
+              <span>English</span>
+              <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="feature-card reveal" style="transition-delay: 0.2s;">
-                <h3>Shizuku-Power</h3>
-                <p>Nutzen Sie die Kraft von Shizuku für fortschrittliche Operationen ohne Root mit hoher Effizienz.</p>
+            <div class="md3-menu-item selected" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/appmanager/', this)">
+              <span>Deutsch</span>
+              <span class="material-symbols-outlined check-icon">check</span>
             </div>
-        </section>
-    </main>
-    <footer class="reveal">
-        <p>© 2026 Buge Studio</p>
-    </footer>
-    <script>
-        (function() {
-            /* --- Scroll Reveal Logic --- */
-            const fadeElements = document.querySelectorAll('.reveal');
-            function checkFade() {
-                const windowHeight = window.innerHeight;
-                fadeElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < windowHeight - 50) {
-                        el.classList.add('visible');
-                    }
-                });
-            }
-            window.addEventListener('scroll', checkFade);
-            window.addEventListener('resize', checkFade);
-            setTimeout(checkFade, 100);
-        })();
-    </script>
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/appmanager/', this)">
+              <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/appmanager/', this)">
+              <span>简体中文</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="md3-dropdown-container" id="themeDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Design</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Hell</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Hell', this)">
+              <span>Hell</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Hell (Mittel)', this)">
+              <span>Hell (Mittel)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Hell (Hoch)', this)">
+              <span>Hell (Hoch)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dunkel', this)">
+              <span>Dunkel</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dunkel (Mittel)', this)">
+              <span>Dunkel (Mittel)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dunkel (Hoch)', this)">
+              <span>Dunkel (Hoch)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
