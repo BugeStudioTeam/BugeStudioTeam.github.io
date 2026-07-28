@@ -22,37 +22,58 @@
       font-weight: 700;
     }
 
-    /* Pill Badges with distinct colors */
     .pill-zero { background-color: #e0f2fe; color: #0369a1; }
     .pill-memory { background-color: #f3e8ff; color: #6b21a8; }
     .pill-telegram { background-color: #e0f2fe; color: #0284c7; }
     .pill-web { background-color: #dcfce7; color: #15803d; }
     .pill-nl { background-color: #ffedd5; color: #c2410c; }
 
-    /* Horizontal Stat Group */
-    .stats-group {
+    /* Generic Radius Utilities for Vertical Groups */
+    .radius-single { border-radius: 20px !important; }
+    .radius-top { border-radius: 20px 20px 4px 4px !important; }
+    .radius-middle { border-radius: 4px !important; }
+    .radius-bottom { border-radius: 4px 4px 20px 20px !important; }
+
+    /* Horizontal Stat & Provider Groups */
+    .stats-group, .providers-group {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2px;
-      background-color: var(--md-sys-color-outline-variant, #e0e2ec);
-      border-radius: 28px;
-      overflow: hidden;
       margin-bottom: 3rem;
     }
-    @media (max-width: 600px) {
-      .stats-group {
-        grid-template-columns: repeat(2, 1fr);
-        border-radius: 20px;
-      }
-    }
-    .stat-card {
+    .stats-group > div, .providers-group > div {
       background-color: var(--md-sys-color-surface-container, #f0f4f9);
-      padding: 1.5rem 1rem;
-      text-align: center;
+      border-radius: 4px; /* default middle */
       transition: background-color 0.2s;
     }
-    .stat-card:hover {
+    .stats-group > div:hover, .providers-group > div:hover {
       background-color: var(--md-sys-color-surface-container-high, #e9eef6);
+    }
+    .stats-group > div:first-child, .providers-group > div:first-child {
+      border-radius: 20px 4px 4px 20px;
+    }
+    .stats-group > div:last-child, .providers-group > div:last-child {
+      border-radius: 4px 20px 20px 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .stats-group, .providers-group {
+        grid-template-columns: 1fr;
+      }
+      .stats-group > div, .providers-group > div {
+        border-radius: 4px !important;
+      }
+      .stats-group > div:first-child, .providers-group > div:first-child {
+        border-radius: 20px 20px 4px 4px !important;
+      }
+      .stats-group > div:last-child, .providers-group > div:last-child {
+        border-radius: 4px 4px 20px 20px !important;
+      }
+    }
+
+    .stat-card {
+      padding: 1.5rem 1rem;
+      text-align: center;
     }
     .stat-value {
       font-size: 2rem;
@@ -67,26 +88,28 @@
       font-weight: 500;
     }
 
-    /* Features 3x2 Grid Container Group */
+    .provider-card {
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .provider-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--md-sys-color-on-surface, #1d1b20);
+      margin-bottom: 0.35rem;
+    }
+    .provider-models {
+      font-size: 0.875rem;
+      color: var(--md-sys-color-on-surface-variant, #44474e);
+      font-weight: 500;
+    }
+
+    /* Features 3x2 Grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
-      background-color: var(--md-sys-color-outline-variant, #e0e2ec);
-      border-radius: 28px;
-      overflow: hidden;
       margin-bottom: 3rem;
-    }
-    @media (max-width: 900px) {
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 600px) {
-      .features-grid {
-        grid-template-columns: 1fr;
-        border-radius: 20px;
-      }
     }
     .feature-card {
       background-color: var(--md-sys-color-surface-container, #f0f4f9);
@@ -94,11 +117,33 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
+      border-radius: 4px; /* default middle */
       transition: background-color 0.2s;
     }
     .feature-card:hover {
       background-color: var(--md-sys-color-surface-container-high, #e9eef6);
     }
+    /* 3x2 Corners */
+    .features-grid .feature-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
+    .features-grid .feature-card:nth-child(3) { border-radius: 4px 20px 4px 4px; }
+    .features-grid .feature-card:nth-child(4) { border-radius: 4px 4px 4px 20px; }
+    .features-grid .feature-card:nth-child(6) { border-radius: 4px 4px 20px 4px; }
+
+    @media (max-width: 900px) and (min-width: 601px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid .feature-card { border-radius: 4px !important; }
+      .features-grid .feature-card:nth-child(1) { border-radius: 20px 4px 4px 4px !important; }
+      .features-grid .feature-card:nth-child(2) { border-radius: 4px 20px 4px 4px !important; }
+      .features-grid .feature-card:nth-child(5) { border-radius: 4px 4px 4px 20px !important; }
+      .features-grid .feature-card:nth-child(6) { border-radius: 4px 4px 20px 4px !important; }
+    }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .features-grid .feature-card { border-radius: 4px !important; }
+      .features-grid .feature-card:first-child { border-radius: 20px 20px 4px 4px !important; }
+      .features-grid .feature-card:last-child { border-radius: 4px 4px 20px 20px !important; }
+    }
+
     .feature-header {
       display: flex;
       align-items: center;
@@ -128,7 +173,6 @@
       background-color: #1e1e2e;
       border-radius: 20px;
       padding: 1.25rem 1.5rem;
-      margin-bottom: 1.5rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       overflow: hidden;
     }
@@ -174,96 +218,7 @@
       margin: 0;
     }
 
-    /* Commands Group (Vertical Rounded Group) */
-    .cmd-group {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      background-color: var(--md-sys-color-outline-variant, #e0e2ec);
-      border-radius: 24px;
-      overflow: hidden;
-      margin-bottom: 3rem;
-    }
-    .cmd-item {
-      background-color: var(--md-sys-color-surface-container, #f0f4f9);
-      padding: 1.15rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      transition: background-color 0.2s;
-    }
-    .cmd-item:hover {
-      background-color: var(--md-sys-color-surface-container-high, #e9eef6);
-    }
-    .cmd-text {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--md-sys-color-primary, #0061a4);
-      background-color: var(--md-sys-color-surface-container-lowest, #ffffff);
-      padding: 0.3rem 0.75rem;
-      border-radius: 8px;
-      border: 1px solid var(--md-sys-color-outline-variant, #e0e2ec);
-    }
-    .cmd-desc {
-      font-size: 0.9rem;
-      color: var(--md-sys-color-on-surface-variant, #44474e);
-      font-weight: 500;
-    }
-
-    /* AI Providers Group */
-    .providers-group {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      background-color: var(--md-sys-color-outline-variant, #e0e2ec);
-      border-radius: 28px;
-      overflow: hidden;
-      margin-bottom: 3rem;
-    }
-    @media (max-width: 768px) {
-      .providers-group {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 480px) {
-      .providers-group {
-        grid-template-columns: 1fr;
-      }
-    }
-    .provider-card {
-      background-color: var(--md-sys-color-surface-container, #f0f4f9);
-      padding: 1.5rem 1.25rem;
-      text-align: center;
-      transition: background-color 0.2s;
-    }
-    .provider-card:hover {
-      background-color: var(--md-sys-color-surface-container-high, #e9eef6);
-    }
-    .provider-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--md-sys-color-on-surface, #1d1b20);
-      margin-bottom: 0.35rem;
-    }
-    .provider-models {
-      font-size: 0.875rem;
-      color: var(--md-sys-color-on-surface-variant, #44474e);
-      font-weight: 500;
-    }
-
-    /* CTA / Testimonial Group */
-    .bottom-cta-group {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      background-color: var(--md-sys-color-outline-variant, #e0e2ec);
-      border-radius: 28px;
-      overflow: hidden;
-      margin-bottom: 3rem;
-    }
+    /* Testimonial & CTA Box */
     .testimonial-box {
       background-color: var(--md-sys-color-surface-container, #f0f4f9);
       padding: 2.25rem 2rem;
@@ -308,20 +263,6 @@
       color: var(--md-sys-color-on-surface-variant, #44474e);
       margin-top: -0.25rem;
       margin-bottom: 1.5rem;
-    }
-
-    .store-extra-links {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-    .store-extra-links a {
-      color: var(--md-sys-color-primary);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
     }
   </style>
 </head>
@@ -437,15 +378,15 @@
       </h2>
       <p class="section-subtitle">Get up and running in minutes</p>
 
-      <div class="code-box-container">
+      <div class="code-box-container radius-single" style="margin-bottom: 2rem;">
         <div class="code-box-header">
           <span class="code-box-lang">Bash / Shell</span>
-          <button class="btn-copy" onclick="copyInstallCode(this)">
+          <button class="btn-copy" onclick="copyCode(this)">
             <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
             <span>Copy</span>
           </button>
         </div>
-        <pre class="code-content" id="installCode"># Step 1: Install Dependencies
+        <pre class="code-content"># Step 1: Install Dependencies
 # Update package manager
 pkg update && pkg upgrade # For Termux
 # OR
@@ -488,35 +429,71 @@ zynox --help
 zynox --about</pre>
       </div>
 
-      <div class="cmd-group">
-        <div class="cmd-item">
-          <span class="cmd-text">zynox "create a folder called myproject"</span>
-          <span class="cmd-desc">Create a folder</span>
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 3rem;">
+        <div class="code-box-container radius-top">
+          <div class="code-box-header">
+            <span class="code-box-lang">Create a folder</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox "create a folder called myproject"</pre>
         </div>
 
-        <div class="cmd-item">
-          <span class="cmd-text">zynox "find abc.txt and read it"</span>
-          <span class="cmd-desc">Search and read file</span>
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Search and read file</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox "find abc.txt and read it"</pre>
         </div>
 
-        <div class="cmd-item">
-          <span class="cmd-text">zynox "list all files"</span>
-          <span class="cmd-desc">Execute system commands</span>
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Execute system commands</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox "list all files"</pre>
         </div>
 
-        <div class="cmd-item">
-          <span class="cmd-text">zynox --web</span>
-          <span class="cmd-desc">Start web server (port 5000)</span>
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Start web server (port 5000)</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox --web</pre>
         </div>
 
-        <div class="cmd-item">
-          <span class="cmd-text">zynox --telegram-bot TOKEN</span>
-          <span class="cmd-desc">Start Telegram bot</span>
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Start Telegram bot</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox --telegram-bot TOKEN</pre>
         </div>
 
-        <div class="cmd-item">
-          <span class="cmd-text">zynox --new-session</span>
-          <span class="cmd-desc">Start fresh conversation</span>
+        <div class="code-box-container radius-bottom">
+          <div class="code-box-header">
+            <span class="code-box-lang">Start fresh conversation</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox --new-session</pre>
         </div>
       </div>
     </section>
@@ -552,15 +529,15 @@ zynox --about</pre>
     </section>
 
     <section>
-      <div class="bottom-cta-group">
-        <div class="testimonial-box">
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 3rem;">
+        <div class="testimonial-box radius-top">
           <p class="testimonial-quote">
             "ZynoxAI completely changed how I prototype. Instead of typing mkdir, touch, and writing boilerplate, I just describe what I need and it's done."
           </p>
           <div class="testimonial-author">— Developer</div>
         </div>
 
-        <div class="cta-box">
+        <div class="cta-box radius-bottom">
           <h2>Ready to get started?</h2>
           <p>Install ZynoxAI today and let AI handle the repetitive work.</p>
           <a href="https://github.com/BugeStudioTeam/Zynox" class="btn btn-filled" target="_blank" rel="noopener noreferrer" style="margin-top: 0.5rem; padding: 0.75rem 2rem; border-radius: 24px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
@@ -595,15 +572,12 @@ zynox --about</pre>
 
   <footer>
     <div class="footer-content">
-      <div>
-        <div class="copyright">© 2026 Buge Studio</div>
-        <div class="store-extra-links">
-          <span>Powered by <a href="https://github.com/BugeStudioTeam/Zynox" target="_blank">ZynoxAI</a></span>
-          <a href="/store/">Store Home</a>
-        </div>
+      <div class="copyright">
+        © 2026 Buge Studio
       </div>
 
       <div class="footer-controls">
+        
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
@@ -612,20 +586,21 @@ zynox --about</pre>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
+
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', '', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/zynox/', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', '', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/zynox/', this)">
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', '', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/zynox/', this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', '', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/zynox/', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -640,6 +615,7 @@ zynox --about</pre>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
+
           <div class="md3-dropdown-menu">
             <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
               <span>Light</span>
@@ -667,14 +643,17 @@ zynox --about</pre>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
   <script>
-    function copyInstallCode(buttonEl) {
-      const codeText = document.getElementById('installCode').innerText;
+    function copyCode(buttonEl) {
+      const container = buttonEl.closest('.code-box-container');
+      const codeText = container.querySelector('.code-content').innerText;
+      
       navigator.clipboard.writeText(codeText).then(() => {
         const textSpan = buttonEl.querySelector('span:last-child');
         const originalText = textSpan.textContent;
