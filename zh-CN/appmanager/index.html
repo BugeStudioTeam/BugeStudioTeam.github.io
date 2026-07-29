@@ -11,6 +11,46 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <link rel="stylesheet" href="styles/style.css" />
+  <style>
+    .image-gallery-group {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      margin-bottom: 2.5rem;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+    }
+    .image-gallery-group::-webkit-scrollbar {
+      height: 6px;
+    }
+    .image-gallery-group::-webkit-scrollbar-thumb {
+      background-color: var(--md-sys-color-outline-variant, #c4c7c5);
+      border-radius: 10px;
+    }
+    .gallery-img-wrapper {
+      flex: 0 0 auto;
+      width: calc(20% - 1.6px);
+      min-width: 180px;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: var(--md-sys-color-surface-container-highest, #e3e3e3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-img-wrapper:first-child {
+      border-radius: 20px 4px 4px 20px;
+    }
+    .gallery-img-wrapper:last-child {
+      border-radius: 4px 20px 20px 4px;
+    }
+    .gallery-img-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+  </style>
 </head>
 <body>
 
@@ -48,6 +88,14 @@
           </svg>
           GitHub
         </a>
+      </div>
+
+      <div class="image-gallery-group">
+        <div class="gallery-img-wrapper"><img src="images/1.png" alt="截图 1" loading="lazy"></div>
+        <div class="gallery-img-wrapper"><img src="images/2.png" alt="截图 2" loading="lazy"></div>
+        <div class="gallery-img-wrapper"><img src="images/3.png" alt="截图 3" loading="lazy"></div>
+        <div class="gallery-img-wrapper"><img src="images/4.png" alt="截图 4" loading="lazy"></div>
+        <div class="gallery-img-wrapper"><img src="images/5.png" alt="截图 5" loading="lazy"></div>
       </div>
 
       <div class="m3-group">
@@ -98,7 +146,7 @@
           </svg>
         </a>
 
-        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" rel="noopener" aria-label="Email">
+        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
           <svg class="custom-icon" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZynoxAI - Create files and execute commands using natural language with AI</title>
+  
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <link rel="stylesheet" href="styles/style.css" />
+  <style>
+    :root {
+      --ai-blue: #0284c7;
+      --ai-blue-light: #e0f2fe;
+    }
+
+    .hero-title-ai {
+      color: #0284c7;
+      font-weight: 700;
+    }
+
+    .pill-zero { background-color: #e0f2fe; color: #0369a1; }
+    .pill-memory { background-color: #f3e8ff; color: #6b21a8; }
+    .pill-telegram { background-color: #e0f2fe; color: #0284c7; }
+    .pill-web { background-color: #dcfce7; color: #15803d; }
+    .pill-nl { background-color: #ffedd5; color: #c2410c; }
+
+    /* Generic Radius Utilities for Vertical Groups */
+    .radius-single { border-radius: 20px !important; }
+    .radius-top { border-radius: 20px 20px 4px 4px !important; }
+    .radius-middle { border-radius: 4px !important; }
+    .radius-bottom { border-radius: 4px 4px 20px 20px !important; }
+
+    /* Horizontal Stat & Provider Groups */
+    .stats-group, .providers-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-bottom: 3rem;
+    }
+    .stats-group > div, .providers-group > div {
+      background-color: var(--md-sys-color-surface-container, #f0f4f9);
+      border-radius: 4px; /* default middle */
+      transition: background-color 0.2s;
+    }
+    .stats-group > div:hover, .providers-group > div:hover {
+      background-color: var(--md-sys-color-surface-container-high, #e9eef6);
+    }
+    .stats-group > div:first-child, .providers-group > div:first-child {
+      border-radius: 20px 4px 4px 20px;
+    }
+    .stats-group > div:last-child, .providers-group > div:last-child {
+      border-radius: 4px 20px 20px 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .stats-group, .providers-group {
+        grid-template-columns: 1fr;
+      }
+      .stats-group > div, .providers-group > div {
+        border-radius: 4px !important;
+      }
+      .stats-group > div:first-child, .providers-group > div:first-child {
+        border-radius: 20px 20px 4px 4px !important;
+      }
+      .stats-group > div:last-child, .providers-group > div:last-child {
+        border-radius: 4px 4px 20px 20px !important;
+      }
+    }
+
+    .stat-card {
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--md-sys-color-primary, #0061a4);
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--md-sys-color-on-surface-variant, #44474e);
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+
+    .provider-card {
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .provider-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--md-sys-color-on-surface, #1d1b20);
+      margin-bottom: 0.35rem;
+    }
+    .provider-models {
+      font-size: 0.875rem;
+      color: var(--md-sys-color-on-surface-variant, #44474e);
+      font-weight: 500;
+    }
+
+    /* Features 3x2 Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 3rem;
+    }
+    .feature-card {
+      background-color: var(--md-sys-color-surface-container, #f0f4f9);
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      border-radius: 4px; /* default middle */
+      transition: background-color 0.2s;
+    }
+    .feature-card:hover {
+      background-color: var(--md-sys-color-surface-container-high, #e9eef6);
+    }
+    /* 3x2 Corners */
+    .features-grid .feature-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
+    .features-grid .feature-card:nth-child(3) { border-radius: 4px 20px 4px 4px; }
+    .features-grid .feature-card:nth-child(4) { border-radius: 4px 4px 4px 20px; }
+    .features-grid .feature-card:nth-child(6) { border-radius: 4px 4px 20px 4px; }
+
+    @media (max-width: 900px) and (min-width: 601px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid .feature-card { border-radius: 4px !important; }
+      .features-grid .feature-card:nth-child(1) { border-radius: 20px 4px 4px 4px !important; }
+      .features-grid .feature-card:nth-child(2) { border-radius: 4px 20px 4px 4px !important; }
+      .features-grid .feature-card:nth-child(5) { border-radius: 4px 4px 4px 20px !important; }
+      .features-grid .feature-card:nth-child(6) { border-radius: 4px 4px 20px 4px !important; }
+    }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .features-grid .feature-card { border-radius: 4px !important; }
+      .features-grid .feature-card:first-child { border-radius: 20px 20px 4px 4px !important; }
+      .features-grid .feature-card:last-child { border-radius: 4px 4px 20px 20px !important; }
+    }
+
+    .feature-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .feature-icon {
+      font-size: 28px;
+      color: var(--md-sys-color-primary, #0061a4);
+      background-color: var(--md-sys-color-primary-container, #d3e3fd);
+      padding: 10px;
+      border-radius: 14px;
+    }
+    .feature-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--md-sys-color-on-surface, #1d1b20);
+    }
+    .feature-desc {
+      font-size: 0.925rem;
+      color: var(--md-sys-color-on-surface-variant, #44474e);
+      line-height: 1.5;
+    }
+
+    /* Code Block Box */
+    .code-box-container {
+      position: relative;
+      background-color: #1e1e2e;
+      border-radius: 20px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+    .code-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .code-box-lang {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #a6adc8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #cdd6f4;
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-copy:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+    .code-content {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: #cdd6f4;
+      line-height: 1.6;
+      white-space: pre;
+      overflow-x: auto;
+      margin: 0;
+    }
+
+    /* Testimonial & CTA Box */
+    .testimonial-box {
+      background-color: var(--md-sys-color-surface-container, #f0f4f9);
+      padding: 2.25rem 2rem;
+      text-align: center;
+    }
+    .testimonial-quote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--md-sys-color-on-surface, #1d1b20);
+      line-height: 1.6;
+      max-width: 750px;
+      margin: 0 auto 1rem auto;
+    }
+    .testimonial-author {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--md-sys-color-primary, #0061a4);
+    }
+    .cta-box {
+      background-color: var(--md-sys-color-surface-container-high, #e9eef6);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .cta-box h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .cta-box p {
+      font-size: 1rem;
+      color: var(--md-sys-color-on-surface-variant, #44474e);
+      margin: 0;
+      max-width: 600px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--md-sys-color-on-surface-variant, #44474e);
+      margin-top: -0.25rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+
+    <header class="hero">
+      <img src="icon.png" alt="ZynoxAI Logo" class="hero-logo" onerror="this.style.display='none'" />
+      
+      <h1>
+        Create with <span class="hero-title-ai">AI</span>,<br>naturally.
+      </h1>
+
+      <p class="hero-subtitle" style="max-width: 720px; margin-top: 0.75rem;">
+        ZynoxAI turns natural language into files, folders, and commands. Powered by GPT, Gemini, Grok, and DeepSeek.
+      </p>
+
+      <div class="hero-pills" style="margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;">
+        <span class="m3-pill pill-zero">Zero Config</span>
+        <span class="m3-pill pill-memory">Smart Memory</span>
+        <span class="m3-pill pill-telegram">Telegram Bot</span>
+        <span class="m3-pill pill-web">Web UI</span>
+        <span class="m3-pill pill-nl">natural language</span>
+      </div>
+
+      <div class="wavy-line" style="margin-top: 2rem; margin-bottom: 2rem;"></div>
+    </header>
+
+    <section>
+      <div class="stats-group">
+        <div class="stat-card">
+          <div class="stat-value">4+</div>
+          <div class="stat-label">AI Providers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Interfaces</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Open Source</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">MIT</div>
+          <div class="stat-label">License</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <span>Features</span>
+      </h2>
+      <p class="section-subtitle">Everything you need to automate your workflow</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-header">
+            <span class="material-symbols-outlined feature-icon">translate</span>
+            <div class="feature-title">Natural Language</div>
+          </div>
+          <div class="feature-desc">Describe what you want in plain English. No complex commands to memorize.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <span class="material-symbols-outlined feature-icon">memory</span>
+            <div class="feature-title">Conversation Memory</div>
+          </div>
+          <div class="feature-desc">Remembers context across commands. Save and load sessions anytime.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <span class="material-symbols-outlined feature-icon">auto_mode</span>
+            <div class="feature-title">Smart Auto-Install</div>
+          </div>
+          <div class="feature-desc">Detects missing packages and installs them automatically</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <span class="material-symbols-outlined feature-icon">smart_toy</span>
+            <div class="feature-title">Telegram Bot</div>
+          </div>
+          <div class="feature-desc">Control ZynoxAI from anywhere via Telegram. Full remote access.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <span class="material-symbols-outlined feature-icon">dashboard</span>
+            <div class="feature-title">Web Dashboard</div>
+          </div>
+          <div class="feature-desc">Modern web interface with chat, terminal, and settings panel.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <span class="material-symbols-outlined feature-icon">code</span>
+            <div class="feature-title">Code Generation</div>
+          </div>
+          <div class="feature-desc">Generates Python, JavaScript, HTML, JSON, and more with real content.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">
+        <span class="material-symbols-outlined">rocket_launch</span>
+        <span>Quick Start</span>
+      </h2>
+      <p class="section-subtitle">Get up and running in minutes</p>
+
+      <div class="code-box-container radius-single" style="margin-bottom: 2rem;">
+        <div class="code-box-header">
+          <span class="code-box-lang">Bash / Shell</span>
+          <button class="btn-copy" onclick="copyCode(this)">
+            <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre class="code-content"># Step 1: Install Dependencies
+# Update package manager
+pkg update && pkg upgrade # For Termux
+# OR
+sudo apt update && sudo apt upgrade # For Linux
+
+# Install Python if not installed
+pkg install python # Termux
+# OR
+sudo apt install python3 # Linux
+
+# Install required Python packages
+pip install requests colorama
+
+# Step 2: Clone/Create ZynoxAI
+# Download the script
+git clone https://github.com/BugeStudioTeam/Zynox.git
+
+# Rename
+mv Zynox ZynoxAI
+cd ~/ZynoxAI
+
+# Step 3: Set Up Alias (Optional but Recommended)
+# Add alias to ~/.bashrc
+echo "alias zynox='python ~/ZynoxAI/zynox.py'" >> ~/.bashrc
+source ~/.bashrc
+
+# Or for Termux with ~/bin directory
+mkdir -p ~/bin
+ln -s ~/ZynoxAI/zynox.py ~/bin/zynox
+chmod +x ~/ZynoxAI/zynox.py
+
+# Step 4: Verify Installation
+# Should show the ZYNOX logo
+zynox
+
+# Should show help menu
+zynox --help
+
+# Should show about menu
+zynox --about</pre>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 3rem;">
+        <div class="code-box-container radius-top">
+          <div class="code-box-header">
+            <span class="code-box-lang">Create a folder</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox "create a folder called myproject"</pre>
+        </div>
+
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Search and read file</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox "find abc.txt and read it"</pre>
+        </div>
+
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Execute system commands</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox "list all files"</pre>
+        </div>
+
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Start web server (port 5000)</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox --web</pre>
+        </div>
+
+        <div class="code-box-container radius-middle">
+          <div class="code-box-header">
+            <span class="code-box-lang">Start Telegram bot</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox --telegram-bot TOKEN</pre>
+        </div>
+
+        <div class="code-box-container radius-bottom">
+          <div class="code-box-header">
+            <span class="code-box-lang">Start fresh conversation</span>
+            <button class="btn-copy" onclick="copyCode(this)">
+              <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre class="code-content">zynox --new-session</pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">
+        <span class="material-symbols-outlined">psychology</span>
+        <span>AI Providers</span>
+      </h2>
+      <p class="section-subtitle">Choose the model that works best for you</p>
+
+      <div class="providers-group">
+        <div class="provider-card">
+          <div class="provider-title">OpenAI</div>
+          <div class="provider-models">GPT-4o · GPT-3.5</div>
+        </div>
+
+        <div class="provider-card">
+          <div class="provider-title">Gemini</div>
+          <div class="provider-models">1.5 Flash · 1.5 Pro</div>
+        </div>
+
+        <div class="provider-card">
+          <div class="provider-title">Grok</div>
+          <div class="provider-models">Grok-β · Grok-2</div>
+        </div>
+
+        <div class="provider-card">
+          <div class="provider-title">DeepSeek</div>
+          <div class="provider-models">Chat · Coder</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 3rem;">
+        <div class="testimonial-box radius-top">
+          <p class="testimonial-quote">
+            "ZynoxAI completely changed how I prototype. Instead of typing mkdir, touch, and writing boilerplate, I just describe what I need and it's done."
+          </p>
+          <div class="testimonial-author">— Developer</div>
+        </div>
+
+        <div class="cta-box radius-bottom">
+          <h2>Ready to get started?</h2>
+          <p>Install ZynoxAI today and let AI handle the repetitive work.</p>
+          <a href="https://github.com/BugeStudioTeam/Zynox" class="btn btn-filled" target="_blank" rel="noopener noreferrer" style="margin-top: 0.5rem; padding: 0.75rem 2rem; border-radius: 24px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <svg class="custom-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="social-row">
+      <a href="https://github.com/BugeStudioTeam/Zynox" class="btn-icon" rel="noopener" aria-label="GitHub" target="_blank">
+        <svg class="custom-icon" viewBox="0 0 24 24">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://t.me/bugestudio" class="btn-icon" rel="noopener" aria-label="Telegram" target="_blank">
+        <svg class="custom-icon" viewBox="0 0 24 24">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+        </svg>
+      </a>
+      <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
+        <svg class="custom-icon" viewBox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">
+        © 2026 Buge Studio
+      </div>
+
+      <div class="footer-controls">
+        
+        <div class="md3-dropdown-container" id="langDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Language</span>
+              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/zynox/', this)">
+              <span>English</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/zynox/', this)">
+              <span>Deutsch</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/zynox/', this)">
+              <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/zynox/', this)">
+              <span>简体中文</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="md3-dropdown-container" id="themeDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Theme</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
+              <span>Light</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
+              <span>Light (Medium)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
+              <span>Light (High)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
+              <span>Dark</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
+              <span>Dark (Medium)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
+              <span>Dark (High)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function copyCode(buttonEl) {
+      const container = buttonEl.closest('.code-box-container');
+      const codeText = container.querySelector('.code-content').innerText;
+      
+      navigator.clipboard.writeText(codeText).then(() => {
+        const textSpan = buttonEl.querySelector('span:last-child');
+        const originalText = textSpan.textContent;
+        textSpan.textContent = 'Copied!';
+        buttonEl.style.background = '#22c55e';
+        buttonEl.style.color = '#fff';
+        
+        setTimeout(() => {
+          textSpan.textContent = originalText;
+          buttonEl.style.background = 'rgba(255, 255, 255, 0.1)';
+          buttonEl.style.color = '#cdd6f4';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy code: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
