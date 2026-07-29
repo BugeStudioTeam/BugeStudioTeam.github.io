@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="ru" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,21 +81,21 @@
       <div class="hero-pills">
         <span class="m3-pill">
           <span class="material-symbols-outlined">apps</span>
-          <span id="appCount">Loading...</span>
+          <span id="appCount">Загрузка...</span>
         </span>
       </div>
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle">Open Source App Store</p>
+      <p class="hero-subtitle">Магазин приложений с открытым исходным кодом</p>
     </header>
 
     <section id="heroBannerSection" style="display:none;">
       <h2 class="section-title">
         <span class="material-symbols-outlined">star</span>
-        <span id="heroTitle">Featured Apps</span>
+        <span id="heroTitle">Рекомендуемые приложения</span>
       </h2>
-      <p class="philosophy-text" style="margin-bottom: 1rem;" id="heroDesc">Discover the most popular open source apps curated by the community.</p>
+      <p class="philosophy-text" style="margin-bottom: 1rem;" id="heroDesc">Откройте для себя самые популярные приложения с открытым исходным кодом, отобранные сообществом.</p>
       <div class="m3-group" style="margin-bottom: 2.5rem;" id="heroApps"></div>
     </section>
 
@@ -105,23 +105,23 @@
           type="text"
           class="m3-search-input"
           id="searchInput"
-          placeholder="Search apps by name or package..."
+          placeholder="Поиск приложений по названию или пакету..."
           oninput="filterApps()"
         />
         <span class="badge" id="resultCount" style="font-size: 0.85rem; padding: 0.5rem 1rem;"></span>
       </div>
 
       <div class="filter-scroll" id="filterContainer">
-        <button class="btn btn-filled" data-category="all" onclick="setCategory('all')">All</button>
+        <button class="btn btn-filled" data-category="all" onclick="setCategory('all')">Все</button>
       </div>
 
       <h2 class="section-title">
         <span class="material-symbols-outlined">grid_view</span>
-        <span id="sectionTitle">All Apps</span>
+        <span id="sectionTitle">Все приложения</span>
       </h2>
 
       <div id="appList" class="app-grid">
-        <div style="text-align:center; padding: 2rem; color:var(--md-sys-color-on-surface-variant); width: 100%;">Loading...</div>
+        <div style="text-align:center; padding: 2rem; color:var(--md-sys-color-on-surface-variant); width: 100%;">Загрузка...</div>
       </div>
     </section>
 
@@ -150,8 +150,8 @@
       <div>
         <div class="copyright">© 2026 Buge Studio</div>
         <div class="store-extra-links">
-          <span>Powered by <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">Buge Store API</a></span>
-          <a href="/store/">Store Home</a>
+          <span>Работает на <a href="https://github.com/BugeStudioTeam/Buge-Store-API" target="_blank">Buge Store API</a></span>
+          <a href="/store/re-RU/">Главная магазина</a>
         </div>
       </div>
 
@@ -159,13 +159,13 @@
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Language</span>
-              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+              <span class="md3-dropdown-label">Язык</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Русский</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/store/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/store/', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -173,7 +173,7 @@
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/store/re-RU/', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('Русский', 'https://bugestudio.website/store/re-RU/', this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -187,34 +187,34 @@
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Theme</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+              <span class="md3-dropdown-label">Тема</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Светлая</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
-              <span>Light</span>
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Светлая', this)">
+              <span>Светлая</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
-              <span>Light (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Светлая (Средний)', this)">
+              <span>Светлая (Средний)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
-              <span>Light (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Светлая (Высокий)', this)">
+              <span>Светлая (Высокий)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
-              <span>Dark</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Тёмная', this)">
+              <span>Тёмная</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
-              <span>Dark (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Тёмная (Средний)', this)">
+              <span>Тёмная (Средний)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
-              <span>Dark (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Тёмная (Высокий)', this)">
+              <span>Тёмная (Высокий)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
           </div>
@@ -242,7 +242,7 @@
     const heroDesc = document.getElementById("heroDesc");
     const heroApps = document.getElementById("heroApps");
 
-    const LANG_PREFIX = "/store";
+    const LANG_PREFIX = "/store/re-RU";
 
     function formatNumber(num) {
         if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
@@ -310,7 +310,7 @@
 
             allApps.sort((a, b) => (b.stars || 0) - (a.stars || 0));
 
-            appCountEl.textContent = `${allApps.length} Apps`;
+            appCountEl.textContent = `${allApps.length} приложений`;
             buildFilters();
             renderHero();
             renderApps();
@@ -321,11 +321,11 @@
                     <div class="software-title" style="justify-content:center; margin-bottom:1rem;">
                         <span class="material-symbols-outlined" style="font-size:3rem; color:var(--md-sys-color-error);">error</span>
                     </div>
-                    <p class="software-desc">Failed to load apps.</p>
-                    <button class="btn btn-filled" style="margin-top:1rem;" onclick="fetchApps()">Retry</button>
+                    <p class="software-desc">Не удалось загрузить приложения.</p>
+                    <button class="btn btn-filled" style="margin-top:1rem;" onclick="fetchApps()">Повторить</button>
                 </div>
             `;
-            appCountEl.textContent = "Error";
+            appCountEl.textContent = "Ошибка";
         }
     }
 
@@ -348,7 +348,7 @@
                             <img class="app-icon" src="${app.icon || ''}" alt="${escapeHtml(app.name)}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect width=%2248%22 height=%2248%22 fill=%22%23e0e2ec%22/%3E%3Ctext x=%2224%22 y=%2232%22 text-anchor=%22middle%22 font-size=%2224%22 fill=%22%2344474e%22%3E📦%3C/text%3E%3C/svg%3E'" />
                             <div style="display:flex; flex-direction:column; gap: 0.15rem;">
                                 <h3 style="font-size: 1.15rem;">${escapeHtml(app.name)}</h3>
-                                <span style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant);">${escapeHtml(app.developer || 'Unknown')}</span>
+                                <span style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant);">${escapeHtml(app.developer || 'Неизвестный')}</span>
                             </div>
                         </div>
                         <span class="badge" style="background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);">★ ${formatNumber(app.stars || 0)}</span>
@@ -365,7 +365,7 @@
         });
         const cats = Array.from(catSet).sort();
 
-        filterContainer.innerHTML = `<button class="btn btn-filled" data-category="all" onclick="setCategory('all')" style="border-radius: 22px; height: 36px; padding: 0 1.25rem;">All</button>`;
+        filterContainer.innerHTML = `<button class="btn btn-filled" data-category="all" onclick="setCategory('all')" style="border-radius: 22px; height: 36px; padding: 0 1.25rem;">Все</button>`;
 
         cats.forEach(cat => {
             const btn = document.createElement("button");
@@ -401,11 +401,11 @@
     function updateSectionTitle() {
         const keyword = searchInput.value.trim().toLowerCase();
         if (keyword) {
-            sectionTitle.textContent = `Results for "${keyword}"`;
+            sectionTitle.textContent = `Результаты для "${keyword}"`;
         } else if (currentCategory !== "all") {
             sectionTitle.textContent = `${currentCategory}`;
         } else {
-            sectionTitle.textContent = 'All Apps';
+            sectionTitle.textContent = 'Все приложения';
         }
     }
 
@@ -425,11 +425,18 @@
             );
         }
 
-        resultCountEl.textContent = filtered.length ? `${filtered.length} result${filtered.length > 1 ? 's' : ''}` : "No matches";
+        const count = filtered.length;
+        let countText = '';
+        if (count === 0) countText = 'Нет результатов';
+        else if (count === 1) countText = '1 результат';
+        else if (count >= 2 && count <= 4) countText = `${count} результата`;
+        else countText = `${count} результатов`;
+
+        resultCountEl.textContent = count ? countText : 'Нет результатов';
         resultCountEl.style.display = filtered.length ? "inline-block" : "none";
 
         if (filtered.length === 0) {
-            appListEl.innerHTML = `<div style="width:100%; text-align:center; padding: 2rem; color:var(--md-sys-color-on-surface-variant);">No apps found</div>`;
+            appListEl.innerHTML = `<div style="width:100%; text-align:center; padding: 2rem; color:var(--md-sys-color-on-surface-variant);">Приложений не найдено</div>`;
             return;
         }
 
