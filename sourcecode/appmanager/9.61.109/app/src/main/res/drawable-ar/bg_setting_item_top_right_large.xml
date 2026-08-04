@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Copyright (C) 2026 Buge Studio -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="?attr/colorSurface" />
+    <corners
+        android:topLeftRadius="24dp"
+        android:topRightRadius="4dp"
+        android:bottomLeftRadius="4dp"
+        android:bottomRightRadius="4dp" />
+</shape>

@@ -1,0 +1,321 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Buge Studio
+
+package com.buge.appmanager.ui
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.buge.appmanager.BaseActivity
+import com.buge.appmanager.R
+import com.buge.appmanager.adapter.AppPermissionAdapter
+import com.buge.appmanager.adapter.AppPermissionItem
+import com.buge.appmanager.data.AppRepository
+import com.buge.appmanager.databinding.FragmentPermissionsBinding
+import com.buge.appmanager.model.AppInfo
+import com.buge.appmanager.shizuku.ShizukuManager
+import com.buge.appmanager.util.FontOverrideHelper
+import com.buge.appmanager.util.PreferencesManager
+import com.buge.appmanager.util.SnackbarHelper
+import com.buge.appmanager.viewmodel.PermissionsViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
+class PermissionsFragment : Fragment() {
+    private var _binding: FragmentPermissionsBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: PermissionsViewModel by viewModels()
+    private lateinit var adapter: AppPermissionAdapter
+    private var currentPermissions: List<String> = AppRepository.PERMISSION_MICROPHONE
+    private var currentPermissionLabel: String = ""
+    private var fontApplied = false
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPermissionsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        currentPermissionLabel = getString(R.string.perm_microphone)
+
+        setupBackPressedCallback()
+        setupRecyclerView()
+        setupPermissionChips()
+        setupBatchActions()
+        observeViewModel()
+        viewModel.loadAppsForPermissions(currentPermissions)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (activity is BaseActivity && !fontApplied) {
+            FontOverrideHelper.applyToActivity(activity as BaseActivity)
+            fontApplied = true
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupBackPressedCallback() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (adapter.isInSelectionMode()) {
+                    adapter.clearSelection()
+                    adapter.setSelectionMode(false)
+                    hideBatchActionBar()
+                } else {
+                    isEnabled = false
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+    }
+
+    private fun setupRecyclerView() {
+        if (!isAdded || view == null) return
+        adapter = AppPermissionAdapter(
+            onPermissionToggle = { app, permission, isGranted ->
+                handlePermissionToggle(app, permission, isGranted)
+            },
+            onSelectionChanged = { count ->
+                updateSelectionUI(count)
+            }
+        )
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
+    }
+
+    private fun setupPermissionChips() {
+        if (!isAdded || view == null) return
+        binding.permissionChipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
+            val (permissions, label) = when {
+                checkedIds.contains(R.id.chip_mic) -> Pair(AppRepository.PERMISSION_MICROPHONE, getString(R.string.perm_microphone))
+                checkedIds.contains(R.id.chip_camera) -> Pair(AppRepository.PERMISSION_CAMERA, getString(R.string.perm_camera))
+                checkedIds.contains(R.id.chip_location) -> Pair(AppRepository.PERMISSION_LOCATION, getString(R.string.perm_location))
+                checkedIds.contains(R.id.chip_contacts) -> Pair(AppRepository.PERMISSION_CONTACTS, getString(R.string.perm_contacts))
+                checkedIds.contains(R.id.chip_storage) -> Pair(AppRepository.PERMISSION_STORAGE, getString(R.string.perm_storage))
+                checkedIds.contains(R.id.chip_manage_storage) -> Pair(AppRepository.PERMISSION_MANAGE_STORAGE, getString(R.string.perm_manage_storage))
+                checkedIds.contains(R.id.chip_phone) -> Pair(AppRepository.PERMISSION_PHONE, getString(R.string.perm_phone))
+                checkedIds.contains(R.id.chip_sms) -> Pair(AppRepository.PERMISSION_SMS, getString(R.string.perm_sms))
+                checkedIds.contains(R.id.chip_calendar) -> Pair(AppRepository.PERMISSION_CALENDAR, getString(R.string.perm_calendar))
+                checkedIds.contains(R.id.chip_sensors) -> Pair(AppRepository.PERMISSION_SENSORS, getString(R.string.perm_body_sensors))
+                checkedIds.contains(R.id.chip_notifications) -> Pair(AppRepository.PERMISSION_NOTIFICATIONS, getString(R.string.perm_notifications))
+                checkedIds.contains(R.id.chip_overlay) -> Pair(AppRepository.PERMISSION_OVERLAY, getString(R.string.perm_overlay))
+                checkedIds.contains(R.id.chip_install_unknown) -> Pair(AppRepository.PERMISSION_INSTALL_UNKNOWN_APPS, getString(R.string.perm_install_unknown))
+                checkedIds.contains(R.id.chip_write_settings) -> Pair(listOf("android.permission.WRITE_SETTINGS"), getString(R.string.perm_write_settings))
+                else -> Pair(AppRepository.PERMISSION_MICROPHONE, getString(R.string.perm_microphone))
+            }
+            currentPermissions = permissions
+            currentPermissionLabel = label
+            adapter.clearSelection()
+            adapter.setSelectionMode(false)
+            hideBatchActionBar()
+            viewModel.loadAppsForPermissions(permissions)
+        }
+    }
+
+    private fun setupBatchActions() {
+        if (!isAdded || view == null) return
+
+        // Select all button
+        binding.btnSelectAll.setOnClickListener {
+            val itemCount = adapter.itemCount
+            if (itemCount > 0) {
+                adapter.selectAll()
+            }
+        }
+
+        // Clear selection button
+        binding.btnClearSelection.setOnClickListener {
+            adapter.clearSelection()
+            adapter.setSelectionMode(false)
+            hideBatchActionBar()
+        }
+
+        binding.btnBatchRevoke.setOnClickListener {
+            val selected = adapter.getSelectedItems()
+            if (selected.isEmpty()) return@setOnClickListener
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.batch_revoke)
+                .setMessage(getString(R.string.confirm_revoke, selected.size))
+                .setPositiveButton(R.string.confirm) { _, _ ->
+                    viewModel.batchRevokePermission(
+                        selected.map { Pair(it.app, it.permissionMap) },
+                        currentPermissions.first()
+                    )
+                    adapter.clearSelection()
+                    adapter.setSelectionMode(false)
+                    hideBatchActionBar()
+                }
+                .setNegativeButton(R.string.cancel, null)
+                .show()
+        }
+        binding.btnBatchGrant.setOnClickListener {
+            val selected = adapter.getSelectedItems()
+            if (selected.isEmpty()) return@setOnClickListener
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.batch_grant)
+                .setMessage(getString(R.string.confirm_grant, selected.size))
+                .setPositiveButton(R.string.confirm) { _, _ ->
+                    viewModel.batchGrantPermission(
+                        selected.map { Pair(it.app, it.permissionMap) },
+                        currentPermissions.first()
+                    )
+                    adapter.clearSelection()
+                    adapter.setSelectionMode(false)
+                    hideBatchActionBar()
+                }
+                .setNegativeButton(R.string.cancel, null)
+                .show()
+        }
+    }
+
+    private fun showBatchActionBar() {
+        if (!isAdded || view == null) return
+        if (binding.batchActionScroll.visibility != View.VISIBLE) {
+            binding.batchActionScroll.visibility = View.VISIBLE
+            binding.batchActionScroll.alpha = 0f
+            binding.batchActionScroll.scaleX = 0.8f
+            binding.batchActionScroll.scaleY = 0.8f
+            binding.batchActionScroll.animate()
+                .alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(250)
+                .setInterpolator(OvershootInterpolator())
+                .start()
+        }
+    }
+
+    private fun hideBatchActionBar() {
+        if (!isAdded || view == null) return
+        if (binding.batchActionScroll.visibility == View.VISIBLE) {
+            binding.batchActionScroll.animate()
+                .alpha(0f)
+                .scaleX(0.8f)
+                .scaleY(0.8f)
+                .setDuration(200)
+                .withEndAction {
+                    if (isAdded && view != null) {
+                        binding.batchActionScroll.visibility = View.GONE
+                    }
+                }
+                .start()
+        }
+    }
+
+    private fun handlePermissionToggle(app: AppInfo, permission: String, isGranted: Boolean) {
+        if (!isAdded || view == null) return
+        if (app.isSystemApp && !PreferencesManager.getAllowSystemOps(requireContext())) {
+            showSystemOpBlockedDialog()
+            return
+        }
+
+        val actionLabel = if (isGranted) getString(R.string.revoke_permission) else getString(R.string.grant_permission)
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(actionLabel)
+            .setMessage("${app.appName}\n${permission}")
+            .setPositiveButton(R.string.confirm) { _, _ ->
+                if (isGranted) {
+                    viewModel.revokePermission(app.packageName, permission, app.isSystemApp)
+                } else {
+                    viewModel.grantPermission(app.packageName, permission, app.isSystemApp)
+                }
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun showSystemOpBlockedDialog() {
+        if (!isAdded || view == null) return
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.system_op_blocked_title)
+            .setMessage(R.string.system_op_blocked_message)
+            .setPositiveButton(R.string.confirm, null)
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun updateSelectionUI(count: Int) {
+        if (!isAdded || view == null) return
+        if (count > 0) {
+            binding.selectedCountText.text = getString(R.string.selected_count, count)
+            adapter.setSelectionMode(true)
+            showBatchActionBar()
+        } else {
+            adapter.setSelectionMode(false)
+            hideBatchActionBar()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.appsWithPermission.observe(viewLifecycleOwner) { apps ->
+            if (!isAdded || view == null) return@observe
+            val primaryPerm = currentPermissions.firstOrNull() ?: return@observe
+            val items = apps.map { (app, permMap) ->
+                AppPermissionItem(
+                    app = app,
+                    permissionMap = permMap,
+                    primaryPermission = primaryPerm
+                )
+            }
+            adapter.submitList(items)
+            binding.toolbar.subtitle = getString(R.string.apps_count, items.size)
+
+            // Show empty state if no apps
+            val isEmpty = items.isEmpty()
+            binding.emptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
+            binding.recyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            binding.loadingOverlay.visibility = View.GONE
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (!isAdded || view == null) return@observe
+            val hasData = viewModel.appsWithPermission.value?.isNotEmpty() == true
+            if (isLoading && !hasData) {
+                binding.loadingOverlay.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.GONE
+                binding.emptyState.visibility = View.GONE
+            } else {
+                binding.loadingOverlay.visibility = View.GONE
+                if (hasData) {
+                    binding.recyclerView.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        viewModel.operationResult.observe(viewLifecycleOwner) { result ->
+            if (!isAdded || view == null) return@observe
+            result ?: return@observe
+            val msg = if (result.success) {
+                getString(R.string.operation_success)
+            } else {
+                val errorMsg = result.error.ifEmpty { "Operation failed" }
+                getString(R.string.operation_failed, errorMsg)
+            }
+            SnackbarHelper.showSnackbar(binding.root, msg)
+            viewModel.clearOperationResult()
+        }
+
+        viewModel.systemOpBlocked.observe(viewLifecycleOwner) { blocked ->
+            if (!isAdded || view == null) return@observe
+            if (blocked) {
+                showSystemOpBlockedDialog()
+                viewModel.clearSystemOpBlocked()
+            }
+        }
+    }
+}

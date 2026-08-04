@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Copyright (C) 2026 Buge Studio -->
+<resources>
+    <string name="app_name">Buge App Manager</string>
+    <string name="developer_name">Buge Team</string>
+
+    <!-- Navigation -->
+    <string name="nav_apps">Apps</string>
+    <string name="nav_activities">Activities</string>
+    <string name="nav_permissions">Permissions</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Settings Groups -->
+    <string name="settings_group_authorization">Authorization</string>
+    <string name="settings_group_appearance">Appearance</string>
+    <string name="settings_group_apps">Apps</string>
+    <string name="settings_group_advanced">Advanced</string>
+    <string name="settings_group_about">About</string>
+
+    <!-- Basic Settings -->
+    <string name="title_settings">Settings</string>
+    <string name="pref_theme">Theme</string>
+    <string name="pref_theme_light">Light</string>
+    <string name="pref_theme_dark">Dark</string>
+    <string name="pref_theme_auto">System Default</string>
+    <string name="pref_language">Language</string>
+    <string name="pref_language_auto">System Default</string>
+    <string name="pref_default_page">Default page</string>
+    <string name="pref_default_page_summary">Select which page to show when app starts</string>
+    <string name="pref_show_system_apps">Show System Apps</string>
+    <string name="pref_show_disabled_apps">Show disabled apps</string>
+    <string name="pref_show_undeclared_activities">Show undeclared activities</string>
+    <string name="pref_allow_system_ops">Allow System App Operations</string>
+    <string name="pref_allow_system_ops_summary">Allow modifying system apps (permissions, disable, uninstall)</string>
+    <string name="pref_about">About</string>
+    <string name="setting_saved">Setting saved</string>
+    <string name="pref_auto_update">Auto Update</string>
+
+    <!-- Apps Settings -->
+    <string name="pref_google_services">Google Services</string>
+    <string name="pref_google_services_summary">Enable or disable Google Mobile Services</string>
+    <string name="pref_google_services_disabled">Google Services not available on this device</string>
+
+    <!-- Shizuku Provider -->
+    <string name="pref_shizuku_provider">Shizuku Provider</string>
+    <string name="pref_shizuku_provider_summary">Customize Shizuku provider package name</string>
+    <string name="shizuku_provider_title">Shizuku Provider Package Name</string>
+    <string name="shizuku_provider_default">moe.shizuku.privileged.api</string>
+    <string name="shizuku_provider_restore_default">Restore Default</string>
+
+    <!-- Log Settings -->
+    <string name="pref_logging">Logging</string>
+    <string name="pref_logging_summary">Record user operations and errors</string>
+    <string name="log_activity_title">Operation Log</string>
+    <string name="log_settings_title">Log Settings</string>
+    <string name="log_enable">Enable Logging</string>
+    <string name="log_enable_summary">Record all user operations and system errors</string>
+    <string name="log_empty">No logs recorded yet</string>
+    <string name="log_copy">Copy</string>
+    <string name="log_cleared">Logs cleared</string>
+    <string name="log_copied">Logs copied to clipboard</string>
+
+    <!-- Default Page Dialog -->
+    <string name="default_page_title">Default start page</string>
+    <string name="default_page_apps">Apps</string>
+    <string name="default_page_permissions">Permissions</string>
+    <string name="default_page_activities">Activities</string>
+    <string name="default_page_settings">Settings</string>
+
+    <!-- About Dialog -->
+    <string name="about_desc">Buge App Manager is a powerful app management tool with Shizuku support for advanced permission and app control.</string>
+
+    <!-- About Links -->
+    <string name="website">Website</string>
+    <string name="website_desc">Visit our official website</string>
+    <string name="github">GitHub</string>
+    <string name="github_desc">Visit our GitHub repository</string>
+    <string name="telegram">Telegram</string>
+    <string name="telegram_desc">Join our Telegram channel</string>
+    <string name="check_for_update">Check for Update</string>
+    <string name="update_desc">Check for new versions on GitHub</string>
+    <string name="about_more">Show more about us</string>
+    <string name="about_more_summary">Learn more about the development team and project vision</string>
+    <string name="about">About</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+
+    <!-- About Us Activity -->
+    <string name="about_us">About Us</string>
+    <string name="about_us_title">Buge Studio Team</string>
+    <string name="about_us_description">Buge Studio Team is a passionate group of developers and designers dedicated to creating innovative and practical utility applications for the Android platform. We focus on user privacy, system control, and openness. Our goal is to provide users with transparent, efficient, and reliable tools. Buge App Manager is an open-source project, and it is our first major application. We welcome everyone to participate in its improvement and development together.</string>
+
+    <!-- GMS Disable Warning -->
+    <string name="gms_disable_warning_title">Disable Google Services?</string>
+    <string name="gms_disable_warning_message">Disabling Google Services will affect the following:\n\n• Google Play Store will stop working\n• Apps that rely on Google Play Services may crash\n• Push notifications from Google apps will stop\n• Location services may be affected\n• In-app purchases will not work\n\nAre you sure you want to disable Google Services?</string>
+
+    <!-- System Operation Blocked -->
+    <string name="system_op_blocked_title">Operation Blocked</string>
+    <string name="system_op_blocked_message">System app operations are currently disabled.\n\nYou can enable "Allow System App Operations" in Settings to perform this action.</string>
+
+    <!-- Restore -->
+    <string name="pref_restore_apps">Restore Uninstalled Apps</string>
+    <string name="pref_restore_apps_summary">View and restore previously uninstalled system apps</string>
+    <string name="title_restore_apps">Restore Apps</string>
+    <string name="restore">Restore</string>
+    <string name="no_uninstalled_apps">No uninstalled apps found</string>
+    <string name="restore_confirm">Restore %s?</string>
+    <string name="restore_success">App restored successfully</string>
+    <string name="restore_failed">Failed to restore app</string>
+
+    <!-- Shizuku -->
+    <string name="shizuku_title">Shizuku Authorization</string>
+    <string name="shizuku_desc">Shizuku is required to manage app permissions and perform advanced operations. Please authorize this app in Shizuku.</string>
+    <string name="shizuku_status_ok">Authorized and running</string>
+    <string name="shizuku_status_no_auth">Running but not authorized</string>
+    <string name="shizuku_status_not_running">Not running</string>
+    <string name="shizuku_authorized">Authorized</string>
+    <string name="shizuku_not_authorized">Not Authorized</string>
+    <string name="shizuku_not_running">Not Running</string>
+    <string name="shizuku_request_auth">Request Authorization</string>
+
+    <!-- App List -->
+    <string name="title_app_list">Installed Apps</string>
+    <string name="search_hint">Search apps…</string>
+    <string name="filter_all">All Apps</string>
+    <string name="filter_user">User Apps</string>
+    <string name="filter_system">System Apps</string>
+    <string name="filter_favorite">Favorite Apps</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_size">Size</string>
+    <string name="sort_install_date">Install Date</string>
+    <string name="apps_count">%d apps</string>
+    <string name="loading_apps">Loading apps…</string>
+    <string name="refresh">Refresh</string>
+    <string name="no_apps_found">No apps found</string>
+    <string name="share_apks">Share APKs</string>
+
+    <!-- App Detail -->
+    <string name="title_app_detail">App Details</string>
+    <string name="package_name">Package Name</string>
+    <string name="version">Version</string>
+    <string name="install_date">Install Date</string>
+    <string name="update_date">Last Updated</string>
+    <string name="app_size">App Size</string>
+    <string name="data_size">Data Size</string>
+    <string name="cache_size">Cache Size</string>
+    <string name="target_sdk">Target SDK</string>
+    <string name="min_sdk">Min SDK</string>
+    <string name="permissions_title">Permissions</string>
+    <string name="granted">Granted</string>
+    <string name="denied">Denied</string>
+    <string name="grant_permission">Grant</string>
+    <string name="revoke_permission">Revoke</string>
+    <string name="open_app">Open App</string>
+    <string name="app_info">App Info</string>
+    <string name="uninstall">Uninstall</string>
+    <string name="force_stop">Force Stop</string>
+    <string name="clear_data">Clear Data</string>
+    <string name="clear_cache">Clear Cache</string>
+    <string name="disable_app">Disable App</string>
+    <string name="enable_app">Enable App</string>
+    <string name="freeze_app">Freeze App</string>
+    <string name="unfreeze_app">Unfreeze App</string>
+
+    <!-- Storage -->
+    <string name="storage_title">Storage</string>
+    <string name="storage_app">App</string>
+    <string name="storage_data">Data</string>
+    <string name="storage_total">Total</string>
+    <string name="storage_unknown">Unknown</string>
+    <string name="installer_app">Installer App</string>
+
+    <!-- App Detail Activity Strings -->
+    <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="apk_path_not_found">APK path not found</string>
+    <string name="apk_file_not_exist">APK file does not exist</string>
+    <string name="apk_saved_to">APK saved to: %s</string>
+    <string name="export_failed">Export failed: %s</string>
+    <string name="cannot_open_google_play">Cannot open Google Play</string>
+    <string name="cannot_open_fdroid">Cannot open F-Droid</string>
+    <string name="cannot_launch_app">Cannot launch this app</string>
+    <string name="force_stop_confirm">Force stop %s?</string>
+    <string name="uninstall_confirm">Uninstall %s?</string>
+    <string name="clear_data_confirm">Clear all data for %s? This cannot be undone.</string>
+
+    <!-- Permissions List -->
+    <string name="title_permissions">Permissions Manager</string>
+    <string name="perm_microphone">Microphone</string>
+    <string name="perm_camera">Camera</string>
+    <string name="perm_location">Location</string>
+    <string name="perm_contacts">Contacts</string>
+    <string name="perm_storage">Storage</string>
+    <string name="perm_manage_storage">All Files Access</string>
+    <string name="perm_phone">Phone</string>
+    <string name="perm_sms">SMS</string>
+    <string name="perm_calendar">Calendar</string>
+    <string name="perm_body_sensors">Body Sensors</string>
+    <string name="perm_notifications">Notifications</string>
+    <string name="perm_overlay">Display Over Other Apps</string>
+    <string name="perm_install_unknown">Install Unknown Apps</string>
+    <string name="batch_revoke">Revoke Permission</string>
+    <string name="batch_grant">Grant Permission</string>
+    <string name="confirm_revoke">Revoke permission from %d app(s)?</string>
+    <string name="confirm_grant">Grant permission to %d app(s)?</string>
+    <string name="selected_count">%d selected</string>
+    <string name="open_system_settings">Open Settings</string>
+    <string name="perm_write_settings">Modify System Settings</string>
+
+    <!-- Activities -->
+    <string name="title_activities">Activity Manager</string>
+    <string name="title_activity_detail">Activity Details</string>
+    <string name="search_activity_hint">Search activities…</string>
+    <string name="launch">Launch</string>
+    <string name="back_to_apps">Back to Apps</string>
+    <string name="no_activities_found">No activities found</string>
+
+    <!-- Common -->
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="operation_success">Operation successful</string>
+    <string name="operation_failed">Operation failed: %s</string>
+    <string name="error_no_shizuku">Shizuku is not available or not authorized</string>
+    <string name="error_system_ops_disabled">System app operations are disabled. Enable "Allow System App Operations" in Settings.</string>
+    <string name="language_changed_restart">Language changed. Restart the app to apply changes.</string>
+    <string name="restart">Restart</string>
+
+    <!-- Language names -->
+    <string name="pref_language_en">English</string>
+    <string name="pref_language_zh">中文 (Simplified)</string>
+    <string name="pref_language_ja">日本語</string>
+    <string name="pref_language_ko">한국어</string>
+    <string name="pref_language_fr">Français</string>
+    <string name="pref_language_de">Deutsch</string>
+    <string name="pref_language_ru">Русский</string>
+    <string name="pref_language_ar">العربية</string>
+    <string name="pref_language_pt">Português</string>
+    <string name="pref_language_es">Español</string>
+    
+    <string name="restart_required">Restart Required</string>
+    <string name="restart_required_message">The default start page has been changed. Restart the app for the change to take effect.</string>
+    <string name="restart_now">Restart Now</string>
+    <string name="later">Later</string>
+    
+    <!-- Update Checker -->
+    <string name="update_available">Update Available</string>
+    <string name="download">Download</string>
+    <string name="no_update_title">No Update Available</string>
+    <string name="no_update_message">You are already using the latest version.</string>
+    <string name="update_check_failed">Update Check Failed</string>
+    <string name="update_check_failed_message">Failed to check for updates. Please check your internet connection.</string>
+    <string name="checking_for_update">Checking for update...</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="ok">OK</string>
+    <string name="ignore">Ignore</string>
+    
+    <!-- Shortcuts -->
+    <string name="shortcut_app_manager_long">Open Buge App Manager</string>
+    
+    <string name="appearance_settings">Appearance Settings</string>
+    <string name="theme_mode">Theme Mode</string>
+    <string name="color_theme">Color Theme</string>
+    <string name="color_default">Default (Blue)</string>
+    <string name="color_red">Red</string>
+    <string name="color_green">Green</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="more_options">More Options</string>
+    <string name="more_options_summary">Customize theme and colors</string>
+    <string name="theme_change_restart_message">Theme has been changed. Restart the app to apply changes.</string>
+    <string name="theme_group">Theme</string>
+    <string name="hide_nav_labels">Hide navigation labels</string>
+    <string name="hide_nav_labels_summary">Hide titles of unselected navigation items, show only selected one</string>
+
+    <!-- Custom Labels -->
+    <string name="pref_custom_labels">Custom Labels</string>
+    <string name="pref_custom_labels_summary">Create and manage custom app labels</string>
+    <string name="title_custom_labels">Custom Labels</string>
+    <string name="create_label">Create Label</string>
+    <string name="label_name">Label Name</string>
+    <string name="label_name_hint">Enter label name</string>
+    <string name="create_new_label">Create New Label</string>
+    <string name="no_labels_created">No labels created yet</string>
+    <string name="tap_to_create">Tap + to create your first label</string>
+    <string name="delete_label_confirm">Delete "%s"?</string>
+    <string name="delete_label">Delete Label</string>
+    <string name="select_apps_for_label">Select apps for "%s"</string>
+    <string name="label_created">Label created</string>
+    <string name="label_updated">Label updated</string>
+    <string name="label_deleted">Label deleted</string>
+    <string name="filter_label">Label: %s</string>
+
+    <!-- Update Options -->
+    <string name="pref_update_options">Update Options</string>
+    <string name="pref_update_options_summary">Configure update download and installation method</string>
+    <string name="title_update_options">Update Options</string>
+    <string name="update_method_browser">Open in Browser</string>
+    <string name="update_method_silent">Silent Install (Shizuku)</string>
+    <string name="installer_name">Installer Name</string>
+    <string name="installer_name_hint">Enter installer name (e.g. BugeAppManager)</string>
+    <string name="update_downloading">Downloading update...</string>
+    <string name="update_download_failed">Download failed</string>
+    <string name="update_installing">Installing update...</string>
+    <string name="update_install_success">Update installed successfully</string>
+    <string name="update_install_failed">Installation failed</string>
+    <string name="update_already_latest">You are already using the latest version</string>
+    <string name="checking_for_update_dialog">Checking for update...</string>
+    <string name="update_download_complete">Download complete</string>
+    <string name="save">Save</string>
+
+    <!-- Optional Permissions -->
+    <string name="pref_optional_permissions">Optional Permissions</string>
+    <string name="pref_optional_permissions_summary">Grant optional permissions for additional features</string>
+    <string name="title_optional_permissions">Optional Permissions</string>
+    <string name="pref_storage_permission">Storage Permission</string>
+    <string name="pref_storage_permission_summary">Includes READ_EXTERNAL_STORAGE and WRITE_EXTERNAL_STORAGE for APK export and storage functions</string>
+    <string name="storage_permission_required">Required for APK export and storage functions</string>
+    <string name="storage_permission_grant">Grant Storage Permission</string>
+    <string name="perm_read_external_storage">Read External Storage</string>
+    <string name="perm_read_external_storage_desc">Allows app to read files from external storage for APK export and sharing</string>
+    <string name="perm_write_external_storage">Write External Storage</string>
+    <string name="perm_write_external_storage_desc">Allows app to write files to external storage for APK export and sharing</string>
+    <string name="optional_perm_granted">Granted</string>
+    <string name="optional_perm_denied">Denied</string>
+    <string name="optional_perm_grant">Grant</string>
+    
+</resources>

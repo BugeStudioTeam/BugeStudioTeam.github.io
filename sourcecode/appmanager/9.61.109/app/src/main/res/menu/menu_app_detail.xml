@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Copyright (C) 2026 Buge Studio -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_favorite"
+        android:icon="@drawable/ic_favorite"
+        android:title="Favorite"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_share_apk"
+        android:title="Share APK"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_export_apk"
+        android:title="Export APK"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_export_info"
+        android:title="Export App Info"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_google_play"
+        android:title="View on Google Play Store"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_f_droid"
+        android:title="View on F-Droid"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_grant_all_permissions"
+        android:title="Grant All Permissions"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_revoke_all_permissions"
+        android:title="Revoke All Permissions"
+        app:showAsAction="never" />
+</menu>

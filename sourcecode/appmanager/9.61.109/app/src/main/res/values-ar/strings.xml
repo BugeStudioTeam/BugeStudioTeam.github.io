@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Copyright (C) 2026 Buge Studio -->
+<resources>
+    <string name="app_name">مدير تطبيقات Buge</string>
+    <string name="developer_name">فريق Buge</string>
+
+    <!-- Navigation -->
+    <string name="nav_apps">التطبيقات</string>
+    <string name="nav_activities">الأنشطة</string>
+    <string name="nav_permissions">الأذونات</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Settings Groups -->
+    <string name="settings_group_authorization">التفويض</string>
+    <string name="settings_group_appearance">المظهر</string>
+    <string name="settings_group_apps">التطبيقات</string>
+    <string name="settings_group_advanced">متقدم</string>
+    <string name="settings_group_about">حول</string>
+
+    <!-- Basic Settings -->
+    <string name="title_settings">الإعدادات</string>
+    <string name="pref_theme">المظهر</string>
+    <string name="pref_theme_light">فاتح</string>
+    <string name="pref_theme_dark">داكن</string>
+    <string name="pref_theme_auto">افتراضي النظام</string>
+    <string name="pref_language">اللغة</string>
+    <string name="pref_language_auto">افتراضي النظام</string>
+    <string name="pref_default_page">الصفحة الافتراضية</string>
+    <string name="pref_default_page_summary">اختر الصفحة التي تظهر عند بدء التشغيل</string>
+    <string name="pref_show_system_apps">إظهار تطبيقات النظام</string>
+    <string name="pref_show_disabled_apps">إظهار التطبيقات المعطلة</string>
+    <string name="pref_show_undeclared_activities">إظهار الأنشطة غير المصرح بها</string>
+    <string name="pref_allow_system_ops">السماح بعمليات تطبيقات النظام</string>
+    <string name="pref_allow_system_ops_summary">السماح بتعديل تطبيقات النظام (الأذونات، التعطيل، الإزالة)</string>
+    <string name="pref_about">حول</string>
+    <string name="setting_saved">تم حفظ الإعداد</string>
+    <string name="pref_auto_update">تحديث تلقائي</string>
+
+    <!-- Apps Settings -->
+    <string name="pref_google_services">خدمات Google</string>
+    <string name="pref_google_services_summary">تمكين أو تعطيل خدمات Google Mobile</string>
+    <string name="pref_google_services_disabled">خدمات Google غير متوفرة على هذا الجهاز</string>
+
+    <!-- Shizuku Provider -->
+    <string name="pref_shizuku_provider">موفر Shizuku</string>
+    <string name="pref_shizuku_provider_summary">تخصيص اسم حزمة موفر Shizuku</string>
+    <string name="shizuku_provider_title">اسم حزمة موفر Shizuku</string>
+    <string name="shizuku_provider_default">moe.shizuku.privileged.api</string>
+    <string name="shizuku_provider_restore_default">استعادة الافتراضي</string>
+
+    <!-- Log Settings -->
+    <string name="pref_logging">السجلات</string>
+    <string name="pref_logging_summary">تسجيل عمليات المستخدم والأخطاء</string>
+    <string name="log_activity_title">سجل العمليات</string>
+    <string name="log_settings_title">إعدادات السجل</string>
+    <string name="log_enable">تمكين التسجيل</string>
+    <string name="log_enable_summary">تسجيل جميع عمليات المستخدم وأخطاء النظام</string>
+    <string name="log_empty">لم يتم تسجيل سجلات بعد</string>
+    <string name="log_copy">نسخ</string>
+    <string name="log_cleared">تم مسح السجلات</string>
+    <string name="log_copied">تم نسخ السجلات إلى الحافظة</string>
+
+    <!-- Default Page Dialog -->
+    <string name="default_page_title">صفحة البدء الافتراضية</string>
+    <string name="default_page_apps">التطبيقات</string>
+    <string name="default_page_permissions">الأذونات</string>
+    <string name="default_page_activities">الأنشطة</string>
+    <string name="default_page_settings">الإعدادات</string>
+
+    <!-- About Dialog -->
+    <string name="about_desc">مدير تطبيقات Buge هو أداة قوية لإدارة التطبيقات مع دعم Shizuku للتحكم المتقدم في الأذونات والتطبيقات.</string>
+
+    <!-- About Links -->
+    <string name="website">الموقع الإلكتروني</string>
+    <string name="website_desc">قم بزيارة موقعنا الرسمي</string>
+    <string name="github">GitHub</string>
+    <string name="github_desc">قم بزيارة مستودع GitHub الخاص بنا</string>
+    <string name="telegram">تيليجرام</string>
+    <string name="telegram_desc">انضم إلى قناتنا على تيليجرام</string>
+    <string name="check_for_update">التحقق من التحديث</string>
+    <string name="update_desc">التحقق من الإصدارات الجديدة على GitHub</string>
+    <string name="about_more">اعرف المزيد عنا</string>
+    <string name="about_more_summary">تعرف على فريق التطوير ورؤية المشروع</string>
+    <string name="about">حول</string>
+    <string name="close">إغلاق</string>
+    <string name="open">فتح</string>
+
+    <!-- About Us Activity -->
+    <string name="about_us">من نحن</string>
+    <string name="about_us_title">فريق Buge Studio</string>
+    <string name="about_us_description">فريق Buge Studio هو مجموعة شغوفة من المطورين والمصممين المكرسين لإنشاء تطبيقات أدوات عملية مبتكرة لنظام Android. نحن نركز على خصوصية المستخدم والتحكم في النظام والانفتاح. هدفنا هو توفير أدوات شفافة وفعالة وموثوقة للمستخدمين. مدير تطبيقات Buge هو مشروع مفتوح المصدر، وهو أول تطبيق رئيسي لدينا. نرحب بالجميع للمشاركة في تحسينه وتطويره معًا.</string>
+
+    <!-- GMS Disable Warning -->
+    <string name="gms_disable_warning_title">تعطيل خدمات Google؟</string>
+    <string name="gms_disable_warning_message">سيؤدي تعطيل خدمات Google إلى التأثير على ما يلي:\n\n• سيتوقف متجر Google Play عن العمل\n• قد تتعطل التطبيقات التي تعتمد على خدمات Google Play\n• ستتوقف إشعارات تطبيقات Google\n• قد تتأثر خدمات الموقع\n• لن تعمل عمليات الشراء داخل التطبيق\n\nهل أنت متأكد من رغبتك في تعطيل خدمات Google؟</string>
+
+    <!-- System Operation Blocked -->
+    <string name="system_op_blocked_title">العملية محظورة</string>
+    <string name="system_op_blocked_message">عمليات تطبيقات النظام معطلة حالياً.\n\nيمكنك تمكين "السماح بعمليات تطبيقات النظام" في الإعدادات لتنفيذ هذا الإجراء.</string>
+
+    <!-- Restore -->
+    <string name="pref_restore_apps">استعادة التطبيقات المحذوفة</string>
+    <string name="pref_restore_apps_summary">عرض واستعادة تطبيقات النظام المحذوفة سابقًا</string>
+    <string name="title_restore_apps">استعادة التطبيقات</string>
+    <string name="restore">استعادة</string>
+    <string name="no_uninstalled_apps">لم يتم العثور على تطبيقات محذوفة</string>
+    <string name="restore_confirm">هل تريد استعادة %s؟</string>
+    <string name="restore_success">تم استعادة التطبيق بنجاح</string>
+    <string name="restore_failed">فشل استعادة التطبيق</string>
+
+    <!-- Shizuku -->
+    <string name="shizuku_title">تفويض Shizuku</string>
+    <string name="shizuku_desc">Shizuku مطلوب لإدارة أذونات التطبيقات وتنفيذ العمليات المتقدمة. يرجى تفويض هذا التطبيق في Shizuku.</string>
+    <string name="shizuku_status_ok">تم التفويض ويعمل</string>
+    <string name="shizuku_status_no_auth">يعمل ولكن لم يتم التفويض</string>
+    <string name="shizuku_status_not_running">لا يعمل</string>
+    <string name="shizuku_authorized">تم التفويض</string>
+    <string name="shizuku_not_authorized">لم يتم التفويض</string>
+    <string name="shizuku_not_running">لا يعمل</string>
+    <string name="shizuku_request_auth">طلب التفويض</string>
+
+    <!-- App List -->
+    <string name="title_app_list">التطبيقات المثبتة</string>
+    <string name="search_hint">ابحث عن التطبيقات…</string>
+    <string name="filter_all">جميع التطبيقات</string>
+    <string name="filter_user">تطبيقات المستخدم</string>
+    <string name="filter_system">تطبيقات النظام</string>
+    <string name="filter_favorite">التطبيقات المفضلة</string>
+    <string name="sort_name">الاسم</string>
+    <string name="sort_size">الحجم</string>
+    <string name="sort_install_date">تاريخ التثبيت</string>
+    <string name="apps_count">%d تطبيق</string>
+    <string name="loading_apps">جاري تحميل التطبيقات…</string>
+    <string name="refresh">تحديث</string>
+    <string name="no_apps_found">لم يتم العثور على تطبيقات</string>
+    <string name="share_apks">مشاركة ملفات APK</string>
+
+    <!-- App Detail -->
+    <string name="title_app_detail">تفاصيل التطبيق</string>
+    <string name="package_name">اسم الحزمة</string>
+    <string name="version">الإصدار</string>
+    <string name="install_date">تاريخ التثبيت</string>
+    <string name="update_date">آخر تحديث</string>
+    <string name="app_size">حجم التطبيق</string>
+    <string name="data_size">حجم البيانات</string>
+    <string name="cache_size">حجم ذاكرة التخزين المؤقت</string>
+    <string name="target_sdk">SDK الهدف</string>
+    <string name="min_sdk">الحد الأدنى لـ SDK</string>
+    <string name="permissions_title">الأذونات</string>
+    <string name="granted">تم منحه</string>
+    <string name="denied">مرفوض</string>
+    <string name="grant_permission">منح</string>
+    <string name="revoke_permission">سحب</string>
+    <string name="open_app">فتح التطبيق</string>
+    <string name="app_info">معلومات التطبيق</string>
+    <string name="uninstall">إزالة التثبيت</string>
+    <string name="force_stop">إيقاف إجباري</string>
+    <string name="clear_data">مسح البيانات</string>
+    <string name="clear_cache">مسح ذاكرة التخزين المؤقت</string>
+    <string name="disable_app">تعطيل التطبيق</string>
+    <string name="enable_app">تمكين التطبيق</string>
+    <string name="freeze_app">تجميد التطبيق</string>
+    <string name="unfreeze_app">إلغاء تجميد التطبيق</string>
+
+    <!-- Storage -->
+    <string name="storage_title">التخزين</string>
+    <string name="storage_app">التطبيق</string>
+    <string name="storage_data">البيانات</string>
+    <string name="storage_total">المجموع</string>
+    <string name="storage_unknown">غير معروف</string>
+    <string name="installer_app">تطبيق المثبت</string>
+
+    <!-- App Detail Activity Strings -->
+    <string name="removed_from_favorites">تمت الإزالة من المفضلة</string>
+    <string name="added_to_favorites">تمت الإضافة إلى المفضلة</string>
+    <string name="apk_path_not_found">لم يتم العثور على مسار APK</string>
+    <string name="apk_file_not_exist">ملف APK غير موجود</string>
+    <string name="apk_saved_to">تم حفظ APK في: %s</string>
+    <string name="export_failed">فشل التصدير: %s</string>
+    <string name="cannot_open_google_play">لا يمكن فتح Google Play</string>
+    <string name="cannot_open_fdroid">لا يمكن فتح F-Droid</string>
+    <string name="cannot_launch_app">لا يمكن تشغيل هذا التطبيق</string>
+    <string name="force_stop_confirm">هل تريد إيقاف %s إجباريًا؟</string>
+    <string name="uninstall_confirm">هل تريد إزالة تثبيت %s؟</string>
+    <string name="clear_data_confirm">هل تريد مسح جميع بيانات %s؟ لا يمكن التراجع عن هذا الإجراء.</string>
+
+    <!-- Permissions List -->
+    <string name="title_permissions">مدير الأذونات</string>
+    <string name="perm_microphone">الميكروفون</string>
+    <string name="perm_camera">الكاميرا</string>
+    <string name="perm_location">الموقع</string>
+    <string name="perm_contacts">جهات الاتصال</string>
+    <string name="perm_storage">التخزين</string>
+    <string name="perm_manage_storage">الوصول إلى جميع الملفات</string>
+    <string name="perm_phone">الهاتف</string>
+    <string name="perm_sms">الرسائل النصية</string>
+    <string name="perm_calendar">التقويم</string>
+    <string name="perm_body_sensors">مستشعرات الجسم</string>
+    <string name="perm_notifications">الإشعارات</string>
+    <string name="perm_overlay">العرض فوق التطبيقات الأخرى</string>
+    <string name="perm_install_unknown">تثبيت تطبيقات غير معروفة</string>
+    <string name="batch_revoke">سحب الإذن</string>
+    <string name="batch_grant">منح الإذن</string>
+    <string name="confirm_revoke">سحب الإذن من %d تطبيق؟</string>
+    <string name="confirm_grant">منح الإذن لـ %d تطبيق؟</string>
+    <string name="selected_count">%d محدد</string>
+    <string name="open_system_settings">فتح إعدادات النظام</string>
+    <string name="perm_write_settings">تعديل إعدادات النظام</string>
+
+    <!-- Activities -->
+    <string name="title_activities">مدير الأنشطة</string>
+    <string name="title_activity_detail">تفاصيل النشاط</string>
+    <string name="search_activity_hint">ابحث عن الأنشطة…</string>
+    <string name="launch">تشغيل</string>
+    <string name="back_to_apps">العودة إلى التطبيقات</string>
+    <string name="no_activities_found">لم يتم العثور على أنشطة</string>
+
+    <!-- Common -->
+    <string name="confirm">تأكيد</string>
+    <string name="cancel">إلغاء</string>
+    <string name="operation_success">تمت العملية بنجاح</string>
+    <string name="operation_failed">فشلت العملية: %s</string>
+    <string name="error_no_shizuku">Shizuku غير متوفر أو لم يتم تفويضه</string>
+    <string name="error_system_ops_disabled">عمليات تطبيقات النظام معطلة. قم بتمكين "السماح بعمليات تطبيقات النظام" في الإعدادات.</string>
+    <string name="language_changed_restart">تم تغيير اللغة. أعد تشغيل التطبيق لتطبيق التغييرات.</string>
+    <string name="restart">إعادة التشغيل</string>
+
+    <!-- Language names -->
+    <string name="pref_language_en">الإنجليزية</string>
+    <string name="pref_language_zh">الصينية (المبسطة)</string>
+    <string name="pref_language_ja">اليابانية</string>
+    <string name="pref_language_ko">الكورية</string>
+    <string name="pref_language_fr">الفرنسية</string>
+    <string name="pref_language_de">الألمانية</string>
+    <string name="pref_language_ru">الروسية</string>
+    <string name="pref_language_ar">العربية</string>
+    <string name="pref_language_pt">البرتغالية</string>
+    <string name="pref_language_es">الإسبانية</string>
+    
+    <string name="restart_required">إعادة التشغيل مطلوبة</string>
+    <string name="restart_required_message">تم تغيير صفحة البدء الافتراضية. أعد تشغيل التطبيق لتطبيق التغيير.</string>
+    <string name="restart_now">إعادة التشغيل الآن</string>
+    <string name="later">لاحقاً</string>
+    
+    <!-- Update Checker -->
+    <string name="update_available">يتوفر تحديث</string>
+    <string name="download">تحميل</string>
+    <string name="no_update_title">لا يوجد تحديث</string>
+    <string name="no_update_message">أنت تستخدم بالفعل أحدث إصدار.</string>
+    <string name="update_check_failed">فشل التحقق من التحديث</string>
+    <string name="update_check_failed_message">فشل التحقق من التحديث. يرجى التحقق من اتصال الإنترنت.</string>
+    <string name="checking_for_update">جاري التحقق من التحديث…</string>
+    <string name="please_wait">يرجى الانتظار…</string>
+    <string name="ok">موافق</string>
+    <string name="ignore">تجاهل</string>
+    
+    <!-- Shortcuts -->
+    <string name="shortcut_app_manager_long">فتح مدير تطبيقات Buge</string>
+    
+    <string name="appearance_settings">إعدادات المظهر</string>
+    <string name="theme_mode">وضع المظهر</string>
+    <string name="color_theme">لون المظهر</string>
+    <string name="color_default">افتراضي (أزرق)</string>
+    <string name="color_red">أحمر</string>
+    <string name="color_green">أخضر</string>
+    <string name="color_yellow">أصفر</string>
+    <string name="more_options">خيارات إضافية</string>
+    <string name="more_options_summary">تخصيص السمة والألوان</string>
+    <string name="theme_change_restart_message">تم تغيير السمة. أعد تشغيل التطبيق لتطبيق التغييرات.</string>
+    <string name="theme_group">السمة</string>
+    <string name="hide_nav_labels">إخفاء تسميات التنقل</string>
+    <string name="hide_nav_labels_summary">إخفاء عناوين عناصر التنقل غير المحددة، وإظهار العنصر المحدد فقط</string>
+
+    <!-- Custom Labels -->
+    <string name="pref_custom_labels">التصنيفات المخصصة</string>
+    <string name="pref_custom_labels_summary">إنشاء وإدارة تصنيفات التطبيقات المخصصة</string>
+    <string name="title_custom_labels">التصنيفات المخصصة</string>
+    <string name="create_label">إنشاء تصنيف</string>
+    <string name="label_name">اسم التصنيف</string>
+    <string name="label_name_hint">أدخل اسم التصنيف</string>
+    <string name="create_new_label">إنشاء تصنيف جديد</string>
+    <string name="no_labels_created">لم يتم إنشاء أي تصنيفات بعد</string>
+    <string name="tap_to_create">انقر على + لإنشاء أول تصنيف لك</string>
+    <string name="delete_label_confirm">حذف "%s"؟</string>
+    <string name="delete_label">حذف التصنيف</string>
+    <string name="select_apps_for_label">اختر التطبيقات لـ "%s"</string>
+    <string name="label_created">تم إنشاء التصنيف</string>
+    <string name="label_updated">تم تحديث التصنيف</string>
+    <string name="label_deleted">تم حذف التصنيف</string>
+    <string name="filter_label">التصنيف: %s</string>
+
+    <!-- Update Options -->
+    <string name="pref_update_options">خيارات التحديث</string>
+    <string name="pref_update_options_summary">تكوين طريقة تنزيل وتثبيت التحديثات</string>
+    <string name="title_update_options">خيارات التحديث</string>
+    <string name="update_method_browser">فتح في المتصفح</string>
+    <string name="update_method_silent">تثبيت صامت (Shizuku)</string>
+    <string name="installer_name">اسم المثبت</string>
+    <string name="installer_name_hint">أدخل اسم المثبت (مثال: BugeAppManager)</string>
+    <string name="update_downloading">جاري تنزيل التحديث…</string>
+    <string name="update_download_failed">فشل التنزيل</string>
+    <string name="update_installing">جاري تثبيت التحديث…</string>
+    <string name="update_install_success">تم تثبيت التحديث بنجاح</string>
+    <string name="update_install_failed">فشل التثبيت</string>
+    <string name="update_already_latest">أنت تستخدم بالفعل أحدث إصدار</string>
+    <string name="checking_for_update_dialog">جاري التحقق من التحديث…</string>
+    <string name="update_download_complete">اكتمل التنزيل</string>
+    <string name="save">حفظ</string>
+
+    <!-- Optional Permissions -->
+    <string name="pref_optional_permissions">الأذونات الاختيارية</string>
+    <string name="pref_optional_permissions_summary">منح أذونات اختيارية لميزات إضافية</string>
+    <string name="title_optional_permissions">الأذونات الاختيارية</string>
+    <string name="pref_storage_permission">إذن التخزين</string>
+    <string name="pref_storage_permission_summary">يتضمن READ_EXTERNAL_STORAGE و WRITE_EXTERNAL_STORAGE لتصدير APK ووظائف التخزين</string>
+    <string name="storage_permission_required">مطلوب لتصدير APK ووظائف التخزين</string>
+    <string name="storage_permission_grant">منح إذن التخزين</string>
+    <string name="perm_read_external_storage">قراءة التخزين الخارجي</string>
+    <string name="perm_read_external_storage_desc">يسمح للتطبيق بقراءة الملفات من التخزين الخارجي لتصدير ومشاركة APK</string>
+    <string name="perm_write_external_storage">كتابة التخزين الخارجي</string>
+    <string name="perm_write_external_storage_desc">يسمح للتطبيق بكتابة الملفات إلى التخزين الخارجي لتصدير ومشاركة APK</string>
+    <string name="optional_perm_granted">تم منحه</string>
+    <string name="optional_perm_denied">مرفوض</string>
+    <string name="optional_perm_grant">منح</string>
+    
+</resources>

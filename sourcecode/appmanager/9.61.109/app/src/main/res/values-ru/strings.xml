@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Copyright (C) 2026 Buge Studio -->
+<resources>
+    <string name="app_name">Диспетчер приложений Buge</string>
+    <string name="developer_name">Команда Buge</string>
+
+    <!-- Navigation -->
+    <string name="nav_apps">Приложения</string>
+    <string name="nav_activities">Активности</string>
+    <string name="nav_permissions">Разрешения</string>
+    <string name="nav_settings">Параметры</string>
+
+    <!-- Settings Groups -->
+    <string name="settings_group_authorization">Авторизация</string>
+    <string name="settings_group_appearance">Внешний вид</string>
+    <string name="settings_group_apps">Приложения</string>
+    <string name="settings_group_advanced">Расширенные</string>
+    <string name="settings_group_about">О программе</string>
+
+    <!-- Basic Settings -->
+    <string name="title_settings">Параметры</string>
+    <string name="pref_theme">Тема</string>
+    <string name="pref_theme_light">Светлая</string>
+    <string name="pref_theme_dark">Тёмная</string>
+    <string name="pref_theme_auto">Системная</string>
+    <string name="pref_language">Язык</string>
+    <string name="pref_language_auto">Системный</string>
+    <string name="pref_default_page">Страница по умолчанию</string>
+    <string name="pref_default_page_summary">Выберите страницу для отображения при запуске</string>
+    <string name="pref_show_system_apps">Показывать системные приложения</string>
+    <string name="pref_show_disabled_apps">Показывать отключенные приложения</string>
+    <string name="pref_show_undeclared_activities">Показывать необъявленные активности</string>
+    <string name="pref_allow_system_ops">Разрешить операции с системными приложениями</string>
+    <string name="pref_allow_system_ops_summary">Разрешить изменение системных приложений (разрешения, отключение, удаление)</string>
+    <string name="pref_about">О программе</string>
+    <string name="setting_saved">Параметр сохранен</string>
+    <string name="pref_auto_update">Автообновление</string>
+
+    <!-- Apps Settings -->
+    <string name="pref_google_services">Сервисы Google</string>
+    <string name="pref_google_services_summary">Включить или отключить сервисы Google Mobile</string>
+    <string name="pref_google_services_disabled">Сервисы Google недоступны на этом устройстве</string>
+
+    <!-- Shizuku Provider -->
+    <string name="pref_shizuku_provider">Провайдер Shizuku</string>
+    <string name="pref_shizuku_provider_summary">Настроить имя пакета провайдера Shizuku</string>
+    <string name="shizuku_provider_title">Имя пакета провайдера Shizuku</string>
+    <string name="shizuku_provider_default">moe.shizuku.privileged.api</string>
+    <string name="shizuku_provider_restore_default">Восстановить по умолчанию</string>
+
+    <!-- Log Settings -->
+    <string name="pref_logging">Журналирование</string>
+    <string name="pref_logging_summary">Записывать операции пользователя и ошибки</string>
+    <string name="log_activity_title">Журнал операций</string>
+    <string name="log_settings_title">Настройки журнала</string>
+    <string name="log_enable">Включить журналирование</string>
+    <string name="log_enable_summary">Записывать все операции пользователя и системные ошибки</string>
+    <string name="log_empty">Журнал пока не записан</string>
+    <string name="log_copy">Копировать</string>
+    <string name="log_cleared">Журнал очищен</string>
+    <string name="log_copied">Журнал скопирован в буфер обмена</string>
+
+    <!-- Default Page Dialog -->
+    <string name="default_page_title">Стартовая страница по умолчанию</string>
+    <string name="default_page_apps">Приложения</string>
+    <string name="default_page_permissions">Разрешения</string>
+    <string name="default_page_activities">Активности</string>
+    <string name="default_page_settings">Настройки</string>
+
+    <!-- About Dialog -->
+    <string name="about_desc">Диспетчер приложений Buge — это мощный инструмент управления приложениями с поддержкой Shizuku для расширенного контроля разрешений и приложений.</string>
+
+    <!-- About Links -->
+    <string name="website">Веб-сайт</string>
+    <string name="website_desc">Посетите наш официальный сайт</string>
+    <string name="github">GitHub</string>
+    <string name="github_desc">Посетите наш репозиторий GitHub</string>
+    <string name="telegram">Telegram</string>
+    <string name="telegram_desc">Присоединяйтесь к нашему Telegram-каналу</string>
+    <string name="check_for_update">Проверить обновления</string>
+    <string name="update_desc">Проверить новые версии на GitHub</string>
+    <string name="about_more">Подробнее о нас</string>
+    <string name="about_more_summary">Узнайте больше о команде разработчиков и видении проекта</string>
+    <string name="about">О программе</string>
+    <string name="close">Закрыть</string>
+    <string name="open">Открыть</string>
+
+    <!-- About Us Activity -->
+    <string name="about_us">О нас</string>
+    <string name="about_us_title">Команда Buge Studio</string>
+    <string name="about_us_description">Команда Buge Studio — это увлеченная группа разработчиков и дизайнеров, посвятившая себя созданию инновационных и практичных утилит для платформы Android. Мы сосредоточены на конфиденциальности пользователей, контроле системы и открытости. Наша цель — предоставить пользователям прозрачные, эффективные и надежные инструменты. Диспетчер приложений Buge — это проект с открытым исходным кодом и наше первое крупное приложение. Мы приветствуем всех желающих участвовать в его улучшении и развитии.</string>
+
+    <!-- GMS Disable Warning -->
+    <string name="gms_disable_warning_title">Отключить сервисы Google?</string>
+    <string name="gms_disable_warning_message">Отключение сервисов Google повлияет на следующее:\n\n• Google Play Store перестанет работать\n• Приложения, зависимые от Google Play Services, могут вылетать\n• Push-уведомления от приложений Google прекратятся\n• Службы определения местоположения могут быть затронуты\n• Внутриигровые покупки не будут работать\n\nВы уверены, что хотите отключить сервисы Google?</string>
+
+    <!-- System Operation Blocked -->
+    <string name="system_op_blocked_title">Операция заблокирована</string>
+    <string name="system_op_blocked_message">Операции с системными приложениями в данный момент отключены.\n\nВы можете включить «Разрешить операции с системными приложениями» в настройках, чтобы выполнить это действие.</string>
+
+    <!-- Restore -->
+    <string name="pref_restore_apps">Восстановить удаленные приложения</string>
+    <string name="pref_restore_apps_summary">Просмотр и восстановление ранее удаленных системных приложений</string>
+    <string name="title_restore_apps">Восстановление приложений</string>
+    <string name="restore">Восстановить</string>
+    <string name="no_uninstalled_apps">Удаленных приложений не найдено</string>
+    <string name="restore_confirm">Восстановить %s?</string>
+    <string name="restore_success">Приложение успешно восстановлено</string>
+    <string name="restore_failed">Не удалось восстановить приложение</string>
+
+    <!-- Shizuku -->
+    <string name="shizuku_title">Авторизация Shizuku</string>
+    <string name="shizuku_desc">Shizuku требуется для управления разрешениями приложений и выполнения расширенных операций. Пожалуйста, авторизуйте это приложение в Shizuku.</string>
+    <string name="shizuku_status_ok">Авторизовано и работает</string>
+    <string name="shizuku_status_no_auth">Работает, но не авторизовано</string>
+    <string name="shizuku_status_not_running">Не работает</string>
+    <string name="shizuku_authorized">Авторизовано</string>
+    <string name="shizuku_not_authorized">Не авторизовано</string>
+    <string name="shizuku_not_running">Не работает</string>
+    <string name="shizuku_request_auth">Запросить авторизацию</string>
+
+    <!-- App List -->
+    <string name="title_app_list">Установленные приложения</string>
+    <string name="search_hint">Поиск приложений…</string>
+    <string name="filter_all">Все приложения</string>
+    <string name="filter_user">Приложения пользователя</string>
+    <string name="filter_system">Системные приложения</string>
+    <string name="filter_favorite">Избранные приложения</string>
+    <string name="sort_name">Имя</string>
+    <string name="sort_size">Размер</string>
+    <string name="sort_install_date">Дата установки</string>
+    <string name="apps_count">%d приложений</string>
+    <string name="loading_apps">Загрузка приложений…</string>
+    <string name="refresh">Обновить</string>
+    <string name="no_apps_found">Приложения не найдены</string>
+    <string name="share_apks">Поделиться APK</string>
+
+    <!-- App Detail -->
+    <string name="title_app_detail">Сведения о приложении</string>
+    <string name="package_name">Имя пакета</string>
+    <string name="version">Версия</string>
+    <string name="install_date">Дата установки</string>
+    <string name="update_date">Последнее обновление</string>
+    <string name="app_size">Размер приложения</string>
+    <string name="data_size">Размер данных</string>
+    <string name="cache_size">Размер кэша</string>
+    <string name="target_sdk">Целевой SDK</string>
+    <string name="min_sdk">Минимальный SDK</string>
+    <string name="permissions_title">Разрешения</string>
+    <string name="granted">Предоставлено</string>
+    <string name="denied">Запрещено</string>
+    <string name="grant_permission">Предоставить</string>
+    <string name="revoke_permission">Отозвать</string>
+    <string name="open_app">Открыть приложение</string>
+    <string name="app_info">Информация о приложении</string>
+    <string name="uninstall">Удалить</string>
+    <string name="force_stop">Принудительная остановка</string>
+    <string name="clear_data">Очистить данные</string>
+    <string name="clear_cache">Очистить кэш</string>
+    <string name="disable_app">Отключить приложение</string>
+    <string name="enable_app">Включить приложение</string>
+    <string name="freeze_app">Заморозить приложение</string>
+    <string name="unfreeze_app">Разморозить приложение</string>
+
+    <!-- Storage -->
+    <string name="storage_title">Хранилище</string>
+    <string name="storage_app">Приложение</string>
+    <string name="storage_data">Данные</string>
+    <string name="storage_total">Всего</string>
+    <string name="storage_unknown">Неизвестно</string>
+    <string name="installer_app">Приложение-установщик</string>
+
+    <!-- App Detail Activity Strings -->
+    <string name="removed_from_favorites">Удалено из избранного</string>
+    <string name="added_to_favorites">Добавлено в избранное</string>
+    <string name="apk_path_not_found">Путь к APK не найден</string>
+    <string name="apk_file_not_exist">Файл APK не существует</string>
+    <string name="apk_saved_to">APK сохранен в: %s</string>
+    <string name="export_failed">Экспорт не удался: %s</string>
+    <string name="cannot_open_google_play">Не удается открыть Google Play</string>
+    <string name="cannot_open_fdroid">Не удается открыть F-Droid</string>
+    <string name="cannot_launch_app">Не удается запустить это приложение</string>
+    <string name="force_stop_confirm">Принудительно остановить %s?</string>
+    <string name="uninstall_confirm">Удалить %s?</string>
+    <string name="clear_data_confirm">Очистить все данные %s? Это действие необратимо.</string>
+
+    <!-- Permissions List -->
+    <string name="title_permissions">Диспетчер разрешений</string>
+    <string name="perm_microphone">Микрофон</string>
+    <string name="perm_camera">Камера</string>
+    <string name="perm_location">Местоположение</string>
+    <string name="perm_contacts">Контакты</string>
+    <string name="perm_storage">Хранилище</string>
+    <string name="perm_manage_storage">Доступ ко всем файлам</string>
+    <string name="perm_phone">Телефон</string>
+    <string name="perm_sms">SMS</string>
+    <string name="perm_calendar">Календарь</string>
+    <string name="perm_body_sensors">Датчики тела</string>
+    <string name="perm_notifications">Уведомления</string>
+    <string name="perm_overlay">Поверх других приложений</string>
+    <string name="perm_install_unknown">Установка из неизвестных источников</string>
+    <string name="batch_revoke">Отозвать разрешение</string>
+    <string name="batch_grant">Предоставить разрешение</string>
+    <string name="confirm_revoke">Отозвать разрешение у %d приложения(й)?</string>
+    <string name="confirm_grant">Предоставить разрешение %d приложению(ям)?</string>
+    <string name="selected_count">%d выбрано</string>
+    <string name="open_system_settings">Открыть системные настройки</string>
+    <string name="perm_write_settings">Изменение системных настроек</string>
+
+    <!-- Activities -->
+    <string name="title_activities">Менеджер активностей</string>
+    <string name="title_activity_detail">Детали активности</string>
+    <string name="search_activity_hint">Поиск активностей…</string>
+    <string name="launch">Запустить</string>
+    <string name="back_to_apps">Назад к приложениям</string>
+    <string name="no_activities_found">Активности не найдены</string>
+
+    <!-- Common -->
+    <string name="confirm">Подтвердить</string>
+    <string name="cancel">Отмена</string>
+    <string name="operation_success">Операция успешна</string>
+    <string name="operation_failed">Операция не удалась: %s</string>
+    <string name="error_no_shizuku">Shizuku недоступен или не авторизован</string>
+    <string name="error_system_ops_disabled">Операции с системными приложениями отключены. Включите «Разрешить операции с системными приложениями» в настройках.</string>
+    <string name="language_changed_restart">Язык изменен. Перезагрузите приложение, чтобы применить изменения.</string>
+    <string name="restart">Перезагрузить</string>
+
+    <!-- Language names -->
+    <string name="pref_language_en">Английский</string>
+    <string name="pref_language_zh">Китайский (упрощенный)</string>
+    <string name="pref_language_ja">Японский</string>
+    <string name="pref_language_ko">Корейский</string>
+    <string name="pref_language_fr">Французский</string>
+    <string name="pref_language_de">Немецкий</string>
+    <string name="pref_language_ru">Русский</string>
+    <string name="pref_language_ar">Арабский</string>
+    <string name="pref_language_pt">Португальский</string>
+    <string name="pref_language_es">Испанский</string>
+    
+    <string name="restart_required">Требуется перезапуск</string>
+    <string name="restart_required_message">Стартовая страница по умолчанию была изменена. Перезапустите приложение, чтобы применить изменение.</string>
+    <string name="restart_now">Перезапустить сейчас</string>
+    <string name="later">Позже</string>
+    
+    <!-- Update Checker -->
+    <string name="update_available">Доступно обновление</string>
+    <string name="download">Скачать</string>
+    <string name="no_update_title">Обновлений нет</string>
+    <string name="no_update_message">Вы уже используете последнюю версию.</string>
+    <string name="update_check_failed">Ошибка проверки обновлений</string>
+    <string name="update_check_failed_message">Не удалось проверить обновления. Проверьте подключение к интернету.</string>
+    <string name="checking_for_update">Проверка обновлений…</string>
+    <string name="please_wait">Пожалуйста, подождите…</string>
+    <string name="ok">ОК</string>
+    <string name="ignore">Игнорировать</string>
+    
+    <!-- Shortcuts -->
+    <string name="shortcut_app_manager_long">Открыть диспетчер приложений Buge</string>
+    
+    <string name="appearance_settings">Настройки внешнего вида</string>
+    <string name="theme_mode">Режим темы</string>
+    <string name="color_theme">Цвет темы</string>
+    <string name="color_default">По умолчанию (Синий)</string>
+    <string name="color_red">Красный</string>
+    <string name="color_green">Зеленый</string>
+    <string name="color_yellow">Желтый</string>
+    <string name="more_options">Дополнительные опции</string>
+    <string name="more_options_summary">Настроить тему и цвета</string>
+    <string name="theme_change_restart_message">Тема была изменена. Перезапустите приложение, чтобы применить изменения.</string>
+    <string name="theme_group">Тема</string>
+    <string name="hide_nav_labels">Скрыть метки навигации</string>
+    <string name="hide_nav_labels_summary">Скрыть заголовки невыбранных элементов навигации, показывать только выбранный</string>
+
+    <!-- Custom Labels -->
+    <string name="pref_custom_labels">Пользовательские метки</string>
+    <string name="pref_custom_labels_summary">Создание и управление пользовательскими метками приложений</string>
+    <string name="title_custom_labels">Пользовательские метки</string>
+    <string name="create_label">Создать метку</string>
+    <string name="label_name">Название метки</string>
+    <string name="label_name_hint">Введите название метки</string>
+    <string name="create_new_label">Создать новую метку</string>
+    <string name="no_labels_created">Метки пока не созданы</string>
+    <string name="tap_to_create">Нажмите +, чтобы создать первую метку</string>
+    <string name="delete_label_confirm">Удалить "%s"?</string>
+    <string name="delete_label">Удалить метку</string>
+    <string name="select_apps_for_label">Выберите приложения для "%s"</string>
+    <string name="label_created">Метка создана</string>
+    <string name="label_updated">Метка обновлена</string>
+    <string name="label_deleted">Метка удалена</string>
+    <string name="filter_label">Метка: %s</string>
+
+    <!-- Update Options -->
+    <string name="pref_update_options">Параметры обновления</string>
+    <string name="pref_update_options_summary">Настройка способа загрузки и установки обновлений</string>
+    <string name="title_update_options">Параметры обновления</string>
+    <string name="update_method_browser">Открыть в браузере</string>
+    <string name="update_method_silent">Тихая установка (Shizuku)</string>
+    <string name="installer_name">Имя установщика</string>
+    <string name="installer_name_hint">Введите имя установщика (например, BugeAppManager)</string>
+    <string name="update_downloading">Загрузка обновления…</string>
+    <string name="update_download_failed">Ошибка загрузки</string>
+    <string name="update_installing">Установка обновления…</string>
+    <string name="update_install_success">Обновление успешно установлено</string>
+    <string name="update_install_failed">Ошибка установки</string>
+    <string name="update_already_latest">У вас уже установлена последняя версия</string>
+    <string name="checking_for_update_dialog">Проверка обновлений…</string>
+    <string name="update_download_complete">Загрузка завершена</string>
+    <string name="save">Сохранить</string>
+
+    <!-- Optional Permissions -->
+    <string name="pref_optional_permissions">Дополнительные разрешения</string>
+    <string name="pref_optional_permissions_summary">Предоставить дополнительные разрешения для дополнительных функций</string>
+    <string name="title_optional_permissions">Дополнительные разрешения</string>
+    <string name="pref_storage_permission">Разрешение на хранилище</string>
+    <string name="pref_storage_permission_summary">Включает READ_EXTERNAL_STORAGE и WRITE_EXTERNAL_STORAGE для экспорта APK и функций хранения</string>
+    <string name="storage_permission_required">Требуется для экспорта APK и функций хранения</string>
+    <string name="storage_permission_grant">Предоставить разрешение на хранилище</string>
+    <string name="perm_read_external_storage">Чтение внешнего хранилища</string>
+    <string name="perm_read_external_storage_desc">Разрешает приложению читать файлы из внешнего хранилища для экспорта и обмена APK</string>
+    <string name="perm_write_external_storage">Запись во внешнее хранилище</string>
+    <string name="perm_write_external_storage_desc">Разрешает приложению записывать файлы во внешнее хранилище для экспорта и обмена APK</string>
+    <string name="optional_perm_granted">Предоставлено</string>
+    <string name="optional_perm_denied">Отказано</string>
+    <string name="optional_perm_grant">Предоставить</string>
+    
+</resources>

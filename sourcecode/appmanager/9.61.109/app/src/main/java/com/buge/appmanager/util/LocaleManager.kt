@@ -1,0 +1,119 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Buge Studio
+
+package com.buge.appmanager.util
+
+import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
+import java.util.Locale
+
+object LocaleManager {
+
+    private const val LANGUAGE_PREF = "language_pref"
+    private const val LANGUAGE_KEY = "selected_language"
+
+    fun setLanguage(context: Context, languageCode: String) {
+        val prefs = context.getSharedPreferences(LANGUAGE_PREF, Context.MODE_PRIVATE)
+        prefs.edit().putString(LANGUAGE_KEY, languageCode).apply()
+    }
+
+    fun getLanguage(context: Context): String {
+        val prefs = context.getSharedPreferences(LANGUAGE_PREF, Context.MODE_PRIVATE)
+        return prefs.getString(LANGUAGE_KEY, "") ?: ""
+    }
+
+    fun applyLanguage(context: Context, languageCode: String) {
+        val locale = createLocaleFromCode(languageCode)
+        setLocale(context, locale)
+    }
+
+    fun createContextWithLocale(context: Context, languageCode: String): Context {
+        val locale = createLocaleFromCode(languageCode)
+        return wrapContextWithLocale(context, locale)
+    }
+
+    private fun createLocaleFromCode(code: String): Locale {
+        if (code.isEmpty()) {
+            return Locale.getDefault()
+        }
+        
+        // Handle Brazilian Portuguese
+        if (code.equals("pt-rBR", ignoreCase = true)) {
+            return Locale("pt", "BR")
+        }
+        
+        // Handle Traditional Chinese (zh-rTW)
+        if (code.equals("zh-rTW", ignoreCase = true)) {
+            return Locale("zh", "TW")
+        }
+        
+        // Handle language-country format with r prefix (e.g., "zh-rCN", "pt-rBR")
+        // This format is used in Android resource qualifiers
+        val rPattern = Regex("""^([a-z]{2})-r([A-Z]{2})$""")
+        val match = rPattern.find(code)
+        if (match != null) {
+            val lang = match.groupValues[1]
+            val country = match.groupValues[2]
+            return Locale(lang, country)
+        }
+        
+        // Handle language-country format (e.g., "en-US", "zh-CN")
+        val parts = code.split("-", "_")
+        return if (parts.size == 2) {
+            Locale(parts[0], parts[1])
+        } else {
+            Locale(code)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun setLocale(context: Context, locale: Locale) {
+        Locale.setDefault(locale)
+        val config = Configuration(context.resources.configuration)
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocale(locale)
+        } else {
+            config.locale = locale
+        }
+        
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+    }
+
+    private fun wrapContextWithLocale(context: Context, locale: Locale): Context {
+        val config = Configuration(context.resources.configuration)
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocale(locale)
+        } else {
+            @Suppress("DEPRECATION")
+            config.locale = locale
+        }
+        
+        return context.createConfigurationContext(config)
+    }
+
+    fun getSupportedLanguages(): Map<String, String> {
+        return mapOf(
+            "" to "System Default",
+            "en" to "English",
+            "fr" to "Français",
+            "de" to "Deutsch",
+            "ru" to "Русский",
+            "pt" to "Português",
+            "pt-rBR" to "Português (Brasil)",
+            "es" to "Español",
+            "zh" to "中文 (简体)",
+            "zh-rTW" to "中文 (繁體)",
+            "ar" to "العربية",
+            "ja" to "日本語",
+            "ko" to "한국어",
+        )
+    }
+    
+    fun getCurrentLocale(context: Context): Locale {
+        val savedLanguage = getLanguage(context)
+        return createLocaleFromCode(savedLanguage)
+    }
+}
