@@ -25,7 +25,7 @@
 
 ## 🌐 About Our Website
 
-Welcome to the central hub of **Buge Studio**. This repository powers our official website: **[bugestudioteam.github.io](https://bugestudioteam.github.io/)**. 
+Welcome to the central hub of **Buge Studio**. This repository powers our official website: **[bugestudio.website](https://bugestudio.website/)**. 
 
 Here, users can find the latest stable releases of our applications, explore documentation, and learn more about our ongoing efforts to build a distraction-free software ecosystem.
 
