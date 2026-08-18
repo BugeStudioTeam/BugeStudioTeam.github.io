@@ -197,6 +197,7 @@
       font-family: 'Google Sans', sans-serif;
       font-weight: 500;
       white-space: nowrap;
+      user-select: none;
     }
     .copy-btn-sm:hover {
       background: var(--md-sys-color-surface-container-high);
@@ -208,6 +209,12 @@
     }
     .copy-btn-sm .material-symbols-outlined {
       font-size: 14px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .copy-btn-sm .copy-text {
+      user-select: none;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -361,14 +368,14 @@
 
     function copyAddress() {
       const address = USDT_ADDRESS;
+      
+      // Use the Clipboard API to write without selecting text
       navigator.clipboard.writeText(address).then(() => {
         const btn = document.getElementById('copyAddressBtn');
-        // Get the span elements inside the button
         const iconSpan = btn.querySelector('.material-symbols-outlined');
         const textSpan = btn.querySelector('.copy-text');
         
-        // Save original content
-        const originalIconHTML = iconSpan.outerHTML;
+        // Save original text
         const originalText = textSpan.textContent;
         
         // Update to copied state
@@ -384,6 +391,33 @@
         }, 2000);
       }).catch(err => {
         console.error('Failed to copy: ', err);
+        // Fallback: try the old method
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = address;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          // Show feedback
+          const btn = document.getElementById('copyAddressBtn');
+          const iconSpan = btn.querySelector('.material-symbols-outlined');
+          const textSpan = btn.querySelector('.copy-text');
+          const originalText = textSpan.textContent;
+          iconSpan.textContent = 'check';
+          textSpan.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            iconSpan.textContent = 'content_copy';
+            textSpan.textContent = originalText;
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (e) {
+          alert('Unable to copy. Please select and copy the address manually.');
+        }
       });
     }
 
@@ -428,7 +462,7 @@
           <div style="margin-top: 0.75rem; text-align: center;">
             <div class="usdt-address-label">Address:</div>
             <div class="usdt-address">
-              <span style="font-family: 'JetBrains Mono', monospace; word-break: break-all;">${USDT_ADDRESS}</span>
+              <span style="font-family: 'JetBrains Mono', monospace; word-break: break-all; user-select: all;">${USDT_ADDRESS}</span>
               <button class="copy-btn-sm" id="copyAddressBtn" onclick="copyAddress()">
                 <span class="material-symbols-outlined">content_copy</span>
                 <span class="copy-text">Copy</span>
