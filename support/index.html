@@ -170,6 +170,11 @@
       margin-top: 0.5rem;
       text-align: center;
       user-select: all;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     .usdt-address-label {
       font-size: 0.8rem;
@@ -179,7 +184,7 @@
     }
     .copy-btn-sm {
       background: var(--md-sys-color-surface-container-highest);
-      border: none;
+      border: 1px solid var(--md-sys-color-outline-variant);
       color: var(--md-sys-color-on-surface);
       padding: 4px 12px;
       border-radius: 8px;
@@ -188,11 +193,21 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      transition: background 0.2s;
-      margin-left: 8px;
+      transition: background 0.2s, border-color 0.2s;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 500;
+      white-space: nowrap;
     }
     .copy-btn-sm:hover {
       background: var(--md-sys-color-surface-container-high);
+    }
+    .copy-btn-sm.copied {
+      background: #22c55e;
+      color: #fff;
+      border-color: #22c55e;
+    }
+    .copy-btn-sm .material-symbols-outlined {
+      font-size: 14px;
     }
   </style>
 </head>
@@ -348,14 +363,24 @@
       const address = USDT_ADDRESS;
       navigator.clipboard.writeText(address).then(() => {
         const btn = document.getElementById('copyAddressBtn');
-        const originalText = btn.textContent;
-        btn.textContent = 'Copied!';
-        btn.style.background = '#22c55e';
-        btn.style.color = '#fff';
+        // Get the span elements inside the button
+        const iconSpan = btn.querySelector('.material-symbols-outlined');
+        const textSpan = btn.querySelector('.copy-text');
+        
+        // Save original content
+        const originalIconHTML = iconSpan.outerHTML;
+        const originalText = textSpan.textContent;
+        
+        // Update to copied state
+        iconSpan.textContent = 'check';
+        textSpan.textContent = 'Copied!';
+        btn.classList.add('copied');
+        
+        // Reset after 2 seconds
         setTimeout(() => {
-          btn.textContent = originalText;
-          btn.style.background = '';
-          btn.style.color = '';
+          iconSpan.textContent = 'content_copy';
+          textSpan.textContent = originalText;
+          btn.classList.remove('copied');
         }, 2000);
       }).catch(err => {
         console.error('Failed to copy: ', err);
@@ -403,10 +428,10 @@
           <div style="margin-top: 0.75rem; text-align: center;">
             <div class="usdt-address-label">Address:</div>
             <div class="usdt-address">
-              ${USDT_ADDRESS}
+              <span style="font-family: 'JetBrains Mono', monospace; word-break: break-all;">${USDT_ADDRESS}</span>
               <button class="copy-btn-sm" id="copyAddressBtn" onclick="copyAddress()">
-                <span class="material-symbols-outlined" style="font-size: 14px;">content_copy</span>
-                Copy
+                <span class="material-symbols-outlined">content_copy</span>
+                <span class="copy-text">Copy</span>
               </button>
             </div>
           </div>
