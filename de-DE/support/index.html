@@ -93,6 +93,129 @@
       justify-content: flex-end;
       gap: 8px;
     }
+
+    /* MD3 Expressive Warning Banner */
+    .md3-warning {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 20px;
+      background-color: var(--md-sys-color-error-container, #fce4ec);
+      border-radius: 16px;
+      margin-top: 0.5rem;
+      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .md3-warning-icon {
+      color: var(--md-sys-color-error, #c62828);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .md3-warning-icon .material-symbols-outlined {
+      font-size: 24px;
+    }
+    .md3-warning-content {
+      flex: 1;
+      font-size: 0.925rem;
+      line-height: 1.5;
+      color: var(--md-sys-color-on-error-container, #b71c1c);
+    }
+    .md3-warning-content strong {
+      font-weight: 600;
+    }
+    .md3-warning-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      margin-top: -2px;
+    }
+    .md3-warning-btn {
+      background: transparent;
+      border: none;
+      color: var(--md-sys-color-error, #c62828);
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .md3-warning-btn:hover {
+      background-color: rgba(198, 40, 40, 0.08);
+    }
+    .md3-warning-btn .material-symbols-outlined {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 600px) {
+      .md3-warning {
+        flex-wrap: wrap;
+        padding: 14px 16px;
+      }
+      .md3-warning-actions {
+        margin-left: 40px;
+      }
+    }
+
+    .usdt-address {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background-color: var(--md-sys-color-surface-container-highest);
+      padding: 10px 16px;
+      border-radius: 10px;
+      word-break: break-all;
+      color: var(--md-sys-color-on-surface);
+      margin-top: 0.5rem;
+      text-align: center;
+      user-select: all;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .usdt-address-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-top: 0.25rem;
+    }
+    .copy-btn-sm {
+      background: var(--md-sys-color-surface-container-highest);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      color: var(--md-sys-color-on-surface);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s, border-color 0.2s;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 500;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .copy-btn-sm:hover {
+      background: var(--md-sys-color-surface-container-high);
+    }
+    .copy-btn-sm.copied {
+      background: #22c55e;
+      color: #fff;
+      border-color: #22c55e;
+    }
+    .copy-btn-sm .material-symbols-outlined {
+      font-size: 14px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .copy-btn-sm .copy-text {
+      user-select: none;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -117,7 +240,8 @@
 
     <section>
       <div class="support-tabs">
-        <div class="support-tab active" id="tab-paypal" onclick="switchTab('paypal')">PayPal</div>
+        <div class="support-tab active" id="tab-usdt" onclick="switchTab('usdt')">USDT (TRC20)</div>
+        <div class="support-tab" id="tab-paypal" onclick="switchTab('paypal')">PayPal</div>
         <div class="support-tab" id="tab-wechat" onclick="switchTab('wechat')">WeChatPay</div>
         <div class="support-tab" id="tab-alipay" onclick="switchTab('alipay')">Alipay</div>
       </div>
@@ -240,13 +364,113 @@
   </footer>
 
   <script>
+    const USDT_ADDRESS = "TWqDc7njqvULm98EAeeMiySWv1sXR8JidC";
+
+    function copyAddress() {
+      const address = USDT_ADDRESS;
+      
+      // Use the Clipboard API to write without selecting text
+      navigator.clipboard.writeText(address).then(() => {
+        const btn = document.getElementById('copyAddressBtn');
+        const iconSpan = btn.querySelector('.material-symbols-outlined');
+        const textSpan = btn.querySelector('.copy-text');
+        
+        // Save original text
+        const originalText = textSpan.textContent;
+        
+        // Update to copied state
+        iconSpan.textContent = 'check';
+        textSpan.textContent = 'Kopiert!';
+        btn.classList.add('copied');
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          iconSpan.textContent = 'content_copy';
+          textSpan.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Fehler beim Kopieren: ', err);
+        // Fallback: try the old method
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = address;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          // Show feedback
+          const btn = document.getElementById('copyAddressBtn');
+          const iconSpan = btn.querySelector('.material-symbols-outlined');
+          const textSpan = btn.querySelector('.copy-text');
+          const originalText = textSpan.textContent;
+          iconSpan.textContent = 'check';
+          textSpan.textContent = 'Kopiert!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            iconSpan.textContent = 'content_copy';
+            textSpan.textContent = originalText;
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (e) {
+          alert('Kopieren fehlgeschlagen. Bitte wähle die Adresse manuell aus und kopiere sie.');
+        }
+      });
+    }
+
     function switchTab(type) {
       document.querySelectorAll('.support-tab').forEach(el => el.classList.remove('active'));
       document.getElementById('tab-' + type).classList.add('active');
 
       const panel = document.getElementById('panel-content');
 
-      if (type === 'paypal') {
+      if (type === 'usdt') {
+        panel.innerHTML = `
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">currency_bitcoin</span>
+              <h3>Zahlen mit USDT (TRC20)</h3>
+            </div>
+            <span class="badge">Krypto</span>
+          </div>
+          <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
+            Sende USDT über das TRON (TRC20) Netzwerk
+          </p>
+          
+          <div class="md3-warning" role="alert">
+            <div class="md3-warning-icon">
+              <span class="material-symbols-outlined">error</span>
+            </div>
+            <div class="md3-warning-content">
+              <strong>Wichtig:</strong> Bitte stelle sicher, dass du das <strong>TRON (TRC20)</strong> Netzwerk verwendest. Das Senden über andere Netzwerke kann zum Verlust von Geldern führen.
+            </div>
+            <div class="md3-warning-actions">
+              <button class="md3-warning-btn" onclick="this.closest('.md3-warning').style.display='none'">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+            <div style="background-color: #ffffff; padding: 16px; border-radius: 28px; display: inline-flex; justify-content: center; align-items: center;">
+              <img src="usdt_qr.png" alt="USDT TRC20 QR-Code" style="width: 200px; height: 200px; display: block; border-radius: 16px; object-fit: contain;" />
+            </div>
+          </div>
+          <div style="margin-top: 0.75rem; text-align: center;">
+            <div class="usdt-address-label">Adresse:</div>
+            <div class="usdt-address">
+              <span style="font-family: 'JetBrains Mono', monospace; word-break: break-all; user-select: all;">${USDT_ADDRESS}</span>
+              <button class="copy-btn-sm" id="copyAddressBtn" onclick="copyAddress()">
+                <span class="material-symbols-outlined">content_copy</span>
+                <span class="copy-text">Kopieren</span>
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (type === 'paypal') {
         panel.innerHTML = `
           <div class="software-header">
             <div class="software-title">
@@ -322,7 +546,8 @@
       window.location.href = 'https://www.paypal.com/paypalme/creepynightmares';
     }
 
-    switchTab('paypal');
+    // Default to USDT
+    switchTab('usdt');
   </script>
   <script src="js/main.js"></script>
 </body>
