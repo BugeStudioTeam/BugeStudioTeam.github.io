@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buge Files - Android File Manager</title>
+  <title>Buge Files - Android 文件管理器</title>
   
   <link rel="icon" href="files.png" type="image/png" />
 
@@ -33,14 +33,14 @@
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle">Buge Files is a modern Android file manager built with Material Design 3 Expressive.</p>
+      <p class="hero-subtitle">Buge Files 是一款采用 Material Design 3 Expressive 构建的现代 Android 文件管理器。</p>
     </header>
 
     <section>
       <div class="action-row" style="margin-bottom: 2.5rem; justify-content: center;">
         <a href="/storage/files/1.5.4/app-release.apk" class="btn btn-filled">
           <span class="material-symbols-outlined">download</span>
-          Download
+          下载
         </a>
         <a href="https://github.com/BugeStudioTeam/Buge-Files" class="btn btn-outlined">
           <svg class="custom-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
@@ -55,10 +55,10 @@
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">folder</span>
-              <h3>File Management</h3>
+              <h3>文件管理</h3>
             </div>
           </div>
-          <p class="software-desc">Browse, copy, move, rename and delete files on your device with an intuitive interface.</p>
+          <p class="software-desc">通过直观的界面浏览、复制、移动、重命名和删除设备上的文件。</p>
         </div>
 
         <div class="card corner-middle">
@@ -68,27 +68,27 @@
               <h3>Material Design 3 Expressive</h3>
             </div>
           </div>
-          <p class="software-desc">Modern UI built with Material Design 3 Expressive, providing a clean and responsive experience on any device.</p>
+          <p class="software-desc">采用 Material Design 3 Expressive 构建的现代界面，在任何设备上都能提供简洁流畅的体验。</p>
         </div>
 
         <div class="card corner-middle">
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">pie_chart</span>
-              <h3>Storage Optimization</h3>
+              <h3>存储优化</h3>
             </div>
           </div>
-          <p class="software-desc">Easily view the storage space occupied by various types of files.</p>
+          <p class="software-desc">轻松查看各类文件占用的存储空间。</p>
         </div>
 
         <div class="card corner-bottom">
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">apps</span>
-              <h3>Multiple Locations</h3>
+              <h3>多位置支持</h3>
             </div>
           </div>
-          <p class="software-desc">Allow viewing storage used by third-party apps.</p>
+          <p class="software-desc">允许查看第三方应用使用的存储空间。</p>
         </div>
       </div>
 
@@ -126,14 +126,14 @@
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Language</span>
-              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+              <span class="md3-dropdown-label">语言</span>
+              <span class="md3-dropdown-value" id="selectedLangText">简体中文</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/files/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/files/', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -145,7 +145,7 @@
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/files/', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/files/', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -155,35 +155,35 @@
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Theme</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+              <span class="md3-dropdown-label">主题</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">浅色</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
-              <span>Light</span>
+            <div class="md3-menu-item selected" onclick="selectTheme('light', '浅色', this)">
+              <span>浅色</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
-              <span>Light (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', '浅色（中对比度）', this)">
+              <span>浅色（中对比度）</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
-              <span>Light (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', '浅色（高对比度）', this)">
+              <span>浅色（高对比度）</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
-              <span>Dark</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark', '深色', this)">
+              <span>深色</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
-              <span>Dark (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', '深色（中对比度）', this)">
+              <span>深色（中对比度）</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
-              <span>Dark (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', '深色（高对比度）', this)">
+              <span>深色（高对比度）</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
           </div>
