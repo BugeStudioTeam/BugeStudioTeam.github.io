@@ -1,30 +1,15 @@
 - name: Alaataheri
   role: Suggestions & Support
   description: Provide us with long-term support and assistance.
-  details: Alaataheri is one of the earliest and most dedicated contributors to the Buge App Manager project. From the very beginning, he played a crucial role in making the application accessible to a broader audience by taking the lead on Arabic localization. His efforts went far beyond simple translation — he ensured that the Arabic version of the app not only read naturally, but also respected cultural and linguistic nuances, which is often overlooked in open-source projects.
+  details: |
+    Alaataheri is one of the earliest and most dedicated contributors to the Buge App Manager project. From the very beginning, he played a crucial role in making the application accessible to a broader audience by taking the lead on Arabic localization. His efforts went far beyond simple translation — he ensured that the Arabic version of the app not only read naturally, but also respected cultural and linguistic nuances, which is often overlooked in open-source projects.
 
-When the project was still in its early stages, many users from Arabic-speaking regions were unable to fully benefit from the app due to language barriers. Alaataheri recognized this gap and stepped in voluntarily. He worked closely with the development team to adapt the user interface, error messages, and system prompts into fluent and contextually appropriate Arabic. His contributions significantly improved the user experience for Arabic-speaking users, many of whom have since become active members of the project's community.
+    When the project was still in its early stages, many users from Arabic-speaking regions were unable to fully benefit from the app due to language barriers. Alaataheri recognized this gap and stepped in voluntarily. He worked closely with the development team to adapt the user interface, error messages, and system prompts into fluent and contextually appropriate Arabic. His contributions significantly improved the user experience for Arabic-speaking users, many of whom have since become active members of the project's community.
 
-What sets Alaataheri apart is not just his technical ability, but his long-term commitment. He didn't stop after the initial translation. Over time, as the app evolved and new features were added, he continued to provide updates and maintenance for the Arabic version.
+    What sets Alaataheri apart is not just his technical ability, but his long-term commitment. He didn't stop after the initial translation. Over time, as the app evolved and new features were added, he continued to provide updates and maintenance for the Arabic version.
 
-Beyond his direct contributions to the codebase, Alaataheri has been a reliable and positive presence in the project's communication channels. He regularly participates in discussions and offers thoughtful suggestions. His collaborative spirit has helped foster a more inclusive and welcoming environment within the community.
+    Beyond his direct contributions to the codebase, Alaataheri has been a reliable and positive presence in the project's communication channels. He regularly participates in discussions and offers thoughtful suggestions. His collaborative spirit has helped foster a more inclusive and welcoming environment within the community.
 
-Alaataheri's involvement reflects the very best of open-source values: selflessness, quality, and persistence. It is one thing to contribute once, but it is another to remain consistently helpful over time. His work has not only expanded the reach of Buge App Manager, but also inspired other contributors to consider localization and internationalization as core parts of development.
-
-For these reasons, we are truly grateful to Alaataheri for his extraordinary contributions, and we sincerely hope to continue working alongside him in the future.
+    Alaataheri's involvement reflects the very best of open-source values: selflessness, quality, and persistence. It is one thing to contribute once, but it is another to remain consistently helpful over time. His work has not only expanded the reach of Buge App Manager, but also inspired other contributors to consider localization and internationalization as core parts of development.
   link: https://github.com/Alaatahera
   avatar: alaataheri.png
-
-- name: Ashish Chaulagain
-  role: UI/UX Designer
-  description: Designed the Material Design 3 Expressive components.
-  details: Sarah leads product design at several open-source initiatives. She crafted the visual design system, interaction patterns, and responsive component libraries used throughout this application.
-  link: https://github.com/sarahchen
-  avatar: sarah.png
-
-- name: Marco Silva
-  role: Community Manager
-  description: Managed localization and community feedback support.
-  details: Marco handles external communications, community moderation, and multi-language translations. He coordinated feedback channels to ensure continuous product improvement.
-  link: https://github.com/marcosilva
-  avatar: marco.png
