@@ -29,5 +29,21 @@
     Over time, his quiet dedication has become a cornerstone of the development culture we've built. His consistency and loyalty have earned him the trust and respect of everyone involved. While his name may not appear in every commit or conversation, his influence is woven into the fabric of the projects themselves.
 
     In short, Ashish Chaulagain is more than just a supporter — he is a pillar of the community. His behind-the-scenes contributions and his willingness to share and advocate for the projects have made a lasting impact. We are deeply grateful for his continued presence and commitment, and we look forward to having him with us on the journey ahead.
-  link: https://www.instagram.com/ashishchaulagain_?igsi=MTNtcDBsazZ2ZWswZw%3D%3D
+  link: https://www.instagram.com/ashishchaulagain
   avatar: ashishchaulagain.png
+
+- name: Mars W
+  role: Test & Support
+  description: Conduct some testing work for us.
+  details: |
+    Mars W is one of the most loyal and dedicated fans of Buge Studio. While many users simply enjoy the apps we build, Mars goes far beyond that — he actively contributes to the improvement of our projects by volunteering his time, energy, and a wide range of devices for testing purposes.
+
+    What makes Mars particularly remarkable is that he is still a student. Despite his busy academic schedule, he consistently finds time to help us. He doesn't wait for stable releases or polished versions — instead, he tests early builds, experimental features, and even rough prototypes that most users would never see. His willingness to engage with unfinished work speaks volumes about his commitment to the project and his trust in our vision.
+
+    Mars doesn't limit himself to a single platform either. He has tested our applications across both Linux and Android environments, using a variety of machines and devices at home. From desktop computers to smartphones, tablets, and even older hardware, he ensures that our software runs smoothly on as many configurations as possible. His feedback covers not only functional issues, but also performance, UI responsiveness, and compatibility across different system versions.
+
+    His testing has helped us catch bugs that we might have otherwise missed, and his detailed reports often include logs, screenshots, and clear reproduction steps — making our work significantly easier. Beyond the technical side, Mars is also a positive presence in our community, encouraging other users and sharing his experiences with genuine enthusiasm.
+
+    Mars W is more than just a tester — he is a trusted partner in our development process. His dedication, generosity, and willingness to support us despite his own commitments are truly inspiring. We are deeply grateful for everything he has done, and we consider him an essential part of the Buge Studio journey.
+  link: https://github.com/marzhiyuan
+  avatar: marsw.png
