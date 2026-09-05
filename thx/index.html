@@ -139,9 +139,11 @@
 
   <script src="js/main.js"></script>
   <script>
+    const YAML_URL = 'https://raw.githubusercontent.com/BugeStudioTeam/BugeStudioTeam.github.io/main/thx/thx.yml';
+
     async function loadContributors() {
       try {
-        const response = await fetch('thx/thx.yml');
+        const response = await fetch(YAML_URL);
         const yamlText = await response.text();
         const data = jsyaml.load(yamlText);
         const container = document.getElementById('contributors-group');
@@ -175,7 +177,7 @@
           });
         }
       } catch (e) {
-        console.error('Error loading YAML file:', e);
+        console.error('Error fetching YAML from GitHub:', e);
       }
     }
 

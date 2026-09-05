@@ -29,7 +29,7 @@
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle" id="person-desc">Retrieving details from YAML registry...</p>
+      <p class="hero-subtitle" id="person-desc">Retrieving details from remote YAML registry...</p>
     </header>
 
     <section>
@@ -147,6 +147,8 @@
 
   <script src="js/main.js"></script>
   <script>
+    const YAML_URL = 'https://raw.githubusercontent.com/BugeStudioTeam/BugeStudioTeam.github.io/main/thx/thx.yml';
+
     async function loadDetail() {
       const urlParams = new URLSearchParams(window.location.search);
       const personId = urlParams.get('id');
@@ -158,7 +160,7 @@
       }
 
       try {
-        const response = await fetch('thx/thx.yml');
+        const response = await fetch(YAML_URL);
         const yamlText = await response.text();
         const data = jsyaml.load(yamlText);
 
@@ -176,7 +178,7 @@
           }
         }
       } catch (e) {
-        console.error('Error loading YAML file:', e);
+        console.error('Error fetching YAML from GitHub:', e);
       }
     }
 
