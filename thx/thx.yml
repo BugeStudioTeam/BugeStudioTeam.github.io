@@ -1,0 +1,13 @@
+contributors:
+  - id: "alex-developer"
+    name: "Alex Johnson"
+    description: "Lead developer who contributed to core architecture and performance optimizations."
+    link: "https://github.com/alexjohnson"
+  - id: "sarah-designer"
+    name: "Sarah Chen"
+    description: "UI/UX designer responsible for the Material Design 3 Expressive theme implementation."
+    link: "https://github.com/sarahchen"
+  - id: "michael-translator"
+    name: "Michael Vance"
+    description: "Localization contributor maintaining German and Russian translations."
+    link: "https://github.com/michaelvance"
