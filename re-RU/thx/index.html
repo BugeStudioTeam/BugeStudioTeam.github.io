@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You</title>
+  
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <link rel="stylesheet" href="styles/style.css" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+  <style>
+    .container {
+      max-width: 1400px !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .contributor-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    .large-rounded-card {
+      border-radius: 28px !important;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .software-desc {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    @media (max-width: 1100px) {
+      .grid-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid-container {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+
+    <header class="hero">
+      <img src="icon.png" alt="Logo" class="hero-logo" />
+      <h1>THX</h1>
+      
+      <div class="hero-pills">
+        <span class="m3-pill">
+          <span class="material-symbols-outlined">favorite</span>
+          Contributors
+        </span>
+      </div>
+
+      <div class="wavy-line"></div>
+
+      <p class="hero-subtitle">Special thanks to everyone who made this project possible.</p>
+    </header>
+
+    <section>
+      <div class="grid-container" id="contributorsContainer">
+      </div>
+
+      <div class="social-row" style="margin-top: 2.5rem;">
+        <a href="https://github.com/BugeStudioTeam" class="btn-icon" rel="noopener" aria-label="GitHub">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <a href="https://t.me/bugestudio" class="btn-icon" rel="noopener" aria-label="Telegram">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+        </a>
+
+        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">
+        © 2026 Buge Studio
+      </div>
+
+      <div class="footer-controls">
+        
+        <div class="md3-dropdown-container" id="langDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Language</span>
+              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectLanguage('English', './', this)">
+              <span>English</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', './de-DE/', this)">
+              <span>Deutsch</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', './re-RU/', this)">
+              <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', './zh-CN/', this)">
+              <span>简体中文</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="md3-dropdown-container" id="themeDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Theme</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
+              <span>Light</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
+              <span>Light (Medium)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
+              <span>Light (High)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
+              <span>Dark</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
+              <span>Dark (Medium)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
+              <span>Dark (High)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    fetch('thx.yml')
+      .then(response => response.text())
+      .then(text => {
+        const data = jsyaml.load(text);
+        const container = document.getElementById('contributorsContainer');
+        
+        data.forEach((item) => {
+          const card = document.createElement('div');
+          card.className = 'card large-rounded-card';
+          card.style.cursor = 'pointer';
+          card.onclick = () => {
+            window.location.href = `detail?name=${encodeURIComponent(item.name)}`;
+          };
+
+          card.innerHTML = `
+            <div class="software-header">
+              <div class="software-title">
+                <img src="images/${item.avatar || item.name + '.png'}" alt="${item.name}" class="contributor-avatar" />
+                <h3>${item.name}</h3>
+              </div>
+              <span class="badge">${item.role || 'Contributor'}</span>
+            </div>
+            <p class="software-desc">${item.description}</p>
+          `;
+          container.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>
