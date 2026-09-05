@@ -1,13 +1,17 @@
-contributors:
-  - id: "alex-developer"
-    name: "Alex Johnson"
-    description: "Lead developer who contributed to core architecture and performance optimizations."
-    link: "https://github.com/alexjohnson"
-  - id: "sarah-designer"
-    name: "Sarah Chen"
-    description: "UI/UX designer responsible for the Material Design 3 Expressive theme implementation."
-    link: "https://github.com/sarahchen"
-  - id: "michael-translator"
-    name: "Michael Vance"
-    description: "Localization contributor maintaining German and Russian translations."
-    link: "https://github.com/michaelvance"
+- name: Alex Rivera
+  role: Core Developer
+  description: Contributed to the core architecture and UI system.
+  link: https://github.com/alexrivera
+  avatar: alex.png
+
+- name: Sarah Chen
+  role: UI/UX Designer
+  description: Designed the Material Design 3 Expressive components.
+  link: https://github.com/sarahchen
+  avatar: sarah.png
+
+- name: Marco Silva
+  role: Community Manager
+  description: Managed localization and community feedback support.
+  link: https://github.com/marcosilva
+  avatar: marco.png

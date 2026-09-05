@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributor Profile</title>
+  <title>Contributor Detail</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -11,36 +11,48 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <link rel="stylesheet" href="styles/style.css" />
+
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+  <style>
+    .detail-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
 
   <main class="container">
 
     <header class="hero">
-      <h1 id="person-name">Loading...</h1>
+      <img id="personAvatar" src="icon.png" alt="Avatar" class="detail-avatar" />
+      <h1 id="personName">Loading...</h1>
       
       <div class="hero-pills">
         <span class="m3-pill">
-          <span class="material-symbols-outlined">badge</span>
-          Profile Detail
+          <span class="material-symbols-outlined">person</span>
+          <span id="personRole">Contributor</span>
         </span>
       </div>
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle" id="person-desc">Retrieving details from remote YAML registry...</p>
+      <p class="hero-subtitle" id="personDesc">Retrieving details...</p>
     </header>
 
     <section>
       <div class="action-row" style="margin-bottom: 2.5rem; justify-content: center;">
-        <a id="person-link" href="#" target="_blank" rel="noopener" class="btn btn-filled">
-          <span class="material-symbols-outlined">open_in_new</span>
-          Personal Profile
+        <a id="personLink" href="#" target="_blank" class="btn btn-filled">
+          <span class="material-symbols-outlined">link</span>
+          Visit Profile
         </a>
-        <a href="thx.html" class="btn btn-outlined">
+        <a href="index.html" class="btn btn-outlined">
           <span class="material-symbols-outlined">arrow_back</span>
-          Back to THX
+          Back
         </a>
       </div>
 
@@ -85,19 +97,19 @@
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/detail.html', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('English', './', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/detail.html', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', './de-DE/', this)">
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/detail.html', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', './re-RU/', this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/detail.html', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', './zh-CN/', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -147,42 +159,24 @@
 
   <script src="js/main.js"></script>
   <script>
-    const YAML_URL = 'https://raw.githubusercontent.com/BugeStudioTeam/BugeStudioTeam.github.io/main/thx/thx.yml';
+    const urlParams = new URLSearchParams(window.location.search);
+    const personName = urlParams.get('name');
 
-    async function loadDetail() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const personId = urlParams.get('id');
+    fetch('thx.yml')
+      .then(response => response.text())
+      .then(text => {
+        const data = jsyaml.load(text);
+        const person = data.find(p => p.name === personName) || data[0];
 
-      if (!personId) {
-        document.getElementById('person-name').textContent = 'Profile Not Found';
-        document.getElementById('person-desc').textContent = 'No contributor specified.';
-        return;
-      }
-
-      try {
-        const response = await fetch(YAML_URL);
-        const yamlText = await response.text();
-        const data = jsyaml.load(yamlText);
-
-        if (data && data.contributors) {
-          const person = data.contributors.find(p => p.id === personId);
-          if (person) {
-            document.title = `${person.name} - Profile`;
-            document.getElementById('person-name').textContent = person.name;
-            document.getElementById('person-desc').textContent = person.description;
-            const linkBtn = document.getElementById('person-link');
-            linkBtn.href = person.link;
-          } else {
-            document.getElementById('person-name').textContent = 'Profile Not Found';
-            document.getElementById('person-desc').textContent = 'The specified profile could not be found.';
-          }
+        if (person) {
+          document.title = `${person.name} - Contributor Detail`;
+          document.getElementById('personName').innerText = person.name;
+          document.getElementById('personRole').innerText = person.role || 'Contributor';
+          document.getElementById('personDesc').innerText = person.description;
+          document.getElementById('personLink').href = person.link;
+          document.getElementById('personAvatar').src = `images/${person.avatar || person.name + '.png'}`;
         }
-      } catch (e) {
-        console.error('Error fetching YAML from GitHub:', e);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadDetail);
+      });
   </script>
 </body>
 </html>
