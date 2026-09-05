@@ -22,6 +22,12 @@
       object-fit: cover;
       margin-bottom: 1rem;
     }
+
+    .detail-card {
+      border-radius: 28px !important;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -45,12 +51,17 @@
     </header>
 
     <section>
+      <div class="card detail-card">
+        <h3 style="margin-bottom: 0.5rem;">Detailed Information</h3>
+        <p class="software-desc" id="personDetails" style="font-size: 1rem; line-height: 1.6;"></p>
+      </div>
+
       <div class="action-row" style="margin-bottom: 2.5rem; justify-content: center;">
         <a id="personLink" href="#" target="_blank" class="btn btn-filled">
           <span class="material-symbols-outlined">link</span>
           Visit Profile
         </a>
-        <a href="index.html" class="btn btn-outlined">
+        <a href="https://bugestudio.website/thx/" class="btn btn-outlined">
           <span class="material-symbols-outlined">arrow_back</span>
           Back
         </a>
@@ -173,6 +184,7 @@
           document.getElementById('personName').innerText = person.name;
           document.getElementById('personRole').innerText = person.role || 'Contributor';
           document.getElementById('personDesc').innerText = person.description;
+          document.getElementById('personDetails').innerText = person.details || person.description;
           document.getElementById('personLink').href = person.link;
           document.getElementById('personAvatar').src = `images/${person.avatar || person.name + '.png'}`;
         }

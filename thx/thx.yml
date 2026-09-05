@@ -1,17 +1,20 @@
 - name: Alex Rivera
   role: Core Developer
   description: Contributed to the core architecture and UI system.
+  details: Alex has over 8 years of experience in system architecture and frontend performance optimization. During this project, Alex designed the core data pipeline and mentored team members on clean code standards.
   link: https://github.com/alexrivera
   avatar: alex.png
 
 - name: Sarah Chen
   role: UI/UX Designer
   description: Designed the Material Design 3 Expressive components.
+  details: Sarah leads product design at several open-source initiatives. She crafted the visual design system, interaction patterns, and responsive component libraries used throughout this application.
   link: https://github.com/sarahchen
   avatar: sarah.png
 
 - name: Marco Silva
   role: Community Manager
   description: Managed localization and community feedback support.
+  details: Marco handles external communications, community moderation, and multi-language translations. He coordinated feedback channels to ensure continuous product improvement.
   link: https://github.com/marcosilva
   avatar: marco.png

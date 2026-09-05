@@ -28,6 +28,10 @@
       gap: 1rem;
     }
 
+    .large-rounded-card {
+      border-radius: 28px !important;
+    }
+
     @media (max-width: 768px) {
       .grid-container {
         grid-template-columns: repeat(1, 1fr);
@@ -170,10 +174,10 @@
         
         data.forEach((item) => {
           const card = document.createElement('div');
-          card.className = 'card corner-top corner-bottom';
+          card.className = 'card large-rounded-card';
           card.style.cursor = 'pointer';
           card.onclick = () => {
-            window.location.href = `detail.html?name=${encodeURIComponent(item.name)}`;
+            window.location.href = `detail?name=${encodeURIComponent(item.name)}`;
           };
 
           card.innerHTML = `
