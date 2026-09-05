@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="ru" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributor Detail</title>
+  <title>Участник - Buge Studio</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -41,35 +41,35 @@
   <main class="container">
 
     <header class="hero">
-      <img id="personAvatar" src="icon.png" alt="Avatar" class="detail-avatar" />
-      <h1 id="personName">Loading...</h1>
+      <img id="personAvatar" src="icon.png" alt="Аватар" class="detail-avatar" />
+      <h1 id="personName">Загрузка...</h1>
       
       <div class="hero-pills">
         <span class="m3-pill">
           <span class="material-symbols-outlined">person</span>
-          <span id="personRole">Contributor</span>
+          <span id="personRole">Участник</span>
         </span>
       </div>
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle" id="personDesc">Retrieving details...</p>
+      <p class="hero-subtitle" id="personDesc">Загрузка данных...</p>
     </header>
 
     <section>
       <div class="card detail-card">
-        <h3 style="margin-bottom: 0.5rem;">Detailed Information</h3>
+        <h3 style="margin-bottom: 0.5rem;">Подробная информация</h3>
         <p class="software-desc person-details-text" id="personDetails"></p>
       </div>
 
       <div class="action-row" style="margin-bottom: 2.5rem; justify-content: center;">
         <a id="personLink" href="#" target="_blank" class="btn btn-filled">
           <span class="material-symbols-outlined">link</span>
-          Visit Profile
+          Посетить профиль
         </a>
-        <a href="https://bugestudio.website/thx/" class="btn btn-outlined">
+        <a href="https://bugestudio.website/re-RU/thx/" class="btn btn-outlined">
           <span class="material-symbols-outlined">arrow_back</span>
-          Back
+          Назад
         </a>
       </div>
 
@@ -107,26 +107,26 @@
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Language</span>
-              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+              <span class="md3-dropdown-label">Язык</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Русский</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', './', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/thx/detail?name=' + getPersonName(), this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', './de-DE/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/thx/detail?name=' + getPersonName(), this)">
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', './re-RU/', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/thx/detail?name=' + getPersonName(), this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', './zh-CN/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/thx/detail?name=' + getPersonName(), this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -136,35 +136,35 @@
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Theme</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+              <span class="md3-dropdown-label">Тема</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Светлая</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
-              <span>Light</span>
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Светлая', this)">
+              <span>Светлая</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
-              <span>Light (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Светлая (Средний)', this)">
+              <span>Светлая (Средний)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
-              <span>Light (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Светлая (Высокий)', this)">
+              <span>Светлая (Высокий)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
-              <span>Dark</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Тёмная', this)">
+              <span>Тёмная</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
-              <span>Dark (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Тёмная (Средний)', this)">
+              <span>Тёмная (Средний)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
-              <span>Dark (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Тёмная (Высокий)', this)">
+              <span>Тёмная (Высокий)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
           </div>
@@ -176,24 +176,55 @@
 
   <script src="js/main.js"></script>
   <script>
+    // Determine the current language from the URL path
+    function getCurrentLang() {
+      const path = window.location.pathname;
+      const match = path.match(/\/([a-z]{2}-[A-Z]{2})\/thx\/detail/);
+      if (match) {
+        return match[1];
+      }
+      return '';
+    }
+
+    function getPersonName() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('name') || '';
+    }
+
     const urlParams = new URLSearchParams(window.location.search);
     const personName = urlParams.get('name');
+    const lang = getCurrentLang();
 
-    fetch('thx.yml')
+    // Fetch the appropriate YAML file based on language
+    const yamlPath = lang === '' ? '/thx/thx.yml' : `/thx/thx.${lang}.yml`;
+
+    fetch(yamlPath)
+      .then(response => {
+        if (!response.ok) {
+          // Fallback to default English if language-specific file not found
+          return fetch('/thx/thx.yml');
+        }
+        return response;
+      })
       .then(response => response.text())
       .then(text => {
         const data = jsyaml.load(text);
         const person = data.find(p => p.name === personName) || data[0];
 
         if (person) {
-          document.title = `${person.name} - Contributor Detail`;
+          document.title = `${person.name} - Участник`;
           document.getElementById('personName').innerText = person.name;
-          document.getElementById('personRole').innerText = person.role || 'Contributor';
+          document.getElementById('personRole').innerText = person.role || 'Участник';
           document.getElementById('personDesc').innerText = person.description;
           document.getElementById('personDetails').innerText = person.details || person.description;
-          document.getElementById('personLink').href = person.link;
+          document.getElementById('personLink').href = person.link || '#';
           document.getElementById('personAvatar').src = `images/${person.avatar || person.name + '.png'}`;
         }
+      })
+      .catch(error => {
+        console.error('Ошибка загрузки данных участника:', error);
+        document.getElementById('personName').innerText = 'Ошибка';
+        document.getElementById('personDesc').innerText = 'Не удалось загрузить данные.';
       });
   </script>
 </body>

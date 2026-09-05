@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributor Detail</title>
+  <title>Contributor Detail - Buge Studio</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -114,19 +114,19 @@
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', './', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('English', 'https://bugestudio.website/thx/detail?name=' + getPersonName(), this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', './de-DE/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/thx/detail?name=' + getPersonName(), this)">
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', './re-RU/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/thx/detail?name=' + getPersonName(), this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', './zh-CN/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/thx/detail?name=' + getPersonName(), this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -176,10 +176,36 @@
 
   <script src="js/main.js"></script>
   <script>
+    // Determine the current language from the URL path
+    function getCurrentLang() {
+      const path = window.location.pathname;
+      const match = path.match(/\/([a-z]{2}-[A-Z]{2})\/thx\/detail/);
+      if (match) {
+        return match[1];
+      }
+      return '';
+    }
+
+    function getPersonName() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('name') || '';
+    }
+
     const urlParams = new URLSearchParams(window.location.search);
     const personName = urlParams.get('name');
+    const lang = getCurrentLang();
 
-    fetch('thx.yml')
+    // Fetch the appropriate YAML file based on language
+    const yamlPath = lang === '' ? '/thx/thx.yml' : `/thx/thx.${lang}.yml`;
+
+    fetch(yamlPath)
+      .then(response => {
+        if (!response.ok) {
+          // Fallback to default English if language-specific file not found
+          return fetch('/thx/thx.yml');
+        }
+        return response;
+      })
       .then(response => response.text())
       .then(text => {
         const data = jsyaml.load(text);
@@ -191,9 +217,14 @@
           document.getElementById('personRole').innerText = person.role || 'Contributor';
           document.getElementById('personDesc').innerText = person.description;
           document.getElementById('personDetails').innerText = person.details || person.description;
-          document.getElementById('personLink').href = person.link;
+          document.getElementById('personLink').href = person.link || '#';
           document.getElementById('personAvatar').src = `images/${person.avatar || person.name + '.png'}`;
         }
+      })
+      .catch(error => {
+        console.error('Failed to load contributor data:', error);
+        document.getElementById('personName').innerText = 'Error';
+        document.getElementById('personDesc').innerText = 'Failed to load contributor details.';
       });
   </script>
 </body>

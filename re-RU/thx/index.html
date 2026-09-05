@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="ru" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thank You</title>
+  <title>Спасибо - Buge Studio</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -71,18 +71,18 @@
 
     <header class="hero">
       <img src="icon.png" alt="Logo" class="hero-logo" />
-      <h1>THX</h1>
+      <h1>СПАСИБО</h1>
       
       <div class="hero-pills">
         <span class="m3-pill">
           <span class="material-symbols-outlined">favorite</span>
-          Contributors
+          Участники
         </span>
       </div>
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle">Special thanks to everyone who made this project possible.</p>
+      <p class="hero-subtitle">Особая благодарность всем, кто сделал этот проект возможным.</p>
     </header>
 
     <section>
@@ -123,26 +123,26 @@
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Language</span>
-              <span class="md3-dropdown-value" id="selectedLangText">English</span>
+              <span class="md3-dropdown-label">Язык</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Русский</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectLanguage('English', './', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/thx/', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', './de-DE/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/thx/', this)">
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', './re-RU/', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/thx/', this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', './zh-CN/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/thx/', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -152,35 +152,35 @@
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Theme</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Light</span>
+              <span class="md3-dropdown-label">Тема</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Светлая</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Light', this)">
-              <span>Light</span>
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Светлая', this)">
+              <span>Светлая</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Light (Medium)', this)">
-              <span>Light (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Светлая (Средний)', this)">
+              <span>Светлая (Средний)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Light (High)', this)">
-              <span>Light (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Светлая (Высокий)', this)">
+              <span>Светлая (Высокий)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Dark', this)">
-              <span>Dark</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Тёмная', this)">
+              <span>Тёмная</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Dark (Medium)', this)">
-              <span>Dark (Medium)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Тёмная (Средний)', this)">
+              <span>Тёмная (Средний)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Dark (High)', this)">
-              <span>Dark (High)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Тёмная (Высокий)', this)">
+              <span>Тёмная (Высокий)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
           </div>
@@ -192,7 +192,29 @@
 
   <script src="js/main.js"></script>
   <script>
-    fetch('thx.yml')
+    // Determine the current language from the URL path
+    function getCurrentLang() {
+      const path = window.location.pathname;
+      const match = path.match(/\/([a-z]{2}-[A-Z]{2})\/thx\//);
+      if (match) {
+        return match[1];
+      }
+      return '';
+    }
+
+    const lang = getCurrentLang();
+    
+    // Fetch the appropriate YAML file based on language
+    const yamlPath = lang === '' ? '/thx/thx.yml' : `/thx/thx.${lang}.yml`;
+    
+    fetch(yamlPath)
+      .then(response => {
+        if (!response.ok) {
+          // Fallback to default English if language-specific file not found
+          return fetch('/thx/thx.yml');
+        }
+        return response;
+      })
       .then(response => response.text())
       .then(text => {
         const data = jsyaml.load(text);
@@ -212,12 +234,21 @@
                 <img src="images/${item.avatar || item.name + '.png'}" alt="${item.name}" class="contributor-avatar" />
                 <h3>${item.name}</h3>
               </div>
-              <span class="badge">${item.role || 'Contributor'}</span>
+              <span class="badge">${item.role || 'Участник'}</span>
             </div>
             <p class="software-desc">${item.description}</p>
           `;
           container.appendChild(card);
         });
+      })
+      .catch(error => {
+        console.error('Failed to load contributors data:', error);
+        const container = document.getElementById('contributorsContainer');
+        container.innerHTML = `
+          <div class="card large-rounded-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+            <p>Не удалось загрузить участников. Пожалуйста, попробуйте позже.</p>
+          </div>
+        `;
       });
   </script>
 </body>
