@@ -15,6 +15,14 @@
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
   <style>
+    .container {
+      max-width: 1400px !important;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+    }
+
     .contributor-avatar {
       width: 48px;
       height: 48px;
@@ -26,7 +34,7 @@
     .grid-container {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
+      gap: 1.25rem;
       width: 100%;
     }
 
@@ -44,7 +52,7 @@
       overflow-wrap: break-word;
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1100px) {
       .grid-container {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
