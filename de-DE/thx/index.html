@@ -130,19 +130,19 @@
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item" onclick="selectLanguage('English', './', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/thx/', this)">
               <span>English</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item selected" onclick="selectLanguage('Deutsch', './de-DE/', this)">
+            <div class="md3-menu-item selected" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/thx/', this)">
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('Русский', './re-RU/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/thx/', this)">
               <span>Русский</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectLanguage('简体中文', './zh-CN/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/thx/', this)">
               <span>简体中文</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
@@ -192,7 +192,29 @@
 
   <script src="js/main.js"></script>
   <script>
-    fetch('/thx/thx.yml')
+    // Determine the current language from the URL path
+    function getCurrentLang() {
+      const path = window.location.pathname;
+      const match = path.match(/\/([a-z]{2}-[A-Z]{2})\/thx\//);
+      if (match) {
+        return match[1];
+      }
+      return '';
+    }
+
+    const lang = getCurrentLang();
+    
+    // Fetch the appropriate YAML file based on language
+    const yamlPath = lang === '' ? '/thx/thx.yml' : `/thx/thx.${lang}.yml`;
+    
+    fetch(yamlPath)
+      .then(response => {
+        if (!response.ok) {
+          // Fallback to default English if language-specific file not found
+          return fetch('/thx/thx.yml');
+        }
+        return response;
+      })
       .then(response => response.text())
       .then(text => {
         const data = jsyaml.load(text);
@@ -218,6 +240,15 @@
           `;
           container.appendChild(card);
         });
+      })
+      .catch(error => {
+        console.error('Fehler beim Laden der Mitwirkendendaten:', error);
+        const container = document.getElementById('contributorsContainer');
+        container.innerHTML = `
+          <div class="card large-rounded-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+            <p>Fehler beim Laden der Mitwirkenden. Bitte versuche es später erneut.</p>
+          </div>
+        `;
       });
   </script>
 </body>
