@@ -50,7 +50,7 @@ We actively maintain utilities that enhance productivity, privacy, and system co
 ### 📱 Android Ecosystem
 
 *  **[Buge App Manager](https://github.com/BugeStudioTeam/Buge-App-Manager)** *Advanced app & granular permission management utility. Utilizes Shizuku for elevated system privileges without requiring root.*
-  * **Tech Stack:** `Kotlin` | `Shizuku API` | `Material Design 3`
+  * **Tech Stack:** `Kotlin` | `Shizuku API` |  `ROOT`  | `Material Design 3`
 *  **[Buge App Locker](https://github.com/BugeStudioTeam/Buge-App-Locker)** *A lightweight, privacy-focused application locker utilizing Android Accessibility services.*
   * **Tech Stack:** `Java` | `Accessibility Service` | `Material 3`
 *  **[Buge Files](https://github.com/BugeStudioTeam/Buge-Files)** *A sleek, modern file manager optimized for speed and clear local storage navigation.*
