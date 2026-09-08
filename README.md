@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Thinking what to do, then creating software that makes a difference.</strong><br />
-  No bloat, no distractions. Fully open-source, tailored for Android & Windows users.
+  No bloat, no distractions. Fully open-source, tailored for Android, Linux & Windows users.
 </p>
 
 <p align="center">
