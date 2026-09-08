@@ -50,24 +50,14 @@ We actively maintain utilities that enhance productivity, privacy, and system co
 ### 📱 Android Ecosystem
 
 *  **[Buge App Manager](https://github.com/BugeStudioTeam/Buge-App-Manager)** *Advanced app & granular permission management utility. Utilizes Shizuku for elevated system privileges without requiring root.*
-  * **Tech Stack:** `Kotlin` | `Shizuku API` |  `ROOT`  | `Material Design 3`
-*  **[Buge App Locker](https://github.com/BugeStudioTeam/Buge-App-Locker)** *A lightweight, privacy-focused application locker utilizing Android Accessibility services.*
-  * **Tech Stack:** `Java` | `Accessibility Service` | `Material 3`
-*  **[Buge Files](https://github.com/BugeStudioTeam/Buge-Files)** *A sleek, modern file manager optimized for speed and clear local storage navigation.*
-  * **Tech Stack:** `Kotlin` | `Jetpack Compose`
+  * **Tech Stack:** `Kotlin`  `Shizuku API`   `ROOT`   `Material Design 3 Expressive`
+*  **[Buge Files](https://github.com/BugeStudioTeam/Buge-Files)** *Buge Files is a modern Android file manager built with Material Design 3 Expressive.*
+  * **Tech Stack:** `Kotlin` | `Material Design 3 Expressive`
 
 ### 💻 Cross-Platform / Desktop
 
 *  **[Zynox](https://github.com/BugeStudioTeam/Zynox)** *An AI-powered cross-platform CLI tool. Generate, create, and manage files/folders or execute platform-specific commands using natural language.*
   * **Tech Stack:** `Python` | `LLM Integrations` (GPT, Gemini, DeepSeek) | `CLI`
-
----
-
-## 📊 Site Performance & Status
-
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=BugeStudioTeam&bg_color=0d1117&color=4285F4&line=26A5E4&point=ffffff&area=true&hide_border=true" width="100%" alt="Buge Studio Commits Graph" />
-</p>
 
 ---
 
