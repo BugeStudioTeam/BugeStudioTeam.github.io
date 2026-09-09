@@ -1,81 +1,66 @@
 <p align="center">
-  <img src="https://github.com/BugeStudioTeam/BugeStudioTeam/blob/main/icon.png" alt="Buge Studio Logo" width="180">
+  <img src="https://github.com/BugeStudioTeam/BugeStudioTeam/blob/main/icon.png" alt="Buge Studio" width="25%">
 </p>
 
-<h1 align="center">Buge Studio Official Website</h1>
+<h1 align="center">
+  Buge Studio Official Website
+</h1>
 
 <p align="center">
   <strong>Thinking what to do, then creating software that makes a difference.</strong><br />
-  No bloat, no distractions. Fully open-source, tailored for Android, Linux & Windows users.
+  No bloat, no distractions. Fully open source, supporting Android, Linux & Windows.
 </p>
 
 <p align="center">
   <a href="https://github.com/BugeStudioTeam">
-    <img src="https://img.shields.io/badge/GitHub-BugeStudioTeam-181717?style=for-the-badge&logo=github" alt="GitHub Organization">
+    <img src="https://img.shields.io/badge/GitHub-BugeStudioTeam-181717?style=for-the-badge&logo=github" alt="GitHub">
   </a>
   <a href="https://t.me/bugestudio">
-    <img src="https://img.shields.io/badge/Telegram-Join_Channel-26A5E4?style=for-the-badge&logo=telegram" alt="Telegram Channel">
+    <img src="https://img.shields.io/badge/Telegram-Join_Channel-26A5E4?style=for-the-badge&logo=telegram" alt="Telegram">
   </a>
   <a href="https://bugestudioteam.github.io">
-    <img src="https://img.shields.io/badge/Website-Visit%20Live-4285F4?style=for-the-badge&logo=google-chrome" alt="Official Website">
+    <img src="https://img.shields.io/badge/Website-Visit-4285F4?style=for-the-badge&logo=google-chrome" alt="Website">
   </a>
+
+  <!-- Profile Views -->
+  <img src="https://komarev.com/ghpvc/?username=BugeStudioTeam&style=for-the-badge&color=blue" alt="Profile Views">
+</p>
+  
 </p>
 
----
+## ✨ Our Philosophy
 
-## 🌐 About Our Website
+> **No bloat, no distractions. Fully open source.** > Clean, powerful, and transparent software for Android, Linux & Windows users.
 
-Welcome to the central hub of **Buge Studio**. This repository powers our official website: **[bugestudio.website](https://bugestudio.website/)**. 
-
-Here, users can find the latest stable releases of our applications, explore documentation, and learn more about our ongoing efforts to build a distraction-free software ecosystem.
+We believe software should be **simple, powerful, and transparent**. Every tool is built to solve real problems without unnecessary features.
 
 ---
 
-## ✨ Our Core Philosophy
+## 🚀 Featured Projects
 
-> **"Simplicity is the ultimate sophistication."**
-
-We believe modern software has become bloated with unnecessary trackers, telemetry, and heavy UI elements. Buge Studio is dedicated to reversing this trend.
-
-- **No Bloat:** Zero heavy components or pointless animations that drain resources.
-- **No Distractions:** Ad-free, clean interfaces built strictly around functionality.
-- **100% Open Source:** Transparent codebases allowing anyone to audit, fork, or contribute.
+| Project | Stars | Description | Tech Stack |
+| :--- | :--- | :--- | :--- |
+| [**Buge App Manager**](https://github.com/BugeStudioTeam/Buge-App-Manager)  | Powerful Android app & permission management tool. Requires Shizuku. | `Kotlin` `Shizuku` `Android` |
+| [**Zynox**](https://github.com/BugeStudioTeam/Zynox) | AI-powered CLI tool creates files/folders from natural language across all platforms. | `Python` `CLI` `AI` |
 
 ---
 
-## 🚀 Our Featured Projects
+## 📊 Organization Stats & Activity
 
-We actively maintain utilities that enhance productivity, privacy, and system control.
+<!-- GitHub Stats -->
+<img src="https://github-stats-extended.vercel.app/api?username=BugeStudioTeam&show_icons=true&theme=transparent&hide_border=true&count_private=true" height="170" /> <img src="https://github-stats-extended.vercel.app/api/top-langs/?username=BugeStudioTeam&layout=compact&theme=transparent&hide_border=true&count_private=true" height="170" />
 
-### 📱 Android Ecosystem
+</div>
 
-*  **[Buge App Manager](https://github.com/BugeStudioTeam/Buge-App-Manager)** *Advanced app & granular permission management utility. Utilizes Shizuku for elevated system privileges without requiring root.*
-  * **Tech Stack:** `Kotlin`  `Shizuku API`   `ROOT`   `Material Design 3 Expressive`
-*  **[Buge Files](https://github.com/BugeStudioTeam/Buge-Files)** *Buge Files is a modern Android file manager built with Material Design 3 Expressive.*
-  * **Tech Stack:** `Kotlin` | `Material Design 3 Expressive`
-
-### 💻 Cross-Platform / Desktop
-
-*  **[Zynox](https://github.com/BugeStudioTeam/Zynox)** *An AI-powered cross-platform CLI tool. Generate, create, and manage files/folders or execute platform-specific commands using natural language.*
-  * **Tech Stack:** `Python` | `LLM Integrations` (GPT, Gemini, DeepSeek) | `CLI`
+[View our Contribution History](https://github.com/BugeStudioTeam/BugeStudioTeam/blob/main/CONTRIBUTE.md)
 
 ---
 
-## 🤝 Contributing & Feedback
+## 📫 Connect With Us
 
-As an open-source team, we love community collaboration! Whether you want to fix a bug, request a feature, or improve the documentation for our apps or website:
-
-1. Look through individual project repositories.
-2. Open an **Issue** or submit a **Pull Request**.
-3. For website-specific bugs, please open an issue directly in this repository.
-
----
-
-## 📫 Stay Connected
-
-- 📧 **Open Source**: Submit feedback or contribute via E-mail (CreepyNightmares@proton.me), (PCreepyNightmares@gmail.com)
-- 💬 **Telegram Channel:** [Join @bugestudio](https://t.me/bugestudio) for instant beta rollouts and announcements.
-- 📧 **GitHub Organization:** Explore all codebases at [github.com/BugeStudioTeam](https://github.com/BugeStudioTeam).
+-   📧 **Open Source**: Submit feedback or contribute via E-mail (CreepyNightmares@proton.me), (buge@bugestudio.website), (pCreepyNightmares@gmail.com)
+-   💬 **Telegram Channel**: [https://t.me/bugestudio](https://t.me/bugestudio)
+-   🌐 **Official Website**: [https://bugestudio.website](https://bugestudioteam.github.io)
 
 ---
 
