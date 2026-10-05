@@ -36,7 +36,7 @@
   role: Test & Support
   description: Conduct some testing work for us.
   details: |
-    marzhiyuan is one of the most loyal and dedicated fans of Buge Studio. While many users simply enjoy the apps we build, Mars goes far beyond that — he actively contributes to the improvement of our projects by volunteering his time, energy, and a wide range of devices for testing purposes.
+    Mars W is one of the most loyal and dedicated fans of Buge Studio. While many users simply enjoy the apps we build, Mars goes far beyond that — he actively contributes to the improvement of our projects by volunteering his time, energy, and a wide range of devices for testing purposes.
 
     What makes Mars particularly remarkable is that he is still a student. Despite his busy academic schedule, he consistently finds time to help us. He doesn't wait for stable releases or polished versions — instead, he tests early builds, experimental features, and even rough prototypes that most users would never see. His willingness to engage with unfinished work speaks volumes about his commitment to the project and his trust in our vision.
 
@@ -44,7 +44,7 @@
 
     His testing has helped us catch bugs that we might have otherwise missed, and his detailed reports often include logs, screenshots, and clear reproduction steps — making our work significantly easier. Beyond the technical side, Mars is also a positive presence in our community, encouraging other users and sharing his experiences with genuine enthusiasm.
 
-    marzhiyuan is more than just a tester — he is a trusted partner in our development process. His dedication, generosity, and willingness to support us despite his own commitments are truly inspiring. We are deeply grateful for everything he has done, and we consider him an essential part of the Buge Studio journey.
+    Mars W is more than just a tester — he is a trusted partner in our development process. His dedication, generosity, and willingness to support us despite his own commitments are truly inspiring. We are deeply grateful for everything he has done, and we consider him an essential part of the Buge Studio journey.
   link: https://github.com/marzhiyuan
   avatar: marsw.png
 
@@ -61,5 +61,19 @@
     Throughout all this time, Cyclone has remained a consistent presence in the Buge Studio journey. Even when he was busy with his own commitments, he continued to check in on our progress, offer suggestions, and encourage us to aim higher.
 
     In many ways, Cyclone embodies the true spirit of open-source collaboration: not what you can gain, but what you can give. His contributions have left a lasting mark on our projects and on the way we approach development. We are incredibly grateful for everything he has shared with us, and we consider him not just an advisor, but a friend and a trusted member of the Buge Studio community.
-  link: https://www.linkedin.com/in/chengjun-jang-a7031742b/
+  link: https://bugestudio.website/thx/detail?name=Cyclone
   avatar: cyclone.png
+
+- name: Kevin233B
+  role: Contributor
+  description: An exceptionally skilled Android enthusiast making milestone-level contributions to Buge App Manager.
+  details: |
+    Kevin233B is an exceptionally skilled Android enthusiast with a remarkably deep understanding of low-level system logic. He has made milestone-level contributions to Buge App Manager, delivering key improvements and breakthroughs that significantly advanced the project. What makes his achievements even more impressive is that he is still only a student. Despite his heavy academic workload, he continues to devote substantial time and energy to the project, offering invaluable support and driving it forward.
+
+    His technical insight goes far beyond surface-level tinkering. He understands how Android works under the hood, from permission models and system services to low-level package management and privileged operations, and he applies that knowledge with precision and care. Whenever the project faces a complex challenge, Kevin233B is often the one who identifies the root cause and proposes a clean, effective solution.
+
+    Beyond his technical ability, he is also a reliable and generous collaborator. He shares his findings openly, explains difficult concepts clearly, and helps other contributors grow. His presence has raised the overall quality and ambition of the project.
+
+    That someone so young can contribute at this level is truly remarkable. Kevin233B is not just a contributor. He is a driving force behind Buge App Manager's progress, and we are deeply grateful for everything he has done.
+  link: https://github.com/Kevin233B
+  avatar: kevin233b.png
