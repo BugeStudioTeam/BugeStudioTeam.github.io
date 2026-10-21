@@ -24,24 +24,22 @@ jobs:
           TAG=$(echo "$DATA" | jq -r '.tag_name')
           VER=$(echo "$TAG" | sed 's/^AppManager//; s/^v//')
           APK_URL=$(echo "$DATA" | jq -r '.assets[] | select(.name | endswith(".apk")) | .browser_download_url' | head -n1)
-          APK_NAME=$(echo "$DATA" | jq -r '.assets[] | select(.name | endswith(".apk")) | .name' | head -n1)
-          echo "version=$VER" >> $GITHUB_OUTPUT
-          echo "apk_url=$APK_URL" >> $GITHUB_OUTPUT
-          echo "apk_name=$APK_NAME" >> $GITHUB_OUTPUT
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "apk_url=$APK_URL" >> "$GITHUB_OUTPUT"
 
       - name: Read current version
         id: cur
         run: |
-          VER=$(grep -o 'appmanager/[0-9]*\.[0-9]*\.[0-9]*' index.html | head -n1 | cut -d'/' -f2)
-          echo "version=$VER" >> $GITHUB_OUTPUT
+          VER=$(grep -o 'BugeAppManager-v[0-9]*\.[0-9]*\.[0-9]*-release\.apk' index.html | head -n1 | sed 's/BugeAppManager-v//; s/-release\.apk//')
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
 
       - name: Compare versions
         id: cmp
         run: |
           if [ "${{ steps.rel.outputs.version }}" != "${{ steps.cur.outputs.version }}" ] && [ -n "${{ steps.rel.outputs.apk_url }}" ]; then
-            echo "update=true" >> $GITHUB_OUTPUT
+            echo "update=true" >> "$GITHUB_OUTPUT"
           else
-            echo "update=false" >> $GITHUB_OUTPUT
+            echo "update=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Replace version references
@@ -49,25 +47,21 @@ jobs:
         run: |
           OLD="${{ steps.cur.outputs.version }}"
           NEW="${{ steps.rel.outputs.version }}"
-          for f in index.html softwares/index.html appmanager/index.html \
-                   de-DE/index.html de-DE/softwares/index.html de-DE/appmanager/index.html \
-                   re-RU/index.html re-RU/softwares/index.html re-RU/appmanager/index.html \
-                   zh-CN/index.html zh-CN/softwares/index.html zh-CN/appmanager/index.html; do
+          NEW_URL="${{ steps.rel.outputs.apk_url }}"
+          FILES="index.html softwares/index.html appmanager/index.html de-DE/index.html de-DE/softwares/index.html de-DE/appmanager/index.html re-RU/index.html re-RU/softwares/index.html re-RU/appmanager/index.html zh-CN/index.html zh-CN/softwares/index.html zh-CN/appmanager/index.html"
+          for f in $FILES; do
             if [ -f "$f" ]; then
-              sed -i "s|$OLD|$NEW|g" "$f"
+              sed -i "s|https://[^\"]*appmanager/${OLD}/BugeAppManager-v${OLD}-release\.apk|${NEW_URL}|g" "$f"
+              sed -i "s|/storage/appmanager/${OLD}/BugeAppManager-v${OLD}-release\.apk|${NEW_URL}|g" "$f"
+              sed -i "s|${OLD}|${NEW}|g" "$f"
             fi
           done
 
-      - name: Clean old storage
+      - name: Remove legacy storage
         if: steps.cmp.outputs.update == 'true'
         run: |
-          rm -rf storage/appmanager/*
-          mkdir -p "storage/appmanager/${{ steps.rel.outputs.version }}"
-
-      - name: Download APK
-        if: steps.cmp.outputs.update == 'true'
-        run: |
-          curl -L -o "storage/appmanager/${{ steps.rel.outputs.version }}/${{ steps.rel.outputs.apk_name }}" "${{ steps.rel.outputs.apk_url }}"
+          rm -rf storage/appmanager
+          mkdir -p storage
 
       - name: Commit and push
         if: steps.cmp.outputs.update == 'true'
