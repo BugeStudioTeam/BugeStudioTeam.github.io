@@ -1,242 +1,79 @@
-name: Update Buge App Manager
+name: Update App Manager
 
 on:
   schedule:
     - cron: '0 * * * *'
   workflow_dispatch:
-    inputs:
-      force:
-        description: 'Force update even if the version is unchanged'
-        type: boolean
-        default: false
-
-concurrency:
-  group: update-appmanager
-  cancel-in-progress: false
 
 permissions:
   contents: write
 
-env:
-  SOURCE_REPO: BugeStudioTeam/Buge-App-Manager
-  STORAGE_DIR: storage/appmanager
-  HTML_GLOBS: |
-    index.html
-    softwares/index.html
-    appmanager/index.html
-    de-DE/index.html
-    de-DE/softwares/index.html
-    de-DE/appmanager/index.html
-    re-RU/index.html
-    re-RU/softwares/index.html
-    re-RU/appmanager/index.html
-    zh-CN/index.html
-    zh-CN/softwares/index.html
-    zh-CN/appmanager/index.html
-
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout website repo
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Query latest release from GitHub API
-        id: release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fetch latest release
+        id: rel
         run: |
-          set -euo pipefail
+          DATA=$(curl -s https://api.github.com/repos/BugeStudioTeam/Buge-App-Manager/releases/latest)
+          TAG=$(echo "$DATA" | jq -r '.tag_name')
+          VER=$(echo "$TAG" | sed 's/^AppManager//; s/^v//')
+          APK_URL=$(echo "$DATA" | jq -r '.assets[] | select(.name | endswith(".apk")) | .browser_download_url' | head -n1)
+          APK_NAME=$(echo "$DATA" | jq -r '.assets[] | select(.name | endswith(".apk")) | .name' | head -n1)
+          echo "version=$VER" >> $GITHUB_OUTPUT
+          echo "apk_url=$APK_URL" >> $GITHUB_OUTPUT
+          echo "apk_name=$APK_NAME" >> $GITHUB_OUTPUT
 
-          API="https://api.github.com/repos/${SOURCE_REPO}/releases/latest"
-          resp=""
-          if resp=$(curl -sS --fail-with-body \
-                -H "Authorization: Bearer ${GH_TOKEN}" \
-                -H "Accept: application/vnd.github+json" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                "$API"); then
-            echo "Fetched with token."
+      - name: Read current version
+        id: cur
+        run: |
+          VER=$(grep -o 'appmanager/[0-9]*\.[0-9]*\.[0-9]*' index.html | head -n1 | cut -d'/' -f2)
+          echo "version=$VER" >> $GITHUB_OUTPUT
+
+      - name: Compare versions
+        id: cmp
+        run: |
+          if [ "${{ steps.rel.outputs.version }}" != "${{ steps.cur.outputs.version }}" ] && [ -n "${{ steps.rel.outputs.apk_url }}" ]; then
+            echo "update=true" >> $GITHUB_OUTPUT
           else
-            echo "::warning::Authenticated API call failed, retrying anonymously."
-            resp=$(curl -sS --fail-with-body \
-                -H "Accept: application/vnd.github+json" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                "$API")
+            echo "update=false" >> $GITHUB_OUTPUT
           fi
 
-          tag=$(jq -r '.tag_name // empty' <<<"$resp")
-          if [[ ! "$tag" =~ ^AppManager([0-9]+(\.[0-9]+)*)$ ]]; then
-            echo "::error::Unexpected tag_name: '$tag'"
-            exit 1
-          fi
-          version="${BASH_REMATCH[1]}"
-
-          asset_json=$(jq -c '
-            [.assets[] | select(.name | endswith(".apk"))]
-            | ( map(select(.name | test("-release\\.apk$"; "i"))) | first )
-              // first
-            // empty
-          ' <<<"$resp")
-          if [[ -z "$asset_json" || "$asset_json" == "null" ]]; then
-            echo "::error::No APK asset found in release $tag"
-            exit 1
-          fi
-
-          asset_name=$(jq -r '.name' <<<"$asset_json")
-          asset_url=$(jq -r '.browser_download_url' <<<"$asset_json")
-          asset_size=$(jq -r '.size' <<<"$asset_json")
-
-          echo "Latest version : $version"
-          echo "APK            : $asset_name ($asset_size bytes)"
-
-          {
-            echo "version=$version"
-            echo "tag=$tag"
-            echo "asset_name=$asset_name"
-            echo "asset_url=$asset_url"
-            echo "asset_size=$asset_size"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Compare with currently deployed version
-        id: check
-        env:
-          NEW_VERSION: ${{ steps.release.outputs.version }}
-          FORCE: ${{ inputs.force }}
+      - name: Replace version references
+        if: steps.cmp.outputs.update == 'true'
         run: |
-          set -euo pipefail
-
-          cur=""
-          if [[ -d "$STORAGE_DIR" ]]; then
-            cur=$(find "$STORAGE_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
-                  | grep -E '^[0-9]+(\.[0-9]+)*$' | sort -V | tail -n1 || true)
-          fi
-          if [[ -z "$cur" ]]; then
-            cur=$(grep -rhoE '/storage/appmanager/[0-9]+(\.[0-9]+)*/' \
-                  --include='*.html' . 2>/dev/null \
-                  | grep -oE '[0-9]+(\.[0-9]+)*' | sort -V | tail -n1 || true)
-          fi
-
-          echo "Deployed: ${cur:-<none>}  ->  Latest: $NEW_VERSION"
-
-          if [[ "$cur" == "$NEW_VERSION" && "$FORCE" != "true" ]]; then
-            echo "Already up to date, nothing to do."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "old_version=$cur" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Download APK and rebuild storage directory
-        if: steps.check.outputs.changed == 'true'
-        env:
-          VERSION: ${{ steps.release.outputs.version }}
-          ASSET_NAME: ${{ steps.release.outputs.asset_name }}
-          ASSET_URL: ${{ steps.release.outputs.asset_url }}
-          ASSET_SIZE: ${{ steps.release.outputs.asset_size }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-
-          if [[ -d "$STORAGE_DIR" ]]; then
-            find "$STORAGE_DIR" -mindepth 1 -maxdepth 1 ! -name "$VERSION" -exec rm -rf {} +
-          fi
-
-          target_dir="$STORAGE_DIR/$VERSION"
-          target_file="$target_dir/$ASSET_NAME"
-
-          if [[ -f "$target_file" ]]; then
-            actual=$(stat -c '%s' "$target_file")
-            if [[ "$actual" == "$ASSET_SIZE" ]]; then
-              echo "APK already present with correct size, skipping download."
-              exit 0
+          OLD="${{ steps.cur.outputs.version }}"
+          NEW="${{ steps.rel.outputs.version }}"
+          for f in index.html softwares/index.html appmanager/index.html \
+                   de-DE/index.html de-DE/softwares/index.html de-DE/appmanager/index.html \
+                   re-RU/index.html re-RU/softwares/index.html re-RU/appmanager/index.html \
+                   zh-CN/index.html zh-CN/softwares/index.html zh-CN/appmanager/index.html; do
+            if [ -f "$f" ]; then
+              sed -i "s|$OLD|$NEW|g" "$f"
             fi
-            rm -f "$target_file"
-          fi
+          done
 
-          mkdir -p "$target_dir"
-
-          curl -L --fail --retry 3 --retry-delay 5 \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/octet-stream" \
-            -o "$target_file.part" "$ASSET_URL"
-          mv "$target_file.part" "$target_file"
-
-          actual=$(stat -c '%s' "$target_file")
-          if [[ "$actual" != "$ASSET_SIZE" ]]; then
-            echo "::error::Size mismatch: expected $ASSET_SIZE, got $actual"
-            exit 1
-          fi
-
-          ls -lh "$target_dir"
-
-      - name: Rewrite version references in HTML
-        if: steps.check.outputs.changed == 'true'
-        env:
-          OLD_VERSION: ${{ steps.check.outputs.old_version }}
-          NEW_VERSION: ${{ steps.release.outputs.version }}
-          NEW_ASSET: ${{ steps.release.outputs.asset_name }}
+      - name: Clean old storage
+        if: steps.cmp.outputs.update == 'true'
         run: |
-          set -euo pipefail
+          rm -rf storage/appmanager/*
+          mkdir -p "storage/appmanager/${{ steps.rel.outputs.version }}"
 
-          changed_files=0
-
-          rewrite() {
-            local f="$1"
-            [[ -f "$f" ]] || return 0
-            local before after
-            before=$(sha256sum "$f" | cut -d' ' -f1)
-
-            sed -i -E \
-              "s#/storage/appmanager/[0-9]+(\.[0-9]+)*/[^\"'[:space:]>]+\.apk#/storage/appmanager/${NEW_VERSION}/${NEW_ASSET}#g" \
-              "$f"
-
-            sed -i -E "s#(^|[^0-9.])${OLD_VERSION//./\\.}([^0-9.]|$)#\1${NEW_VERSION}\2#g" "$f"
-
-            after=$(sha256sum "$f" | cut -d' ' -f1)
-            if [[ "$before" != "$after" ]]; then
-              echo "updated: $f"
-              changed_files=$((changed_files + 1))
-            fi
-          }
-
-          while IFS= read -r f; do
-            [[ -n "$f" ]] && rewrite "$f"
-          done <<<"$HTML_GLOBS"
-
-          echo "Files updated: $changed_files"
-          if [[ "$changed_files" -eq 0 ]]; then
-            echo "::warning::No HTML file was modified; check HTML_GLOBS."
-          fi
-
-          echo "--- Remaining references ---"
-          grep -rhoE "/storage/appmanager/[0-9]+(\.[0-9]+)*/" --include='*.html' . || true
+      - name: Download APK
+        if: steps.cmp.outputs.update == 'true'
+        run: |
+          curl -L -o "storage/appmanager/${{ steps.rel.outputs.version }}/${{ steps.rel.outputs.apk_name }}" "${{ steps.rel.outputs.apk_url }}"
 
       - name: Commit and push
-        if: steps.check.outputs.changed == 'true'
-        env:
-          OLD_VERSION: ${{ steps.check.outputs.old_version }}
-          NEW_VERSION: ${{ steps.release.outputs.version }}
-          TAG: ${{ steps.release.outputs.tag }}
-          ASSET_NAME: ${{ steps.release.outputs.asset_name }}
+        if: steps.cmp.outputs.update == 'true'
         run: |
-          set -euo pipefail
-
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add -A "$STORAGE_DIR"
-          git add -A -- '*.html'
-
-          if git diff --cached --quiet; then
-            echo "Nothing staged, skip commit."
-            exit 0
-          fi
-
-          git commit -m "chore(appmanager): bump to ${NEW_VERSION}
-
-- source: https://github.com/${SOURCE_REPO}/releases/tag/${TAG}
-- apk: ${ASSET_NAME} (${OLD_VERSION:-none} -> ${NEW_VERSION})
-- refreshed storage/appmanager and version references in all locales"
-
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update Buge App Manager to ${{ steps.rel.outputs.version }}"
           git push
