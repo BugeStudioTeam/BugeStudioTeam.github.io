@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru" class="light">
+<html lang="tr" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buge Code Integrator - Инструмент интеграции кода</title>
+  <title>Buge Code Integrator - Kod Entegrasyon Aracı</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -33,14 +33,14 @@
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle">Простой и удобный инструмент интеграции кода, который представляет сложные структуры в виде дерева.</p>
+      <p class="hero-subtitle">Karmaşık yapıları ağaç biçiminde sunan basit ve kullanışlı kod entegrasyon aracı.</p>
     </header>
 
     <section>
       <div class="action-row" style="margin-bottom: 2.5rem; justify-content: center;">
         <a href="/storage/codeintegrator/2.5.0/app-release.apk" class="btn btn-filled">
           <span class="material-symbols-outlined">download</span>
-          Скачать
+          İndir
         </a>
         <a href="https://github.com/BugeStudioTeam/Buge-Code-Integrator" class="btn btn-outlined">
           <svg class="custom-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
@@ -55,40 +55,40 @@
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">filter_alt</span>
-              <h3>Простая фильтрация</h3>
+              <h3>Kolay filtreleme</h3>
             </div>
           </div>
-          <p class="software-desc">Автоматически фильтрует нераспознаваемые типы файлов, такие как APK, EXE и ZIP.</p>
+          <p class="software-desc">APK, EXE ve ZIP gibi tanınmayan dosya türlerini otomatik olarak filtreler.</p>
         </div>
 
         <div class="card corner-middle">
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">touch_app</span>
-              <h3>Простота использования</h3>
+              <h3>Kullanım kolaylığı</h3>
             </div>
           </div>
-          <p class="software-desc">Просто нажмите «Старт» для интеграции и записи сложных структур в текстовый файл в указанном месте.</p>
+          <p class="software-desc">Karmaşık yapıları entegre etmek ve belirtilen konumdaki bir metin dosyasına yazmak için Başlat'a dokunmanız yeterli.</p>
         </div>
 
         <div class="card corner-middle">
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">speed</span>
-              <h3>Высокая эффективность</h3>
+              <h3>Yüksek verimlilik</h3>
             </div>
           </div>
-          <p class="software-desc">Интеграция большого количества файлов занимает менее секунды (в зависимости от количества).</p>
+          <p class="software-desc">Çok sayıda dosyanın entegrasyonu bir saniyeden kısa sürer (sayıya bağlı olarak).</p>
         </div>
 
         <div class="card corner-bottom">
           <div class="software-header">
             <div class="software-title">
               <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">account_tree</span>
-              <h3>Чёткая структура</h3>
+              <h3>Net yapı</h3>
             </div>
           </div>
-          <p class="software-desc">Интегрированный выходной текст имеет чёткую организованную структуру со 100% точностью и нулевой путаницей.</p>
+          <p class="software-desc">Entegre edilen çıktı metni, %100 doğruluk ve sıfır karışıklıkla net bir şekilde düzenlenmiş bir yapıya sahiptir.</p>
         </div>
       </div>
 
@@ -126,8 +126,8 @@
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Язык</span>
-              <span class="md3-dropdown-value" id="selectedLangText">Русский</span>
+              <span class="md3-dropdown-label">Dil</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Türkçe</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
@@ -141,8 +141,12 @@
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item selected" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/codeintegrator/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/codeintegrator/', this)">
               <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item selected" onclick="selectLanguage('Türkçe', '', this)">
+              <span>Türkçe</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
             <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/codeintegrator/', this)">
@@ -155,35 +159,35 @@
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Тема</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Светлая</span>
+              <span class="md3-dropdown-label">Tema</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Açık</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Светлая', this)">
-              <span>Светлая</span>
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Açık', this)">
+              <span>Açık</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Светлая (Средний)', this)">
-              <span>Светлая (Средний)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Açık (Orta)', this)">
+              <span>Açık (Orta)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Светлая (Высокий)', this)">
-              <span>Светлая (Высокий)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Açık (Yüksek)', this)">
+              <span>Açık (Yüksek)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Тёмная', this)">
-              <span>Тёмная</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Koyu', this)">
+              <span>Koyu</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Тёмная (Средний)', this)">
-              <span>Тёмная (Средний)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Koyu (Orta)', this)">
+              <span>Koyu (Orta)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Тёмная (Высокий)', this)">
-              <span>Тёмная (Высокий)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Koyu (Yüksek)', this)">
+              <span>Koyu (Yüksek)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
           </div>

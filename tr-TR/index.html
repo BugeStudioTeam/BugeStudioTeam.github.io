@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="ru" class="light">
+<html lang="tr" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,34 +37,34 @@
 
       <div class="wavy-line"></div>
 
-      <p class="hero-subtitle">Создаём полезное программное обеспечение для всех</p>
-      <p class="hero-desc">Мы создаём инструменты, которые просто работают. Просто, открыто, мощно.</p>
+      <p class="hero-subtitle">Herkes için faydalı yazılımlar geliştiriyoruz</p>
+      <p class="hero-desc">Basitçe çalışan araçlar geliştiriyoruz. Sade, açık, güçlü.</p>
     </header>
 
     <section>
       <h2 class="section-title">
         <span class="material-symbols-outlined">apps</span>
-        Наше ПО
+        Yazılımlarımız
       </h2>
 
       <div class="m3-group">
         <div class="card corner-single">
-          <div class="software-header clickable-header" onclick="window.location.href='https://bugestudio.website/re-RU/appmanager/'">
+          <div class="software-header clickable-header" onclick="window.location.href='https://bugestudio.website/tr-TR/appmanager/'">
             <div class="software-title">
               <img src="AppManager.jpg" alt="Buge App Manager Icon" class="app-icon" />
               <h3>Buge App Manager</h3>
             </div>
-            <span class="badge">Требуется Shizuku</span>
+            <span class="badge">Shizuku gerekli</span>
           </div>
 
           <p class="software-desc">
-            Buge App Manager — это мощный инструмент для Android для управления приложениями и разрешениями, требующий Shizuku.
+            Buge App Manager, uygulamaları ve izinleri yönetmek için Shizuku gerektiren güçlü bir Android aracıdır.
           </p>
 
           <div class="action-row">
             <a href="https://github.com/BugeStudioTeam/Buge-App-Manager/releases/download/AppManager13.90.154/BugeAppManager-v13.90.154-release.apk" class="btn btn-filled" rel="noopener">
               <span class="material-symbols-outlined">download</span>
-              Скачать
+              İndir
             </a>
             <a href="https://github.com/BugeStudioTeam/Buge-App-Manager" class="btn btn-outlined" rel="noopener">
               <span class="material-symbols-outlined">code</span>
@@ -75,8 +75,8 @@
       </div>
 
       <div class="view-all-wrapper">
-        <a href="https://bugestudio.website/re-RU/softwares/" class="btn btn-text" rel="noopener">
-          <span>Все программы</span>
+        <a href="https://bugestudio.website/tr-TR/softwares/" class="btn btn-text" rel="noopener">
+          <span>Tüm yazılımlar</span>
           <span class="material-symbols-outlined">arrow_forward</span>
         </a>
       </div>
@@ -85,24 +85,24 @@
     <section>
       <h2 class="section-title">
         <span class="material-symbols-outlined">auto_awesome</span>
-        Наша философия
+        Felsefemiz
       </h2>
 
       <div class="m3-group">
         <div class="card corner-top">
           <p class="philosophy-text">
-            Мы создаём программное обеспечение, которое меняет мир к лучшему. Никакого мусора, никаких отвлечений. Полностью открытый исходный код, поддержка Android, Linux &amp; Windows.
+            Dünyayı daha iyiye değiştiren yazılımlar geliştiriyoruz. Gereksiz şişkinlik yok, dikkat dağıtıcı hiçbir şey yok. Tamamen açık kaynak, Android, Linux &amp; Windows desteği.
           </p>
         </div>
 
         <div class="card corner-bottom" style="flex-direction: row; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
           <div style="display:flex; align-items:center; gap: 0.75rem;">
             <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">favorite</span>
-            <span style="font-weight: 700;">Поддержите нашу работу с открытым кодом</span>
+            <span style="font-weight: 700;">Açık kaynak çalışmamızı destekleyin</span>
           </div>
-          <a href="https://bugestudio.website/re-RU/support/" class="btn btn-filled" rel="noopener">
+          <a href="https://bugestudio.website/tr-TR/support/" class="btn btn-filled" rel="noopener">
             <span class="material-symbols-outlined">volunteer_activism</span>
-            Поддержать
+            Destekle
           </a>
         </div>
       </div>
@@ -141,8 +141,8 @@
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Язык</span>
-              <span class="md3-dropdown-value" id="selectedLangText">Русский</span>
+              <span class="md3-dropdown-label">Dil</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Türkçe</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
@@ -156,8 +156,12 @@
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item selected" onclick="selectLanguage('Русский', '', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/', this)">
               <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item selected" onclick="selectLanguage('Türkçe', '', this)">
+              <span>Türkçe</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
             <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/', this)">
@@ -170,35 +174,35 @@
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Тема</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Светлая</span>
+              <span class="md3-dropdown-label">Tema</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Açık</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Светлая', this)">
-              <span>Светлая</span>
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Açık', this)">
+              <span>Açık</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Светлая (Средний)', this)">
-              <span>Светлая (Средний)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Açık (Orta)', this)">
+              <span>Açık (Orta)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Светлая (Высокий)', this)">
-              <span>Светлая (Высокий)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Açık (Yüksek)', this)">
+              <span>Açık (Yüksek)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Тёмная', this)">
-              <span>Тёмная</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Koyu', this)">
+              <span>Koyu</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Тёмная (Средний)', this)">
-              <span>Тёмная (Средний)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Koyu (Orta)', this)">
+              <span>Koyu (Orta)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Тёмная (Высокий)', this)">
-              <span>Тёмная (Высокий)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Koyu (Yüksek)', this)">
+              <span>Koyu (Yüksek)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
           </div>

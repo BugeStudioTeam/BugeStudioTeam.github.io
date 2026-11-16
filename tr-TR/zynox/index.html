@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru" class="light">
+<html lang="tr" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZynoxAI - Создавайте файлы и выполняйте команды с помощью ИИ на естественном языке</title>
+  <title>ZynoxAI - Doğal dil ile yapay zeka kullanarak dosyalar oluşturun ve komutlar çalıştırın</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
 
@@ -28,13 +28,11 @@
     .pill-web { background-color: #dcfce7; color: #15803d; }
     .pill-nl { background-color: #ffedd5; color: #c2410c; }
 
-    /* Generic Radius Utilities for Vertical Groups */
     .radius-single { border-radius: 20px !important; }
     .radius-top { border-radius: 20px 20px 4px 4px !important; }
     .radius-middle { border-radius: 4px !important; }
     .radius-bottom { border-radius: 4px 4px 20px 20px !important; }
 
-    /* Horizontal Stat & Provider Groups */
     .stats-group, .providers-group {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -43,7 +41,7 @@
     }
     .stats-group > div, .providers-group > div {
       background-color: var(--md-sys-color-surface-container, #f0f4f9);
-      border-radius: 4px; /* default middle */
+      border-radius: 4px;
       transition: background-color 0.2s;
     }
     .stats-group > div:hover, .providers-group > div:hover {
@@ -104,7 +102,6 @@
       font-weight: 500;
     }
 
-    /* Features 3x2 Grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -117,13 +114,12 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      border-radius: 4px; /* default middle */
+      border-radius: 4px;
       transition: background-color 0.2s;
     }
     .feature-card:hover {
       background-color: var(--md-sys-color-surface-container-high, #e9eef6);
     }
-    /* 3x2 Corners */
     .features-grid .feature-card:nth-child(1) { border-radius: 20px 4px 4px 4px; }
     .features-grid .feature-card:nth-child(3) { border-radius: 4px 20px 4px 4px; }
     .features-grid .feature-card:nth-child(4) { border-radius: 4px 4px 4px 20px; }
@@ -167,7 +163,6 @@
       line-height: 1.5;
     }
 
-    /* Code Block Box */
     .code-box-container {
       position: relative;
       background-color: #1e1e2e;
@@ -218,7 +213,6 @@
       margin: 0;
     }
 
-    /* Testimonial & CTA Box */
     .testimonial-box {
       background-color: var(--md-sys-color-surface-container, #f0f4f9);
       padding: 2.25rem 2rem;
@@ -274,19 +268,19 @@
       <img src="icon.png" alt="ZynoxAI Logo" class="hero-logo" onerror="this.style.display='none'" />
       
       <h1>
-        Создавайте с <span class="hero-title-ai">ИИ</span>,<br>естественно.
+        Yapay zeka ile,<br>doğal bir şekilde.
       </h1>
 
       <p class="hero-subtitle" style="max-width: 720px; margin-top: 0.75rem;">
-        ZynoxAI превращает естественный язык в файлы, папки и команды. Поддерживается GPT, Gemini, Grok и DeepSeek.
+        ZynoxAI doğal dili dosyalara, klasörlere ve komutlara dönüştürür. GPT, Gemini, Grok ve DeepSeek desteklenir.
       </p>
 
       <div class="hero-pills" style="margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;">
-        <span class="m3-pill pill-zero">Без настройки</span>
-        <span class="m3-pill pill-memory">Умная память</span>
-        <span class="m3-pill pill-telegram">Telegram Бот</span>
-        <span class="m3-pill pill-web">Веб-интерфейс</span>
-        <span class="m3-pill pill-nl">Естественный язык</span>
+        <span class="m3-pill pill-zero">Kurulum gerektirmez</span>
+        <span class="m3-pill pill-memory">Akıllı hafıza</span>
+        <span class="m3-pill pill-telegram">Telegram Botu</span>
+        <span class="m3-pill pill-web">Web arayüzü</span>
+        <span class="m3-pill pill-nl">Doğal dil</span>
       </div>
 
       <div class="wavy-line" style="margin-top: 2rem; margin-bottom: 2rem;"></div>
@@ -296,11 +290,11 @@
       <div class="stats-group">
         <div class="stat-card">
           <div class="stat-value">4+</div>
-          <div class="stat-label">ИИ-провайдера</div>
+          <div class="stat-label">Yapay zeka sağlayıcısı</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">3</div>
-          <div class="stat-label">Интерфейса</div>
+          <div class="stat-label">Arayüz</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">100%</div>
@@ -308,7 +302,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-value">MIT</div>
-          <div class="stat-label">Лицензия</div>
+          <div class="stat-label">Lisans</div>
         </div>
       </div>
     </section>
@@ -316,57 +310,57 @@
     <section>
       <h2 class="section-title">
         <span class="material-symbols-outlined">auto_awesome</span>
-        <span>Возможности</span>
+        <span>Özellikler</span>
       </h2>
-      <p class="section-subtitle">Всё, что нужно для автоматизации рабочего процесса</p>
+      <p class="section-subtitle">İş akışınızı otomatikleştirmek için ihtiyacınız olan her şey</p>
 
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-header">
             <span class="material-symbols-outlined feature-icon">translate</span>
-            <div class="feature-title">Естественный язык</div>
+            <div class="feature-title">Doğal dil</div>
           </div>
-          <div class="feature-desc">Опишите на простом русском, что вам нужно. Никаких сложных команд для запоминания.</div>
+          <div class="feature-desc">İhtiyacınız olanı basit bir dille açıklayın. Ezberlenecek karmaşık komutlar yok.</div>
         </div>
 
         <div class="feature-card">
           <div class="feature-header">
             <span class="material-symbols-outlined feature-icon">memory</span>
-            <div class="feature-title">Память диалога</div>
+            <div class="feature-title">Sohbet hafızası</div>
           </div>
-          <div class="feature-desc">Запоминает контекст между командами. Сохраняйте и загружайте сессии в любое время.</div>
+          <div class="feature-desc">Komutlar arasındaki bağlamı hatırlar. Oturumları istediğiniz zaman kaydedin ve yükleyin.</div>
         </div>
 
         <div class="feature-card">
           <div class="feature-header">
             <span class="material-symbols-outlined feature-icon">auto_mode</span>
-            <div class="feature-title">Умная авто-установка</div>
+            <div class="feature-title">Akıllı otomatik kurulum</div>
           </div>
-          <div class="feature-desc">Обнаруживает отсутствующие пакеты и устанавливает их автоматически.</div>
+          <div class="feature-desc">Eksik paketleri algılar ve otomatik olarak kurar.</div>
         </div>
 
         <div class="feature-card">
           <div class="feature-header">
             <span class="material-symbols-outlined feature-icon">smart_toy</span>
-            <div class="feature-title">Telegram Бот</div>
+            <div class="feature-title">Telegram Botu</div>
           </div>
-          <div class="feature-desc">Управляйте ZynoxAI откуда угодно через Telegram. Полный удалённый доступ.</div>
+          <div class="feature-desc">ZynoxAI'yi Telegram üzerinden her yerden yönetin. Tam uzaktan erişim.</div>
         </div>
 
         <div class="feature-card">
           <div class="feature-header">
             <span class="material-symbols-outlined feature-icon">dashboard</span>
-            <div class="feature-title">Веб-панель</div>
+            <div class="feature-title">Web paneli</div>
           </div>
-          <div class="feature-desc">Современный веб-интерфейс с чатом, терминалом и настройками.</div>
+          <div class="feature-desc">Sohbet, terminal ve ayarlarla modern bir web arayüzü.</div>
         </div>
 
         <div class="feature-card">
           <div class="feature-header">
             <span class="material-symbols-outlined feature-icon">code</span>
-            <div class="feature-title">Генерация кода</div>
+            <div class="feature-title">Kod oluşturma</div>
           </div>
-          <div class="feature-desc">Генерирует Python, JavaScript, HTML, JSON и многое другое с реальным содержимым.</div>
+          <div class="feature-desc">Python, JavaScript, HTML, JSON ve daha fazlasını gerçek içerikle oluşturur.</div>
         </div>
       </div>
     </section>
@@ -374,101 +368,101 @@
     <section>
       <h2 class="section-title">
         <span class="material-symbols-outlined">rocket_launch</span>
-        <span>Быстрый старт</span>
+        <span>Hızlı başlangıç</span>
       </h2>
-      <p class="section-subtitle">Начните работу за считанные минуты</p>
+      <p class="section-subtitle">Dakikalar içinde başlayın</p>
 
       <div class="code-box-container radius-single" style="margin-bottom: 2rem;">
         <div class="code-box-header">
           <span class="code-box-lang">Bash / Shell</span>
           <button class="btn-copy" onclick="copyCode(this)">
             <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-            <span>Копировать</span>
+            <span>Kopyala</span>
           </button>
         </div>
-        <pre class="code-content"># Шаг 1: Установка зависимостей
-# Обновление менеджера пакетов
-pkg update && pkg upgrade # Для Termux
-# ИЛИ
-sudo apt update && sudo apt upgrade # Для Linux
+        <pre class="code-content"># Adım 1: Bağımlılıkları yükleme
+# Paket yöneticisini güncelleme
+pkg update && pkg upgrade # Termux için
+# VEYA
+sudo apt update && sudo apt upgrade # Linux için
 
-# Установка Python, если не установлен
+# Python kurulu değilse yükleyin
 pkg install python # Termux
-# ИЛИ
+# VEYA
 sudo apt install python3 # Linux
 
-# Установка необходимых Python-пакетов
+# Gerekli Python paketlerini yükleme
 pip install requests colorama
 
-# Шаг 2: Клонирование/создание ZynoxAI
-# Скачивание скрипта
+# Adım 2: ZynoxAI'yi klonlama/oluşturma
+# Betiği indirme
 git clone https://github.com/BugeStudioTeam/Zynox.git
 
-# Переименование
+# Yeniden adlandırma
 mv Zynox ZynoxAI
 cd ~/ZynoxAI
 
-# Шаг 3: Настройка алиаса (опционально, но рекомендуется)
-# Добавление алиаса в ~/.bashrc
+# Adım 3: Takma ad ayarlama (isteğe bağlı, ancak önerilir)
+# ~/.bashrc dosyasına takma ad ekleme
 echo "alias zynox='python ~/ZynoxAI/zynox.py'" >> ~/.bashrc
 source ~/.bashrc
 
-# Или для Termux с каталогом ~/bin
+# Veya ~/bin dizinli Termux için
 mkdir -p ~/bin
 ln -s ~/ZynoxAI/zynox.py ~/bin/zynox
 chmod +x ~/ZynoxAI/zynox.py
 
-# Шаг 4: Проверка установки
-# Должен отобразиться логотип ZYNOX
+# Adım 4: Kurulumu doğrulama
+# ZYNOX logosu görüntülenmeli
 zynox
 
-# Должно отобразиться меню помощи
+# Yardım menüsü görüntülenmeli
 zynox --help
 
-# Должно отобразиться меню о программе
+# Hakkında menüsü görüntülenmeli
 zynox --about</pre>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 3rem;">
         <div class="code-box-container radius-top">
           <div class="code-box-header">
-            <span class="code-box-lang">Создать папку</span>
+            <span class="code-box-lang">Klasör oluştur</span>
             <button class="btn-copy" onclick="copyCode(this)">
               <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-              <span>Копировать</span>
+              <span>Kopyala</span>
             </button>
           </div>
-          <pre class="code-content">zynox "создай папку с именем myproject"</pre>
+          <pre class="code-content">zynox "myproject adında bir klasör oluştur"</pre>
         </div>
 
         <div class="code-box-container radius-middle">
           <div class="code-box-header">
-            <span class="code-box-lang">Найти и прочитать файл</span>
+            <span class="code-box-lang">Dosyayı bul ve oku</span>
             <button class="btn-copy" onclick="copyCode(this)">
               <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-              <span>Копировать</span>
+              <span>Kopyala</span>
             </button>
           </div>
-          <pre class="code-content">zynox "найди abc.txt и прочитай его"</pre>
+          <pre class="code-content">zynox "abc.txt dosyasını bul ve oku"</pre>
         </div>
 
         <div class="code-box-container radius-middle">
           <div class="code-box-header">
-            <span class="code-box-lang">Выполнить системные команды</span>
+            <span class="code-box-lang">Sistem komutlarını çalıştır</span>
             <button class="btn-copy" onclick="copyCode(this)">
               <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-              <span>Копировать</span>
+              <span>Kopyala</span>
             </button>
           </div>
-          <pre class="code-content">zynox "покажи все файлы"</pre>
+          <pre class="code-content">zynox "tüm dosyaları göster"</pre>
         </div>
 
         <div class="code-box-container radius-middle">
           <div class="code-box-header">
-            <span class="code-box-lang">Запустить веб-сервер (порт 5000)</span>
+            <span class="code-box-lang">Web sunucusunu başlat (port 5000)</span>
             <button class="btn-copy" onclick="copyCode(this)">
               <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-              <span>Копировать</span>
+              <span>Kopyala</span>
             </button>
           </div>
           <pre class="code-content">zynox --web</pre>
@@ -476,10 +470,10 @@ zynox --about</pre>
 
         <div class="code-box-container radius-middle">
           <div class="code-box-header">
-            <span class="code-box-lang">Запустить Telegram бота</span>
+            <span class="code-box-lang">Telegram botunu başlat</span>
             <button class="btn-copy" onclick="copyCode(this)">
               <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-              <span>Копировать</span>
+              <span>Kopyala</span>
             </button>
           </div>
           <pre class="code-content">zynox --telegram-bot TOKEN</pre>
@@ -487,10 +481,10 @@ zynox --about</pre>
 
         <div class="code-box-container radius-bottom">
           <div class="code-box-header">
-            <span class="code-box-lang">Начать новый диалог</span>
+            <span class="code-box-lang">Yeni sohbet başlat</span>
             <button class="btn-copy" onclick="copyCode(this)">
               <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
-              <span>Копировать</span>
+              <span>Kopyala</span>
             </button>
           </div>
           <pre class="code-content">zynox --new-session</pre>
@@ -501,9 +495,9 @@ zynox --about</pre>
     <section>
       <h2 class="section-title">
         <span class="material-symbols-outlined">psychology</span>
-        <span>ИИ-провайдеры</span>
+        <span>Yapay zeka sağlayıcıları</span>
       </h2>
-      <p class="section-subtitle">Выберите модель, которая лучше всего подходит вам</p>
+      <p class="section-subtitle">Size en uygun modeli seçin</p>
 
       <div class="providers-group">
         <div class="provider-card">
@@ -532,14 +526,14 @@ zynox --about</pre>
       <div style="display: flex; flex-direction: column; gap: 2px; margin-bottom: 3rem;">
         <div class="testimonial-box radius-top">
           <p class="testimonial-quote">
-            «ZynoxAI полностью изменил мой подход к прототипированию. Вместо того чтобы печатать mkdir, touch и шаблонный код, я просто описываю, что мне нужно, и всё готово.»
+            «ZynoxAI prototipleme yaklaşımımı tamamen değiştirdi. mkdir, touch ve şablon kod yazmak yerine neye ihtiyacım olduğunu anlatıyorum ve her şey hazır oluyor.»
           </p>
-          <div class="testimonial-author">— Разработчик</div>
+          <div class="testimonial-author">— Geliştirici</div>
         </div>
 
         <div class="cta-box radius-bottom">
-          <h2>Готовы начать?</h2>
-          <p>Установите ZynoxAI сегодня и позвольте ИИ выполнять рутинную работу.</p>
+          <h2>Başlamaya hazır mısınız?</h2>
+          <p>ZynoxAI'yi bugün kurun ve rutin işleri yapay zekaya bırakın.</p>
           <a href="https://github.com/BugeStudioTeam/Zynox" class="btn btn-filled" target="_blank" rel="noopener noreferrer" style="margin-top: 0.5rem; padding: 0.75rem 2rem; border-radius: 24px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
             <svg class="custom-icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
@@ -581,8 +575,8 @@ zynox --about</pre>
         <div class="md3-dropdown-container" id="langDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Язык</span>
-              <span class="md3-dropdown-value" id="selectedLangText">Русский</span>
+              <span class="md3-dropdown-label">Dil</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Türkçe</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
@@ -596,8 +590,12 @@ zynox --about</pre>
               <span>Deutsch</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item selected" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/zynox/', this)">
+            <div class="md3-menu-item" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/zynox/', this)">
               <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item selected" onclick="selectLanguage('Türkçe', '', this)">
+              <span>Türkçe</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
             <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/zynox/', this)">
@@ -610,35 +608,35 @@ zynox --about</pre>
         <div class="md3-dropdown-container" id="themeDropdownContainer">
           <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
             <div class="md3-dropdown-info">
-              <span class="md3-dropdown-label">Тема</span>
-              <span class="md3-dropdown-value" id="selectedThemeText">Светлая</span>
+              <span class="md3-dropdown-label">Tema</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Açık</span>
             </div>
             <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
           </div>
 
           <div class="md3-dropdown-menu">
-            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Светлая', this)">
-              <span>Светлая</span>
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Açık', this)">
+              <span>Açık</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Светлая (Средний)', this)">
-              <span>Светлая (Средний)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Açık (Orta)', this)">
+              <span>Açık (Orta)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Светлая (Высокий)', this)">
-              <span>Светлая (Высокий)</span>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Açık (Yüksek)', this)">
+              <span>Açık (Yüksek)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark', 'Тёмная', this)">
-              <span>Тёмная</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Koyu', this)">
+              <span>Koyu</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Тёмная (Средний)', this)">
-              <span>Тёмная (Средний)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Koyu (Orta)', this)">
+              <span>Koyu (Orta)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
-            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Тёмная (Высокий)', this)">
-              <span>Тёмная (Высокий)</span>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Koyu (Yüksek)', this)">
+              <span>Koyu (Yüksek)</span>
               <span class="material-symbols-outlined check-icon">check</span>
             </div>
           </div>
@@ -657,7 +655,7 @@ zynox --about</pre>
       navigator.clipboard.writeText(codeText).then(() => {
         const textSpan = buttonEl.querySelector('span:last-child');
         const originalText = textSpan.textContent;
-        textSpan.textContent = 'Скопировано!';
+        textSpan.textContent = 'Kopyalandı!';
         buttonEl.style.background = '#22c55e';
         buttonEl.style.color = '#fff';
         
@@ -667,7 +665,7 @@ zynox --about</pre>
           buttonEl.style.color = '#cdd6f4';
         }, 2000);
       }).catch(err => {
-        console.error('Ошибка копирования кода: ', err);
+        console.error('Kod kopyalama hatası: ', err);
       });
     }
   </script>

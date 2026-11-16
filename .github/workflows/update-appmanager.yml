@@ -54,7 +54,7 @@ jobs:
           OLD="${{ steps.cur.outputs.version }}"
           NEW="${{ steps.rel.outputs.version }}"
           NEW_URL="${{ steps.rel.outputs.apk_url }}"
-          FILES="index.html softwares/index.html appmanager/index.html de-DE/index.html de-DE/softwares/index.html de-DE/appmanager/index.html re-RU/index.html re-RU/softwares/index.html re-RU/appmanager/index.html zh-CN/index.html zh-CN/softwares/index.html zh-CN/appmanager/index.html"
+          FILES="index.html softwares/index.html appmanager/index.html de-DE/index.html de-DE/softwares/index.html de-DE/appmanager/index.html re-RU/index.html re-RU/softwares/index.html re-RU/appmanager/index.html tr-TR/appmanager/index.html tr-TR/index.html tr-TR/softwares/index.html zh-CN/index.html zh-CN/softwares/index.html zh-CN/appmanager/index.html"
           for f in $FILES; do
             if [ -f "$f" ]; then
               sed -i "s|https://[^\"']*appmanager/${OLD}/BugeAppManager-v${OLD}-release\.apk|${NEW_URL}|g" "$f"
