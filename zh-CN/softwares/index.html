@@ -3,6 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      if (!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches) return;
+      document.documentElement.className = 'dark';
+      document.addEventListener('DOMContentLoaded', function () {
+        var container = document.getElementById('themeDropdownContainer');
+        if (!container) return;
+        var valueEl = document.getElementById('selectedThemeText');
+        var darkItem = null;
+        container.querySelectorAll('.md3-menu-item').forEach(function (el) {
+          var handler = el.getAttribute('onclick') || '';
+          if (handler.indexOf("selectTheme('dark',") !== -1) darkItem = el;
+          el.classList.remove('selected');
+        });
+        if (!darkItem) return;
+        darkItem.classList.add('selected');
+        if (valueEl) {
+          var labelEl = darkItem.querySelector('span');
+          if (labelEl) valueEl.textContent = labelEl.textContent;
+        }
+      });
+    })();
+  </script>
+
   <title>所有软件 - Buge Studio</title>
   
   <link rel="icon" href="icon.png" type="image/png" />
