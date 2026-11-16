@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Поддержать - Buge Studio</title>
+  
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <link rel="stylesheet" href="styles/style.css" />
+  <style>
+    .support-tabs {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .support-tab {
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      background-color: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+      user-select: none;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.95rem;
+      box-shadow: none;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      transition: background-color 0.4s cubic-bezier(0.2, 0, 0, 1), color 0.4s cubic-bezier(0.2, 0, 0, 1), border-radius 0.5s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .support-tab.active {
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border-radius: 9999px;
+    }
+    .support-tab:hover:not(.active) {
+      background-color: var(--md-sys-color-surface-container-high);
+    }
+    .dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s cubic-bezier(0.2, 0, 0, 1), visibility 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .dialog-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dialog {
+      background-color: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      border-radius: 28px;
+      padding: 24px;
+      width: calc(100% - 48px);
+      max-width: 560px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transform: scale(0.8) translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.05, 0.7, 0.1, 1), opacity 0.3s cubic-bezier(0.05, 0.7, 0.1, 1);
+    }
+    .dialog-backdrop.active .dialog {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    .dialog-headline {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 2rem;
+      margin-bottom: 16px;
+      color: var(--md-sys-color-on-surface);
+    }
+    .dialog-content {
+      font-size: 0.95rem;
+      line-height: 1.5rem;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: 24px;
+    }
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* MD3 Expressive Warning Banner */
+    .md3-warning {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 20px;
+      background-color: var(--md-sys-color-error-container, #fce4ec);
+      border-radius: 16px;
+      margin-top: 0.5rem;
+      transition: background-color 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .md3-warning-icon {
+      color: var(--md-sys-color-error, #c62828);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .md3-warning-icon .material-symbols-outlined {
+      font-size: 24px;
+    }
+    .md3-warning-content {
+      flex: 1;
+      font-size: 0.925rem;
+      line-height: 1.5;
+      color: var(--md-sys-color-on-error-container, #b71c1c);
+    }
+    .md3-warning-content strong {
+      font-weight: 600;
+    }
+    .md3-warning-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      margin-top: -2px;
+    }
+    .md3-warning-btn {
+      background: transparent;
+      border: none;
+      color: var(--md-sys-color-error, #c62828);
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .md3-warning-btn:hover {
+      background-color: rgba(198, 40, 40, 0.08);
+    }
+    .md3-warning-btn .material-symbols-outlined {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 600px) {
+      .md3-warning {
+        flex-wrap: wrap;
+        padding: 14px 16px;
+      }
+      .md3-warning-actions {
+        margin-left: 40px;
+      }
+    }
+
+    .usdt-address {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background-color: var(--md-sys-color-surface-container-highest);
+      padding: 10px 16px;
+      border-radius: 10px;
+      word-break: break-all;
+      color: var(--md-sys-color-on-surface);
+      margin-top: 0.5rem;
+      text-align: center;
+      user-select: all;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .usdt-address-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-top: 0.25rem;
+    }
+    .copy-btn-sm {
+      background: var(--md-sys-color-surface-container-highest);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      color: var(--md-sys-color-on-surface);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s, border-color 0.2s;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 500;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .copy-btn-sm:hover {
+      background: var(--md-sys-color-surface-container-high);
+    }
+    .copy-btn-sm.copied {
+      background: #22c55e;
+      color: #fff;
+      border-color: #22c55e;
+    }
+    .copy-btn-sm .material-symbols-outlined {
+      font-size: 14px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .copy-btn-sm .copy-text {
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+
+    <header class="hero">
+      <img src="icon.png" alt="Buge Studio Logo" class="hero-logo" />
+      <h1>Поддержать Buge Studio</h1>
+      
+      <div class="hero-pills">
+        <span class="m3-pill">
+          <span class="material-symbols-outlined">volunteer_activism</span>
+          Пожертвование
+        </span>
+      </div>
+
+      <div class="wavy-line"></div>
+
+      <p class="hero-subtitle">Выберите предпочтительный способ оплаты, чтобы помочь нам сохранить наше программное обеспечение открытым и бесплатным.</p>
+    </header>
+
+    <section>
+      <div class="support-tabs">
+        <div class="support-tab active" id="tab-usdt" onclick="switchTab('usdt')">USDT (TRC20)</div>
+        <div class="support-tab" id="tab-paypal" onclick="switchTab('paypal')">PayPal</div>
+        <div class="support-tab" id="tab-wechat" onclick="switchTab('wechat')">WeChatPay</div>
+        <div class="support-tab" id="tab-alipay" onclick="switchTab('alipay')">Alipay</div>
+      </div>
+
+      <div class="m3-group">
+        <div class="card corner-single" id="panel-content">
+        </div>
+      </div>
+
+      <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+        <a href="https://bugestudio.website/re-RU/thx/" class="btn btn-outlined" style="text-decoration: none;">
+          <span class="material-symbols-outlined">favorite</span>
+          Страница THX
+        </a>
+      </div>
+
+      <div class="social-row">
+        <a href="https://github.com/BugeStudioTeam" class="btn-icon" rel="noopener" aria-label="GitHub">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <a href="https://t.me/bugestudio" class="btn-icon" rel="noopener" aria-label="Telegram">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+        </a>
+
+        <a href="mailto:CreepyNightmares@proton.me" class="btn-icon" aria-label="Email">
+          <svg class="custom-icon" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="dialog-backdrop" id="dialogBackdrop" onclick="closeDialogOnBackdrop(event)">
+    <div class="dialog">
+      <div class="dialog-headline">Уведомление</div>
+      <div class="dialog-content">Благодарим вас за поддержку. Пожалуйста, нажмите «Подтвердить», чтобы перейти по ссылке.</div>
+      <div class="dialog-actions">
+        <button class="btn btn-outlined" onclick="closeDialog()">Отмена</button>
+        <button class="btn btn-filled" onclick="confirmPayPal()">Подтвердить</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">
+        © 2026 Buge Studio
+      </div>
+
+      <div class="footer-controls">
+        
+        <div class="md3-dropdown-container" id="langDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('langDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Язык</span>
+              <span class="md3-dropdown-value" id="selectedLangText">Русский</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item" onclick="selectLanguage('English', 'https://bugestudio.website/support/', this)">
+              <span>English</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('Deutsch', 'https://bugestudio.website/de-DE/support/', this)">
+              <span>Deutsch</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item selected" onclick="selectLanguage('Русский', 'https://bugestudio.website/re-RU/support/', this)">
+              <span>Русский</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectLanguage('简体中文', 'https://bugestudio.website/zh-CN/support/', this)">
+              <span>简体中文</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="md3-dropdown-container" id="themeDropdownContainer">
+          <div class="md3-dropdown-trigger" onclick="toggleDropdown('themeDropdownContainer')">
+            <div class="md3-dropdown-info">
+              <span class="md3-dropdown-label">Тема</span>
+              <span class="md3-dropdown-value" id="selectedThemeText">Светлая</span>
+            </div>
+            <span class="material-symbols-outlined md3-dropdown-icon">arrow_drop_down</span>
+          </div>
+
+          <div class="md3-dropdown-menu">
+            <div class="md3-menu-item selected" onclick="selectTheme('light', 'Светлая', this)">
+              <span>Светлая</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-medium-contrast', 'Светлая (Средний)', this)">
+              <span>Светлая (Средний)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('light-high-contrast', 'Светлая (Высокий)', this)">
+              <span>Светлая (Высокий)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark', 'Тёмная', this)">
+              <span>Тёмная</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-medium-contrast', 'Тёмная (Средний)', this)">
+              <span>Тёмная (Средний)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+            <div class="md3-menu-item" onclick="selectTheme('dark-high-contrast', 'Тёмная (Высокий)', this)">
+              <span>Тёмная (Высокий)</span>
+              <span class="material-symbols-outlined check-icon">check</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const USDT_ADDRESS = "TWqDc7njqvULm98EAeeMiySWv1sXR8JidC";
+
+    function copyAddress() {
+      const address = USDT_ADDRESS;
+      
+      // Use the Clipboard API to write without selecting text
+      navigator.clipboard.writeText(address).then(() => {
+        const btn = document.getElementById('copyAddressBtn');
+        const iconSpan = btn.querySelector('.material-symbols-outlined');
+        const textSpan = btn.querySelector('.copy-text');
+        
+        // Save original text
+        const originalText = textSpan.textContent;
+        
+        // Update to copied state
+        iconSpan.textContent = 'check';
+        textSpan.textContent = 'Скопировано!';
+        btn.classList.add('copied');
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          iconSpan.textContent = 'content_copy';
+          textSpan.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Ошибка копирования: ', err);
+        // Fallback: try the old method
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = address;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          // Show feedback
+          const btn = document.getElementById('copyAddressBtn');
+          const iconSpan = btn.querySelector('.material-symbols-outlined');
+          const textSpan = btn.querySelector('.copy-text');
+          const originalText = textSpan.textContent;
+          iconSpan.textContent = 'check';
+          textSpan.textContent = 'Скопировано!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            iconSpan.textContent = 'content_copy';
+            textSpan.textContent = originalText;
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (e) {
+          alert('Не удалось скопировать. Пожалуйста, выберите и скопируйте адрес вручную.');
+        }
+      });
+    }
+
+    function switchTab(type) {
+      document.querySelectorAll('.support-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + type).classList.add('active');
+
+      const panel = document.getElementById('panel-content');
+
+      if (type === 'usdt') {
+        panel.innerHTML = `
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">currency_bitcoin</span>
+              <h3>Оплата через USDT (TRC20)</h3>
+            </div>
+            <span class="badge">Криптовалюта</span>
+          </div>
+          <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
+            Отправьте USDT через сеть TRON (TRC20)
+          </p>
+          
+          <div class="md3-warning" role="alert">
+            <div class="md3-warning-icon">
+              <span class="material-symbols-outlined">error</span>
+            </div>
+            <div class="md3-warning-content">
+              <strong>Важно:</strong> Пожалуйста, убедитесь, что вы используете сеть <strong>TRON (TRC20)</strong>. Отправка через другие сети может привести к потере средств.
+            </div>
+            <div class="md3-warning-actions">
+              <button class="md3-warning-btn" onclick="this.closest('.md3-warning').style.display='none'">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+            <div style="background-color: #ffffff; padding: 16px; border-radius: 28px; display: inline-flex; justify-content: center; align-items: center;">
+              <img src="usdt_qr.png" alt="USDT TRC20 QR-код" style="width: 200px; height: 200px; display: block; border-radius: 16px; object-fit: contain;" />
+            </div>
+          </div>
+          <div style="margin-top: 0.75rem; text-align: center;">
+            <div class="usdt-address-label">Адрес:</div>
+            <div class="usdt-address">
+              <span style="font-family: 'JetBrains Mono', monospace; word-break: break-all; user-select: all;">${USDT_ADDRESS}</span>
+              <button class="copy-btn-sm" id="copyAddressBtn" onclick="copyAddress()">
+                <span class="material-symbols-outlined">content_copy</span>
+                <span class="copy-text">Копировать</span>
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (type === 'paypal') {
+        panel.innerHTML = `
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">payments</span>
+              <h3>Оплата через PayPal</h3>
+            </div>
+            <span class="badge">Международный</span>
+          </div>
+          <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
+            Безопасные международные платежи и кредитные карты
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+            <button class="btn btn-filled" onclick="openDialog()">
+              <span class="material-symbols-outlined">open_in_new</span>
+              Пожертвовать через PayPal
+            </button>
+          </div>
+        `;
+      } else if (type === 'wechat') {
+        panel.innerHTML = `
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">qr_code_2</span>
+              <h3>Оплата через WeChat Pay</h3>
+            </div>
+            <span class="badge">QR-код</span>
+          </div>
+          <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
+            Отсканируйте QR-код в мобильном приложении
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+            <div style="background-color: #ffffff; padding: 16px; border-radius: 28px; display: inline-flex; justify-content: center; align-items: center;">
+              <img src="wechat_qr.png" alt="WeChat Pay QR-код" style="width: 200px; height: 200px; display: block; border-radius: 16px; object-fit: contain;" />
+            </div>
+          </div>
+        `;
+      } else if (type === 'alipay') {
+        panel.innerHTML = `
+          <div class="software-header">
+            <div class="software-title">
+              <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--md-sys-color-primary);">qr_code</span>
+              <h3>Оплата через Alipay</h3>
+            </div>
+            <span class="badge">QR-код</span>
+          </div>
+          <p class="software-desc" style="font-size: 1rem; margin-top: 0.5rem;">
+            Отсканируйте QR-код в мобильном приложении
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+            <div style="background-color: #ffffff; padding: 16px; border-radius: 28px; display: inline-flex; justify-content: center; align-items: center;">
+              <img src="alipay_qr.png" alt="Alipay QR-код" style="width: 200px; height: 200px; display: block; border-radius: 16px; object-fit: contain;" />
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function openDialog() {
+      document.getElementById('dialogBackdrop').classList.add('active');
+    }
+
+    function closeDialog() {
+      document.getElementById('dialogBackdrop').classList.remove('active');
+    }
+
+    function closeDialogOnBackdrop(event) {
+      if (event.target.id === 'dialogBackdrop') {
+        closeDialog();
+      }
+    }
+
+    function confirmPayPal() {
+      window.location.href = 'https://bugestudio.website/support/paypal-disabled';
+    }
+
+    // Default to USDT
+    switchTab('usdt');
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>
